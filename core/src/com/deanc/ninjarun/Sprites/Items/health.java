@@ -28,7 +28,7 @@ public class health extends Item{
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / NinjaRun.PPM);
         fdef.filter.categoryBits = NinjaRun.ITEM_BIT;
-        fdef.filter.maskBits = NinjaRun.MARIO_BIT |
+        fdef.filter.maskBits = NinjaRun.RYU_BIT |
                 NinjaRun.OBJECT_BIT |
                 NinjaRun.GROUND_BIT |
                 NinjaRun.BRICK_BIT |

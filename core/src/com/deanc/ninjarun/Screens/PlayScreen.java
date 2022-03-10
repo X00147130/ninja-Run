@@ -17,9 +17,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.deanc.ninjarun.Attacks.Sword;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
+import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
@@ -50,6 +52,7 @@ public class PlayScreen implements Screen {
 
     //Player variable
     private Ryu player;
+    private Sword sword;
 
     //Audio variables
     private Music music;
@@ -80,6 +83,7 @@ public class PlayScreen implements Screen {
 
         //Player creation
         player = new Ryu(this);
+        sword = new Sword(this);
 
         world.setContactListener(new WorldContactListener());
 
@@ -128,6 +132,10 @@ public class PlayScreen implements Screen {
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
+            if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                Ninja ninja = new Ninja(this,0,0);
+                ninja.attacked();
+            }
 
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
                 player.b2body.applyLinearImpulse(new Vector2(0.5f, 0), player.b2body.getWorldCenter(), true);
@@ -202,6 +210,7 @@ public class PlayScreen implements Screen {
     public void resize(int width, int height) {
         gamePort.update(width,height);
     }
+
 
     public boolean gameOver(){
         if(player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3){

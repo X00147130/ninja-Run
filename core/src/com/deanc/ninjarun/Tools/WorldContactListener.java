@@ -5,8 +5,10 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.deanc.ninjarun.Attacks.Sword;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
+import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Ryu;
 import com.deanc.ninjarun.Sprites.TileObjects.InteractiveTileObject;
@@ -20,19 +22,19 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
-            case NinjaRun.MARIO_HEAD_BIT | NinjaRun.BRICK_BIT:
-            case NinjaRun.MARIO_HEAD_BIT | NinjaRun.COIN_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.MARIO_HEAD_BIT)
+            case NinjaRun.RYU_HEAD_BIT | NinjaRun.BRICK_BIT:
+            case NinjaRun.RYU_HEAD_BIT | NinjaRun.COIN_BIT:
+                if(fixA.getFilterData().categoryBits == NinjaRun.RYU_HEAD_BIT)
                     ((InteractiveTileObject) fixB.getUserData()).onHeadHit((Ryu) fixA.getUserData());
                 else
                     ((InteractiveTileObject) fixA.getUserData()).onHeadHit((Ryu) fixB.getUserData());
                 break;
 
-            case NinjaRun.ENEMY_HEAD_BIT | NinjaRun.MARIO_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.ENEMY_HEAD_BIT)
-                    ((Enemy) fixA.getUserData()).hitOnHead();
+            case NinjaRun.ENEMY_BIT | NinjaRun.ATTACK_BIT:
+                if(fixA.getFilterData().categoryBits == NinjaRun.ATTACK_BIT)
+                    ((Ninja)fixA.getUserData()).attacked();
                 else
-                    ((Enemy) fixB.getUserData()).hitOnHead();
+                    ((Ninja)fixB.getUserData()).attacked();
                 break;
 
             case NinjaRun.ENEMY_BIT | NinjaRun.OBJECT_BIT:
@@ -41,8 +43,8 @@ public class WorldContactListener implements ContactListener {
                 else
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case NinjaRun.MARIO_BIT | NinjaRun.ENEMY_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.MARIO_BIT)
+            case NinjaRun.RYU_BIT | NinjaRun.ENEMY_BIT:
+                if(fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
                     ((Ryu)fixA.getUserData()).hit();
                 else
                     ((Ryu)fixB.getUserData()).hit();
@@ -58,7 +60,7 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Item) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case NinjaRun.ITEM_BIT | NinjaRun.MARIO_BIT:
+            case NinjaRun.ITEM_BIT | NinjaRun.RYU_BIT:
                 if (fixA.getFilterData().categoryBits == NinjaRun.ITEM_BIT)
                     ((Item) fixA.getUserData()).useItem((Ryu) fixB.getUserData());
                 else

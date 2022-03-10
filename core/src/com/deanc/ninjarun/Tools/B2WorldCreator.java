@@ -12,12 +12,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.Sprites.Enemies.Goomba;
+import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.TileObjects.Brick;
 import com.deanc.ninjarun.Sprites.TileObjects.coin;
 
 public class B2WorldCreator {
-    private Array<Goomba> goombas;
+    private Array<Ninja> goombas;
 
 
 
@@ -75,14 +75,14 @@ public class B2WorldCreator {
         }
 
         // create all goombas e.g. multiple enemies
-        goombas = new Array<Goomba>();
+        goombas = new Array<Ninja>();
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            goombas.add(new Goomba(screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            goombas.add(new Ninja(screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
         }
     }
 
-    public Array<Goomba> getGoombas() {
+    public Array<Ninja> getGoombas() {
         return goombas;
     }
 }

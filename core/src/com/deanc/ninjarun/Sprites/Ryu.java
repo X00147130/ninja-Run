@@ -1,6 +1,7 @@
 package com.deanc.ninjarun.Sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,10 +22,11 @@ import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes
-    public enum State{ FALLING, JUMPING, STANDING, RUNNING, GROWING, DEAD }
+    public enum State{ FALLING, JUMPING, STANDING, RUNNING, ATTACK, DEAD }
     public State currentState;
     public State previousState;
 
@@ -32,11 +34,13 @@ public class Ryu extends Sprite {
     public World world;
     public Body b2body;
     public Texture ryuStand;
-    private Animation<Texture> ryuDead;
+
 
     //Animation Variables
     private Animation <Texture> ryuRun;
     private Animation <Texture> ryuJump;
+    private Animation <Texture> ryuAttack;
+    private Animation<Texture> ryuDead;
     private boolean runningRight;
     private float stateTimer;
 
@@ -50,9 +54,12 @@ public class Ryu extends Sprite {
     private static int hitCounter;
 
 
+    //Attack variables
+    private boolean attack;
+
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
-        defineMario();
+        defineRyu();
 
         //initialising health variables
         health = 100;
@@ -85,7 +92,7 @@ public class Ryu extends Sprite {
         frames.add(run4);
         frames.add(run5);
         frames.add(run6);
-        ryuRun = new Animation <Texture>(0.1f, frames);
+        ryuRun = new Animation <Texture>(0.2f, frames);
         frames.clear();
 
         //Creating Jump Animation loop
@@ -107,7 +114,6 @@ public class Ryu extends Sprite {
         ryuJump = (new Animation<Texture>(0.1f,jumping));
 
         //mario dying contsruction
-
         Texture dead1 = new Texture("die1.png");
         Texture dead2 = new Texture("die2.png");
         Texture dead3 = new Texture("die3.png");
@@ -133,6 +139,22 @@ public class Ryu extends Sprite {
         dying.add(dead10);
 
         ryuDead = new Animation<Texture>(0.2f,dying);
+
+        //Attack Texture
+        Texture attack1 = new Texture("attack1.png");
+        Texture attack2 = new Texture("attack2.png");
+        Texture attack3 = new Texture("attack3.png");
+        Texture attack4 = new Texture("attack4.png");
+        Texture attack5 = new Texture("attack5.png");
+
+        Array <Texture> attack= new Array<>(5);
+        attack.add(attack1);
+        attack.add(attack2);
+        attack.add(attack3);
+        attack.add(attack4);
+        attack.add(attack5);
+
+        ryuAttack = new Animation<Texture>(0.1f,attack);
     }
 
     public void update(float dt){
@@ -161,6 +183,10 @@ public class Ryu extends Sprite {
                 texture = ryuRun.getKeyFrame(stateTimer, true);
                 break;
 
+            case ATTACK:
+                texture = ryuAttack.getKeyFrame(stateTimer,true);
+                break;
+
             case FALLING:
 
             case STANDING:
@@ -187,9 +213,6 @@ public class Ryu extends Sprite {
         if(marioIsDead)
             return State.DEAD;
 
-        else if(runGrowAnimation)
-            return State.GROWING;
-
         else if (b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return State.JUMPING;
 
@@ -199,12 +222,15 @@ public class Ryu extends Sprite {
         else if (b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
 
+        else if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            return State.ATTACK;
+
         else
             return State.STANDING;
     }
 
 
-    public void defineMario(){
+    public void defineRyu(){
         BodyDef bdef = new BodyDef();
         bdef.position.set(32 / NinjaRun.PPM,32 / NinjaRun.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -213,13 +239,12 @@ public class Ryu extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / NinjaRun.PPM);
-        fdef.filter.categoryBits = NinjaRun.MARIO_BIT;
+        fdef.filter.categoryBits = NinjaRun.RYU_BIT;
         fdef.filter.maskBits = NinjaRun.GROUND_BIT |
                 NinjaRun.COIN_BIT |
                 NinjaRun.BRICK_BIT|
                 NinjaRun.ENEMY_BIT|
                 NinjaRun.OBJECT_BIT|
-                NinjaRun.ENEMY_HEAD_BIT|
                 NinjaRun.ITEM_BIT;
 
         fdef.shape = shape;
@@ -227,7 +252,7 @@ public class Ryu extends Sprite {
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2 / NinjaRun.PPM, 6 / NinjaRun.PPM), new Vector2(2 /NinjaRun.PPM, 6 / NinjaRun.PPM));
-        fdef.filter.categoryBits=NinjaRun.MARIO_HEAD_BIT;
+        fdef.filter.categoryBits=NinjaRun.RYU_HEAD_BIT;
         fdef.shape = head;
         fdef.isSensor = true;
 
@@ -284,4 +309,6 @@ public class Ryu extends Sprite {
     public static void setHitCounter(int resetHits){
         hitCounter = resetHits;
     }
+
+
 }
