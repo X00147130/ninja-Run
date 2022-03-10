@@ -6,10 +6,9 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Vector2;
 import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
-import com.deanc.ninjarun.Sprites.Items.Mushrooms;
+import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class coin extends InteractiveTileObject {
@@ -36,7 +35,7 @@ public class coin extends InteractiveTileObject {
         else {
             if(object.getProperties().containsKey("mushroom")){
                 screen.spawnItem(new ItemDef( new Vector2(body.getPosition().x, body.getPosition().y + 16 / NinjaRun.PPM),
-                        Mushrooms.class));
+                        health.class));
                 NinjaRun.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();
             }
             else
@@ -44,7 +43,6 @@ public class coin extends InteractiveTileObject {
 
         }
         getCell().setTile(tileSet.getTile(BLANK_COIN));
-        Hud.addScore(100);
 
     }
 }

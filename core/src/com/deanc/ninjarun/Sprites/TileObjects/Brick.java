@@ -16,16 +16,7 @@ public class Brick extends InteractiveTileObject {
     }
 
     @Override
-    public void onHeadHit(Ryu mario) {
-        if(mario.isBig()) {
-            Gdx.app.log("Brick", "Collision");
-            NinjaRun.manager.get("audio/sounds/block.mp3", Sound.class).play();
-            setCategoryFilter(NinjaRun.DESTROYED_BIT);
-            getCell().setTile(null);
-            Hud.addScore(200);
-        }
-        else{
+    public void onHeadHit(Ryu ryu) {
             NinjaRun.manager.get("audio/sounds/fireworks.mp3", Sound.class).play();
-        }
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -21,7 +22,7 @@ import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
-import com.deanc.ninjarun.Sprites.Items.Mushrooms;
+import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.Ryu;
 import com.deanc.ninjarun.Tools.B2WorldCreator;
 import com.deanc.ninjarun.Tools.WorldContactListener;
@@ -57,22 +58,22 @@ public class PlayScreen implements Screen {
     private Array<Item> items;
     private LinkedBlockingQueue<ItemDef> itemToSpawn;
 
-    public PlayScreen(NinjaRun game){
+    public PlayScreen(NinjaRun game) {
         atlas = new TextureAtlas("Mario_and_enemies.pack");
 
         this.game = game;
         gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM,NinjaRun.V_HEIGHT / NinjaRun.PPM,gamecam);
+        gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("lvl1-1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map,1 / NinjaRun.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / NinjaRun.PPM);
 
         //initiating game cam
-        gamecam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight() /2, 0);
+        gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0,-10), true);
+        world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
         creator = new B2WorldCreator(this);
@@ -82,7 +83,7 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        music = NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class);
+        music = NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
         music.setLooping(true);
         music.play();
 
@@ -90,28 +91,28 @@ public class PlayScreen implements Screen {
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
     }
 
-    public void spawnItem(ItemDef idef){
+    public void spawnItem(ItemDef idef) {
         itemToSpawn.add(idef);
     }
 
-    public void handleSpawningItems(){
-        if(!itemToSpawn.isEmpty()){
+    public void handleSpawningItems() {
+        if (!itemToSpawn.isEmpty()) {
             ItemDef idef = itemToSpawn.poll();
-            if(idef.type == Mushrooms.class){
-                items.add(new Mushrooms(this, idef.position.x, idef.position.y));
+            if (idef.type == health.class) {
+                items.add(new health(this, idef.position.x, idef.position.y));
             }
         }
     }
 
-    public TiledMap getMap(){
+    public TiledMap getMap() {
         return map;
     }
 
-    public World getWorld(){
+    public World getWorld() {
         return world;
     }
 
-    public TextureAtlas getAtlas(){
+    public TextureAtlas getAtlas() {
         return atlas;
     }
 
@@ -120,11 +121,13 @@ public class PlayScreen implements Screen {
 
     }
 
-    public void handleInput(float dt){
-
-        if(player.currentState != Ryu.State.DEAD) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
+    public void handleInput(float dt) {
+        if (player.currentState != Ryu.State.DEAD) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+                NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+            }
+
 
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
                 player.b2body.applyLinearImpulse(new Vector2(0.5f, 0), player.b2body.getWorldCenter(), true);
@@ -187,6 +190,7 @@ public class PlayScreen implements Screen {
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        hud.draw(game.batch,delta );
 
         if(gameOver()){
             game.setScreen(new GameOverScreen(game));

@@ -1,7 +1,9 @@
 package com.deanc.ninjarun.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.NinjaRun;
 
@@ -28,31 +31,34 @@ public class Ryu extends Sprite {
     //Basic variables
     public World world;
     public Body b2body;
-    private TextureRegion marioStand;
-    private TextureRegion marioDead;
+    public Texture ryuStand;
+    private Animation<Texture> ryuDead;
 
     //Animation Variables
-    private Animation <TextureRegion> marioRun;
-    private TextureRegion marioJump;
+    private Animation <Texture> ryuRun;
+    private Animation <Texture> ryuJump;
     private boolean runningRight;
     private float stateTimer;
 
-    //Big Mario Animation Variables
-    private TextureRegion bigMarioStand;
-    private TextureRegion bigMarioJump;
-    private Animation<TextureRegion> bigMarioRun;
-    private Animation<TextureRegion> bigMarioGrow;
-
     //boolean tests
     private boolean runGrowAnimation;
-    private boolean marioIsBig;
-    private boolean timeToDefineBigMario;
-    private boolean timeToRedefineMario;
     private boolean marioIsDead;
+
+    //health variables
+    private int health;
+    private int damage;
+    private static int hitCounter;
+
 
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
         defineMario();
+
+        //initialising health variables
+        health = 100;
+        damage = 50;
+        hitCounter = 0;
+
 
         //Animation variables initialization
         currentState = State.STANDING;
@@ -61,93 +67,98 @@ public class Ryu extends Sprite {
         runningRight = true;
 
         //Animation initialization for Mario Standing
-        marioStand = new TextureRegion(screen.getAtlas().findRegion("little_mario"), 0,0,16,16);
-        setBounds(0,0,16 / NinjaRun.PPM, 16 / NinjaRun.PPM);
-        setRegion(marioStand);
-
-        //Animation For Big Mario Standing
-        bigMarioStand = new TextureRegion(screen.getAtlas().findRegion("big_mario"), 0,0, 16,32 );
-
+        ryuStand = new Texture("jumpup1.png");
+        setBounds(0,0,16 / NinjaRun.PPM, 15 / NinjaRun.PPM);
+        setRegion(ryuStand);
 
         //Creating Animation loop for Mario running
-        Array<TextureRegion> frames = new Array<TextureRegion>();
-        for(int i =1; i<4; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("little_mario"), i * 16,0,16,16 ));
-        marioRun = new Animation <TextureRegion>(0.1f, frames);
+        Texture run1 = new Texture("running1.png");
+        Texture run2 = new Texture("running2.png");
+        Texture run3 = new Texture("running3.png");
+        Texture run4 = new Texture("running4.png");
+        Texture run5 = new Texture("running5.png");
+        Texture run6 = new Texture("running6.png");
+        Array<Texture> frames = new Array<Texture>(6);
+        frames.add(run1);
+        frames.add(run2);
+        frames.add(run3);
+        frames.add(run4);
+        frames.add(run5);
+        frames.add(run6);
+        ryuRun = new Animation <Texture>(0.1f, frames);
         frames.clear();
-
-        /*Creating Run Animation For Big Mario
-         using array from small mario thats already initialised*/
-        for(int i =1; i<4; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("big_mario"), i * 16,0,16,32 ));
-        bigMarioRun = new Animation<TextureRegion>(0.1f, frames);
-        frames.clear();
-
-        //getting frames for growing mario animation
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("big_mario"), 240, 0 , 16, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("big_mario"), 0, 0 , 16, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("big_mario"), 240, 0 , 16, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("big_mario"), 0, 0 , 16, 32));
-        bigMarioGrow = new Animation<TextureRegion>(0.2f, frames);
 
         //Creating Jump Animation loop
-        marioJump = (new TextureRegion(screen.getAtlas().findRegion("little_mario"), 80, 0,16,16));
-
-        //Creating Big Mario Jump Animation
-        bigMarioJump = new TextureRegion(screen.getAtlas().findRegion("big_mario"), 80,0, 16,32 );
-
-        runGrowAnimation = false;
-        marioIsBig = false;
+        Texture jump1 = new Texture("jumpup1.png");
+        Texture jump2 = new Texture("jumpup2.png");
+        Texture jump3 = new Texture("jumpup3.png");
+        Texture jump4 = new Texture("jumpup4.png");
+        Texture jump5 = new Texture("jumpup5.png");
+        Texture jump6 = new Texture("jumpup6.png");
+        Texture jump7 = new Texture("jumpup7.png");
+        Array<Texture> jumping = new Array<Texture>(7);
+        jumping.add(jump1);
+        jumping.add(jump2);
+        jumping.add(jump3);
+        jumping.add(jump4);
+        jumping.add(jump5);
+        jumping.add(jump6);
+        jumping.add(jump7);
+        ryuJump = (new Animation<Texture>(0.1f,jumping));
 
         //mario dying contsruction
-        marioDead = new TextureRegion(screen.getAtlas().findRegion("little_mario"), 96, 0, 16, 16);
+
+        Texture dead1 = new Texture("die1.png");
+        Texture dead2 = new Texture("die2.png");
+        Texture dead3 = new Texture("die3.png");
+        Texture dead4 = new Texture("die4.png");
+        Texture dead5 = new Texture("die5.png");
+        Texture dead6 = new Texture("die6.png");
+        Texture dead7 = new Texture("die7.png");
+        Texture dead8 = new Texture("die8.png");
+        Texture dead9 = new Texture("die9.png");
+        Texture dead10 = new Texture("die10.png");
+
+        Array<Texture> dying = new Array<Texture>(10);
+
+        dying.add(dead1);
+        dying.add(dead2);
+        dying.add(dead3);
+        dying.add(dead4);
+        dying.add(dead5);
+        dying.add(dead6);
+        dying.add(dead7);
+        dying.add(dead8);
+        dying.add(dead9);
+        dying.add(dead10);
+
+        ryuDead = new Animation<Texture>(0.2f,dying);
     }
 
     public void update(float dt){
-        if(marioIsBig)
-            setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2 - 6 / NinjaRun.PPM);
-        else
-            setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
-
+        setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
         setRegion(getFrame(dt));
 
-        if(timeToDefineBigMario)
-            defineBigMario();
-        if(timeToRedefineMario)
-            redefineMario();
-    }
-
-    public void grow(){
-        runGrowAnimation = true;
-        marioIsBig = true;
-        timeToDefineBigMario = true;
-        setBounds(getX(), getY(), getWidth(), getHeight() * 2);
-        NinjaRun.manager.get("audio/sounds/powerup.wav", Sound.class).play();
     }
 
 
-    public TextureRegion getFrame(float dt){
+    public Texture getFrame(float dt){
         currentState = getState();
 
         TextureRegion region;
+        Texture texture = new Texture("running1.png");
 
         switch(currentState){
             case DEAD:
-                region = marioDead;
+                texture = ryuDead.getKeyFrame(stateTimer, false);
             break;
 
-            case GROWING:
-                region = bigMarioGrow.getKeyFrame(stateTimer);
-                if(bigMarioGrow.isAnimationFinished(stateTimer))
-                    runGrowAnimation = false;
-                break;
-
             case JUMPING:
-                region = marioIsBig ? bigMarioJump : marioJump;
+                texture =  ryuJump.getKeyFrame(stateTimer, false);
                 break;
 
             case RUNNING:
-                region = marioIsBig ? bigMarioRun.getKeyFrame(stateTimer, true) : marioRun.getKeyFrame(stateTimer, true);
+                texture = ryuRun.getKeyFrame(stateTimer, true);
                 break;
 
             case FALLING:
@@ -155,20 +166,20 @@ public class Ryu extends Sprite {
             case STANDING:
 
             default:
-                region = marioIsBig ? bigMarioStand : marioStand;
+                texture = ryuStand;
                 break;
         }
-        if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
-            region.flip(true,false);
-            runningRight = false;
-        }
-        else if((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
-            region.flip(true, false);
-            runningRight = true;
-        }
+     //   if((b2body.getLinearVelocity().x < 0 || !runningRight) && !texture.isFlipX()){
+       //     texture.
+       //     runningRight = false;
+      //  }
+      //  else if((b2body.getLinearVelocity().x > 0 || runningRight) && texture.flipX()) {
+       //     region.flip(true, false);
+       //     runningRight = true;
+       // }
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
-        return region;
+        return texture;
 
         }
 
@@ -192,41 +203,6 @@ public class Ryu extends Sprite {
             return State.STANDING;
     }
 
-    public void defineBigMario(){
-        Vector2 currentPosition = b2body.getPosition();
-        world.destroyBody(b2body);
-
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(currentPosition.add(0, 10 / NinjaRun.PPM));
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(6 / NinjaRun.PPM);
-        fdef.filter.categoryBits = NinjaRun.MARIO_BIT;
-        fdef.filter.maskBits = NinjaRun.GROUND_BIT |
-                NinjaRun.COIN_BIT |
-                NinjaRun.BRICK_BIT|
-                NinjaRun.ENEMY_BIT|
-                NinjaRun.OBJECT_BIT|
-                NinjaRun.ENEMY_HEAD_BIT|
-                NinjaRun.ITEM_BIT;
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
-        shape.setPosition(new Vector2 (0, -14 / NinjaRun.PPM));
-        b2body.createFixture(fdef).setUserData(this);
-
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / NinjaRun.PPM, 6 / NinjaRun.PPM), new Vector2(2 /NinjaRun.PPM, 6 / NinjaRun.PPM));
-        fdef.filter.categoryBits = NinjaRun.MARIO_HEAD_BIT;
-        fdef.shape = head;
-        fdef.isSensor = true;
-
-        b2body.createFixture(fdef).setUserData(this);
-        timeToDefineBigMario = false;
-    }
 
     public void defineMario(){
         BodyDef bdef = new BodyDef();
@@ -258,62 +234,39 @@ public class Ryu extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public boolean isBig(){
-        return marioIsBig;
+
+    //health method
+    public void health(){
+        if(hitCounter == 1){
+            health -= damage;
+        }
     }
 
+
+    //getting hit method
     public void hit(){
-        if(marioIsBig){    //mario shrinks
-            marioIsBig = false;
-            timeToRedefineMario = true;
-            setBounds(getX(), getY(), getWidth(), getHeight() / 2);
-            NinjaRun.manager.get("audio/sounds/powerdown.wav", Sound.class).play();
+        //loading gameover music in to set it to loop in case player leaves it for a while.
+        Music music = NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class);
+        music.setLooping(true);
+
+        if(hitCounter < 1){    //ryu is pushed back and says ow
+            b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
+            NinjaRun.manager.get("audio/sounds/getting-hit.wav", Sound.class).play();
+
+            hitCounter++;
         }
-        else{   //marios death
+        else{   //Ryus death
             NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
-            NinjaRun.manager.get("audio/music/Gewitter__Thunderstorm-Tim.mp3", Music.class).play();
-            NinjaRun.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+            music.play();
+            NinjaRun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play();
             marioIsDead = true;
             Filter filter = new Filter();
-            filter.maskBits = NinjaRun.NOTHING_BIT;
+            filter.maskBits = NinjaRun.GROUND_BIT;
             for (Fixture fixture : b2body.getFixtureList())
                 fixture.setFilterData(filter);
-            b2body.applyLinearImpulse(new Vector2(0,4f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(-1f,2f), b2body.getWorldCenter(), true);
+            hitCounter = 2;
         }
-    }
-
-    public void redefineMario(){
-        Vector2 position = b2body.getPosition();
-        world.destroyBody(b2body);
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(position);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(6 / NinjaRun.PPM);
-        fdef.filter.categoryBits = NinjaRun.MARIO_BIT;
-        fdef.filter.maskBits = NinjaRun.GROUND_BIT |
-                NinjaRun.COIN_BIT |
-                NinjaRun.BRICK_BIT|
-                NinjaRun.ENEMY_BIT|
-                NinjaRun.OBJECT_BIT|
-                NinjaRun.ENEMY_HEAD_BIT|
-                NinjaRun.ITEM_BIT;
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
-
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / NinjaRun.PPM, 6 / NinjaRun.PPM), new Vector2(2 /NinjaRun.PPM, 6 / NinjaRun.PPM));
-        fdef.filter.categoryBits=NinjaRun.MARIO_HEAD_BIT;
-        fdef.shape = head;
-        fdef.isSensor = true;
-
-        b2body.createFixture(fdef).setUserData(this);
-
-        timeToRedefineMario = false;
     }
 
     public boolean isDead(){
@@ -322,5 +275,13 @@ public class Ryu extends Sprite {
 
     public float getStateTimer(){
         return stateTimer;
+    }
+
+    public static int getHitCounter(){
+        return hitCounter;
+    }
+
+    public static void setHitCounter(int resetHits){
+        hitCounter = resetHits;
     }
 }

@@ -1,6 +1,7 @@
 package com.deanc.ninjarun.Screens;
 
 import static com.badlogic.gdx.graphics.Color.RED;
+import static com.badlogic.gdx.graphics.Color.WHITE;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -19,18 +20,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Sprites.Ryu;
 
 public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
-
     private final Game GAME;
 
+
     //buttons
-    Button playAgainButton;
-    Button mainMenuButton;
-    TextButton.TextButtonStyle buttonStyle;
-    BitmapFont buttonFont;
+    private Button playAgainButton;
+    private Button mainMenuButton;
+    private TextButton.TextButtonStyle buttonStyle;
+    private BitmapFont buttonFont;
 
     public GameOverScreen(Game game){
         this.GAME = game;
@@ -46,7 +48,7 @@ public class GameOverScreen implements Screen {
         buttonStyle = new TextButton.TextButtonStyle();
         buttonFont = new BitmapFont();
         buttonStyle.font= buttonFont;
-        buttonStyle.fontColor = RED;
+        buttonStyle.fontColor = WHITE;
         playAgainButton = new TextButton(" Play Again? ", buttonStyle);
         mainMenuButton = new TextButton(" Main Menu ", buttonStyle);
 
@@ -65,6 +67,7 @@ public class GameOverScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 GAME.setScreen(new PlayScreen((NinjaRun)GAME));
+                NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).stop();
             }
         });
 
@@ -73,7 +76,7 @@ public class GameOverScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 GAME.setScreen(new MenuScreen((NinjaRun)GAME));
-                NinjaRun.manager.get("audio/music/Gewitter__Thunderstorm-Tim.mp3", Music.class).stop();
+                NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).stop();
                 NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
             }
         });
@@ -87,11 +90,6 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()) {
-            GAME.setScreen(new PlayScreen((NinjaRun) GAME));
-            NinjaRun.manager.get("audio/music/Gewitter__Thunderstorm-Tim.mp3", Music.class).stop();
-            dispose();
-        }
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
