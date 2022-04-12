@@ -27,7 +27,7 @@ public class Ninja extends Enemy {
         super(screen, x, y);
         frames = new Array<TextureRegion>();
         for (int i = 0; i < 2; i++ )
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("goomba"),i * 16, 0, 16, 16));
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"),i * 578, 304, 16, 16));
         walkAnimation = new Animation<TextureRegion>(0.4f, frames);
         stateTime = 0;
         setBounds(getX(), getY(), 16 / NinjaRun.PPM , 16 / NinjaRun.PPM);
@@ -41,7 +41,7 @@ public class Ninja extends Enemy {
         if (setToDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
-            setRegion(new TextureRegion(screen.getAtlas().findRegion("goomba"), 32, 0, 16, 16));
+            setRegion(new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"), 578, 374, 16, 16));
             stateTime=0;
         } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);

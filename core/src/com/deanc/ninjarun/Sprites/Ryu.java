@@ -79,94 +79,53 @@ public class Ryu extends Sprite {
         runningRight = true;
 
         //Animation initialization for Mario Standing
-        ryuStand = new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), 0,319,16,16);
-        setBounds(0,0,16 / NinjaRun.PPM, 16 / NinjaRun.PPM);
-        setRegion(ryuStand);
+        ryuStand = new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"), 0,125,52,52);
+         setBounds(0,0,16 / NinjaRun.PPM, 16 / NinjaRun.PPM);
+       setRegion(ryuStand);
 
         //Creating Animation loop for Mario running
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for(int i =1; i<4; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,319,16,16 ));
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"), i * 12,125,50,52));
         ryuRun = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
         //Creating Jump Animation loop
-        Texture jump1 = new Texture("jumpup1.png");
-        Texture jump2 = new Texture("jumpup2.png");
-        Texture jump3 = new Texture("jumpup3.png");
-        Texture jump4 = new Texture("jumpup4.png");
-        Texture jump5 = new Texture("jumpup5.png");
-        Texture jump6 = new Texture("jumpup6.png");
-        Texture jump7 = new Texture("jumpup7.png");
-        Array<Texture> jumping = new Array<Texture>(7);
-        jumping.add(jump1);
-        jumping.add(jump2);
-        jumping.add(jump3);
-        jumping.add(jump4);
-        jumping.add(jump5);
-        jumping.add(jump6);
-        jumping.add(jump7);
-        //ryuJump = (new Animation<TextureRegion>(0.1f,jumping));
+        for(int i =1; i<7; i++)
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,351,16,16 ));
+        ryuJump = new Animation <TextureRegion>(0.1f, frames);
+        frames.clear();
 
-        //mario dying contsruction
-        Texture dead1 = new Texture("die1.png");
-        Texture dead2 = new Texture("die2.png");
-        Texture dead3 = new Texture("die3.png");
-        Texture dead4 = new Texture("die4.png");
-        Texture dead5 = new Texture("die5.png");
-        Texture dead6 = new Texture("die6.png");
-        Texture dead7 = new Texture("die7.png");
-        Texture dead8 = new Texture("die8.png");
-        Texture dead9 = new Texture("die9.png");
-        Texture dead10 = new Texture("die10.png");
 
-        Array<Texture> dying = new Array<Texture>(10);
+        //Ryu death animation
 
-        dying.add(dead1);
-        dying.add(dead2);
-        dying.add(dead3);
-        dying.add(dead4);
-        dying.add(dead5);
-        dying.add(dead6);
-        dying.add(dead7);
-        dying.add(dead8);
-        dying.add(dead9);
-        dying.add(dead10);
-
-        //ryuDead = new Animation<Texture>(0.2f,dying);
+        for(int i =1; i<2; i++)
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,447,16,16 ));
+        ryuDead = new Animation <TextureRegion>(0.1f, frames);
+        frames.clear();
 
         //Attack Texture
-        Texture attack1 = new Texture("attack1.png");
-        Texture attack2 = new Texture("attack2.png");
-        Texture attack3 = new Texture("attack3.png");
-        Texture attack4 = new Texture("attack4.png");
-        Texture attack5 = new Texture("attack5.png");
-
-        Array <Texture> attack= new Array<>(5);
-        attack.add(attack1);
-        attack.add(attack2);
-        attack.add(attack3);
-        attack.add(attack4);
-        attack.add(attack5);
-
-        //ryuAttack = new Animation<Texture>(0.1f,attack);
+        for(int i =1; i<5; i++)
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,511,16,16 ));
+        ryuAttack = new Animation <TextureRegion>(0.1f, frames);
+        frames.clear();
     }
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
-        setRegion(getFrame(dt));
+     //   setRegion(getFrame(dt));
 
     }
 
 
-    public Texture getFrame(float dt){
+    public TextureRegion getFrame(float dt){
         currentState = getState();
 
         TextureRegion region;
-        Texture texture = new Texture("running1.png");
+
 
         switch(currentState){
-            case DEAD:
+           case DEAD:
                 region = ryuDead.getKeyFrame(stateTimer, false);
             break;
 
@@ -176,7 +135,7 @@ public class Ryu extends Sprite {
 
             case RUNNING:
                 region = ryuRun.getKeyFrame(stateTimer, true);
-                break;
+               break;
 
             case ATTACK:
                 region = ryuAttack.getKeyFrame(stateTimer,true);
@@ -190,18 +149,17 @@ public class Ryu extends Sprite {
                 region = ryuStand;
                 break;
         }
-     //   if((b2body.getLinearVelocity().x < 0 || !runningRight) && !texture.isFlipX()){
-       //     texture.
-       //     runningRight = false;
-      //  }
-      //  else if((b2body.getLinearVelocity().x > 0 || runningRight) && texture.flipX()) {
-       //     region.flip(true, false);
-       //     runningRight = true;
-       // }
+       if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
+           region.flip(true,false);
+            runningRight = false;
+        }
+       else if((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
+           region.flip(true, false);
+            runningRight = true;
+        }
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
-        return texture;
-
+        return region;
         }
 
     public State getState(){
