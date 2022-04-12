@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.deanc.ninjarun.Attacks.Sword;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;

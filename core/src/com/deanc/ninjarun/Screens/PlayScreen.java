@@ -17,7 +17,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.deanc.ninjarun.Attacks.Sword;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
@@ -52,7 +51,6 @@ public class PlayScreen implements Screen {
 
     //Player variable
     private Ryu player;
-    private Sword sword;
 
     //Audio variables
     private Music music;
@@ -62,7 +60,7 @@ public class PlayScreen implements Screen {
     private LinkedBlockingQueue<ItemDef> itemToSpawn;
 
     public PlayScreen(NinjaRun game) {
-        atlas = new TextureAtlas("Mario_and_enemies.pack");
+        atlas = new TextureAtlas("NinjaRun.pack");
 
         this.game = game;
         gamecam = new OrthographicCamera();
@@ -83,7 +81,6 @@ public class PlayScreen implements Screen {
 
         //Player creation
         player = new Ryu(this);
-        sword = new Sword(this);
 
         world.setContactListener(new WorldContactListener());
 
@@ -128,13 +125,13 @@ public class PlayScreen implements Screen {
     public void handleInput(float dt) {
         if (player.currentState != Ryu.State.DEAD) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0, 7f), player.b2body.getWorldCenter(), true);
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                Ninja ninja = new Ninja(this,0,0);
-                ninja.attacked();
+                player.sword.setMotorSpeed(25);
+                player.sword.setMaxMotorTorque(20);
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)

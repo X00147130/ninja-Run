@@ -1,5 +1,7 @@
 package com.deanc.ninjarun.Sprites;
 
+import static com.deanc.ninjarun.NinjaRun.PPM;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
@@ -11,18 +13,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes
@@ -30,23 +31,26 @@ public class Ryu extends Sprite {
     public State currentState;
     public State previousState;
 
+
     //Basic variables
     public World world;
     public Body b2body;
-    public Texture ryuStand;
+    public Body arm;
+    public TextureRegion ryuStand;
 
 
     //Animation Variables
-    private Animation <Texture> ryuRun;
-    private Animation <Texture> ryuJump;
-    private Animation <Texture> ryuAttack;
-    private Animation<Texture> ryuDead;
+    private Animation <TextureRegion> ryuRun;
+    private Animation <TextureRegion> ryuJump;
+    private Animation <TextureRegion> ryuAttack;
+    private Animation<TextureRegion> ryuDead;
     private boolean runningRight;
     private float stateTimer;
 
+
     //boolean tests
-    private boolean runGrowAnimation;
-    private boolean marioIsDead;
+    private boolean ryuIsDead;
+
 
     //health variables
     private int health;
@@ -54,8 +58,9 @@ public class Ryu extends Sprite {
     private static int hitCounter;
 
 
-    //Attack variables
-    private boolean attack;
+    //Joint Variables
+    public RevoluteJoint sword;
+
 
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
@@ -74,25 +79,15 @@ public class Ryu extends Sprite {
         runningRight = true;
 
         //Animation initialization for Mario Standing
-        ryuStand = new Texture("jumpup1.png");
-        setBounds(0,0,16 / NinjaRun.PPM, 15 / NinjaRun.PPM);
+        ryuStand = new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), 0,319,16,16);
+        setBounds(0,0,16 / NinjaRun.PPM, 16 / NinjaRun.PPM);
         setRegion(ryuStand);
 
         //Creating Animation loop for Mario running
-        Texture run1 = new Texture("running1.png");
-        Texture run2 = new Texture("running2.png");
-        Texture run3 = new Texture("running3.png");
-        Texture run4 = new Texture("running4.png");
-        Texture run5 = new Texture("running5.png");
-        Texture run6 = new Texture("running6.png");
-        Array<Texture> frames = new Array<Texture>(6);
-        frames.add(run1);
-        frames.add(run2);
-        frames.add(run3);
-        frames.add(run4);
-        frames.add(run5);
-        frames.add(run6);
-        ryuRun = new Animation <Texture>(0.2f, frames);
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        for(int i =1; i<4; i++)
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,319,16,16 ));
+        ryuRun = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
         //Creating Jump Animation loop
@@ -111,7 +106,7 @@ public class Ryu extends Sprite {
         jumping.add(jump5);
         jumping.add(jump6);
         jumping.add(jump7);
-        ryuJump = (new Animation<Texture>(0.1f,jumping));
+        //ryuJump = (new Animation<TextureRegion>(0.1f,jumping));
 
         //mario dying contsruction
         Texture dead1 = new Texture("die1.png");
@@ -138,7 +133,7 @@ public class Ryu extends Sprite {
         dying.add(dead9);
         dying.add(dead10);
 
-        ryuDead = new Animation<Texture>(0.2f,dying);
+        //ryuDead = new Animation<Texture>(0.2f,dying);
 
         //Attack Texture
         Texture attack1 = new Texture("attack1.png");
@@ -154,7 +149,7 @@ public class Ryu extends Sprite {
         attack.add(attack4);
         attack.add(attack5);
 
-        ryuAttack = new Animation<Texture>(0.1f,attack);
+        //ryuAttack = new Animation<Texture>(0.1f,attack);
     }
 
     public void update(float dt){
@@ -172,19 +167,19 @@ public class Ryu extends Sprite {
 
         switch(currentState){
             case DEAD:
-                texture = ryuDead.getKeyFrame(stateTimer, false);
+                region = ryuDead.getKeyFrame(stateTimer, false);
             break;
 
             case JUMPING:
-                texture =  ryuJump.getKeyFrame(stateTimer, false);
+                region =  ryuJump.getKeyFrame(stateTimer, false);
                 break;
 
             case RUNNING:
-                texture = ryuRun.getKeyFrame(stateTimer, true);
+                region = ryuRun.getKeyFrame(stateTimer, true);
                 break;
 
             case ATTACK:
-                texture = ryuAttack.getKeyFrame(stateTimer,true);
+                region = ryuAttack.getKeyFrame(stateTimer,true);
                 break;
 
             case FALLING:
@@ -192,7 +187,7 @@ public class Ryu extends Sprite {
             case STANDING:
 
             default:
-                texture = ryuStand;
+                region = ryuStand;
                 break;
         }
      //   if((b2body.getLinearVelocity().x < 0 || !runningRight) && !texture.isFlipX()){
@@ -210,7 +205,7 @@ public class Ryu extends Sprite {
         }
 
     public State getState(){
-        if(marioIsDead)
+        if(ryuIsDead)
             return State.DEAD;
 
         else if (b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
@@ -230,15 +225,16 @@ public class Ryu extends Sprite {
     }
 
 
+
     public void defineRyu(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / NinjaRun.PPM,32 / NinjaRun.PPM);
+        bdef.position.set(32 / PPM,32 / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(6 / NinjaRun.PPM);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(5 / PPM,6/ PPM);
         fdef.filter.categoryBits = NinjaRun.RYU_BIT;
         fdef.filter.maskBits = NinjaRun.GROUND_BIT |
                 NinjaRun.COIN_BIT |
@@ -250,21 +246,38 @@ public class Ryu extends Sprite {
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
 
+
+    //Joint Creation
+    //Body for the joint to connect
+        BodyDef bdef2 = new BodyDef();
+        bdef2.position.set(33 / PPM,32 / PPM);
+        bdef2.type = BodyDef.BodyType.DynamicBody;
+        arm = world.createBody(bdef);
+
+        FixtureDef fdef2 = new FixtureDef();
+        PolygonShape shape1 = new PolygonShape();
+        shape1.setAsBox((float)0.1 * PPM,(float)0.2 * PPM);
+        fdef2.shape = shape1;
+        arm.createFixture(fdef).setUserData(this);
+
+    //Joint
+        RevoluteJointDef rDef = new RevoluteJointDef();
+        rDef.enableMotor =true;
+        rDef.bodyA = b2body;
+        rDef.bodyB = arm;
+        rDef.collideConnected  = false;
+        rDef.localAnchorA.set(2 / PPM,2 / PPM);
+        sword = (RevoluteJoint) world.createJoint(rDef);
+
+
+    //Ryus Head(Used for colliding with bricks
         EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / NinjaRun.PPM, 6 / NinjaRun.PPM), new Vector2(2 /NinjaRun.PPM, 6 / NinjaRun.PPM));
+        head.set(new Vector2(-2 / PPM, 6 / PPM), new Vector2(2 / PPM, 6 / PPM));
         fdef.filter.categoryBits=NinjaRun.RYU_HEAD_BIT;
         fdef.shape = head;
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData(this);
-    }
-
-
-    //health method
-    public void health(){
-        if(hitCounter == 1){
-            health -= damage;
-        }
     }
 
 
@@ -284,7 +297,7 @@ public class Ryu extends Sprite {
             NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
             music.play();
             NinjaRun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play();
-            marioIsDead = true;
+            ryuIsDead = true;
             Filter filter = new Filter();
             filter.maskBits = NinjaRun.GROUND_BIT;
             for (Fixture fixture : b2body.getFixtureList())
@@ -295,7 +308,7 @@ public class Ryu extends Sprite {
     }
 
     public boolean isDead(){
-        return marioIsDead;
+        return ryuIsDead;
     }
 
     public float getStateTimer(){

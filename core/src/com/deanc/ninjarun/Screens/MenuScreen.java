@@ -54,9 +54,8 @@ public class MenuScreen implements Screen  {
         batch = new SpriteBatch();
 
         //make sure to credit Sebatian Schulz for the art
-        background = new Texture("Sekiro Fanart Sebastian Schulz.jpg");
-        mainBackground = new TextureRegion(background, 0, 0, 5600, 3000);
-
+        background = new Texture("AutumnHills_Parallax05_16.png");
+        mainBackground = new TextureRegion(background);
 
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
@@ -108,7 +107,7 @@ public class MenuScreen implements Screen  {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(mainBackground,0,0,5600,3000);
+        batch.draw(mainBackground,0,0);
         batch.end();
         stage.draw();
     }
