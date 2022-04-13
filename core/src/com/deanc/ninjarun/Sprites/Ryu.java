@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -58,8 +59,8 @@ public class Ryu extends Sprite {
     private static int hitCounter;
 
 
-    //Joint Variables
-    public RevoluteJoint sword;
+    //Attack Variables
+    public FixtureDef attackdef;
 
 
     public Ryu(PlayScreen screen){
@@ -79,41 +80,65 @@ public class Ryu extends Sprite {
         runningRight = true;
 
         //Animation initialization for Mario Standing
-        ryuStand = new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"), 0,125,52,52);
+        ryuStand = new TextureRegion(screen.getAtlas().findRegion("attack1"));
          setBounds(0,0,16 / NinjaRun.PPM, 16 / NinjaRun.PPM);
        setRegion(ryuStand);
 
-        //Creating Animation loop for Mario running
+        //Creating Animation loop for Ryu running
         Array<TextureRegion> frames = new Array<TextureRegion>();
-        for(int i =1; i<4; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"), i * 12,125,50,52));
+        frames.clear();
+
+        frames.add(screen.getAtlas().findRegion("running1"));
+        frames.add(screen.getAtlas().findRegion("running2"));
+        frames.add(screen.getAtlas().findRegion("running3"));
+        frames.add(screen.getAtlas().findRegion("running4"));
+        frames.add(screen.getAtlas().findRegion("running5"));
+        frames.add(screen.getAtlas().findRegion("running6"));
+
         ryuRun = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
         //Creating Jump Animation loop
-        for(int i =1; i<7; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,351,16,16 ));
+        frames.clear();
+
+        frames.add(screen.getAtlas().findRegion("jumpup2"));
+        frames.add(screen.getAtlas().findRegion("jumpup4"));
+        frames.add(screen.getAtlas().findRegion("jumpup5"));
+        frames.add(screen.getAtlas().findRegion("jumpup6"));
+        frames.add(screen.getAtlas().findRegion("jumpup7"));
+
         ryuJump = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
 
         //Ryu death animation
 
-        for(int i =1; i<2; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,447,16,16 ));
+        frames.add(screen.getAtlas().findRegion("die2"));
+        frames.add(screen.getAtlas().findRegion("die3"));
+        frames.add(screen.getAtlas().findRegion("die4"));
+        frames.add(screen.getAtlas().findRegion("die5"));
+        frames.add(screen.getAtlas().findRegion("die7"));
+        frames.add(screen.getAtlas().findRegion("die8"));
+        frames.add(screen.getAtlas().findRegion("die10"));
+
         ryuDead = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
         //Attack Texture
-        for(int i =1; i<5; i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("Custom Edited - Ninja Gaiden Customs - Ryu Hayabusa"), i * 7,511,16,16 ));
+        frames.add(screen.getAtlas().findRegion("attack1"));
+        frames.add(screen.getAtlas().findRegion("attack2"));
+        frames.add(screen.getAtlas().findRegion("attack3"));
+        frames.add(screen.getAtlas().findRegion("attack4"));
+        frames.add(screen.getAtlas().findRegion("attack5"));
+        frames.add(screen.getAtlas().findRegion("attacka6"));
+        frames.add(screen.getAtlas().findRegion("attacka7"));
         ryuAttack = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
     }
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
-     //   setRegion(getFrame(dt));
+        setRegion(getFrame(dt));
 
     }
 
@@ -149,13 +174,14 @@ public class Ryu extends Sprite {
                 region = ryuStand;
                 break;
         }
-       if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
-           region.flip(true,false);
-            runningRight = false;
-        }
-       else if((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
-           region.flip(true, false);
-            runningRight = true;
+        if(b2body!=null) {
+            if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
+                region.flip(true, false);
+                runningRight = false;
+            } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
+                region.flip(true, false);
+                runningRight = true;
+            }
         }
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
@@ -191,8 +217,8 @@ public class Ryu extends Sprite {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(5 / PPM,6/ PPM);
+        CircleShape shape = new CircleShape();
+        shape.setRadius(6 / PPM);
         fdef.filter.categoryBits = NinjaRun.RYU_BIT;
         fdef.filter.maskBits = NinjaRun.GROUND_BIT |
                 NinjaRun.COIN_BIT |
@@ -205,29 +231,6 @@ public class Ryu extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
 
 
-    //Joint Creation
-    //Body for the joint to connect
-        BodyDef bdef2 = new BodyDef();
-        bdef2.position.set(33 / PPM,32 / PPM);
-        bdef2.type = BodyDef.BodyType.DynamicBody;
-        arm = world.createBody(bdef);
-
-        FixtureDef fdef2 = new FixtureDef();
-        PolygonShape shape1 = new PolygonShape();
-        shape1.setAsBox((float)0.1 * PPM,(float)0.2 * PPM);
-        fdef2.shape = shape1;
-        arm.createFixture(fdef).setUserData(this);
-
-    //Joint
-        RevoluteJointDef rDef = new RevoluteJointDef();
-        rDef.enableMotor =true;
-        rDef.bodyA = b2body;
-        rDef.bodyB = arm;
-        rDef.collideConnected  = false;
-        rDef.localAnchorA.set(2 / PPM,2 / PPM);
-        sword = (RevoluteJoint) world.createJoint(rDef);
-
-
     //Ryus Head(Used for colliding with bricks
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2 / PPM, 6 / PPM), new Vector2(2 / PPM, 6 / PPM));
@@ -236,7 +239,41 @@ public class Ryu extends Sprite {
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData(this);
+
     }
+
+    //An Attack System Attempt
+
+    public Fixture createAttack(){
+        if(!isFlipX()){
+            b2body.applyLinearImpulse(new Vector2(1,0),b2body.getWorldCenter(),true);
+        }
+        else {
+            b2body.applyLinearImpulse(new Vector2(-1,0),b2body.getWorldCenter(),true);
+        }
+        b2body.setAwake(true);
+
+        //Collision Detection Line
+
+        EdgeShape head = new EdgeShape();
+        if(!isFlipX()){
+            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(9/NinjaRun.PPM, 0 / NinjaRun.PPM));
+        }
+        else{
+            head.set(new Vector2(-9/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
+        }
+        attackdef.shape = head;
+        attackdef.isSensor = false;
+        attackdef.filter.categoryBits= NinjaRun.ATTACK_BIT;
+        attackdef.filter.maskBits = NinjaRun.ENEMY_BIT| NinjaRun.COIN_BIT;
+
+        Fixture fix1 = b2body.createFixture(attackdef);
+        fix1.setUserData("attack");
+        NinjaRun.manager.get("audio/sounds/coin.mp3",Sound.class).play();
+        head.dispose();
+        return fix1;
+    }
+
 
 
     //getting hit method

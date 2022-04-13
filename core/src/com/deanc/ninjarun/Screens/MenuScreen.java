@@ -54,7 +54,7 @@ public class MenuScreen implements Screen  {
         batch = new SpriteBatch();
 
         //make sure to credit Sebatian Schulz for the art
-        background = new Texture("AutumnHills_Parallax05_16.png");
+        background = new Texture("logo.jpg");
         mainBackground = new TextureRegion(background);
 
 

@@ -17,6 +17,7 @@ public class Ninja extends Enemy {
 
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
+    private Animation<TextureRegion> dieAnimation;
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
@@ -25,10 +26,18 @@ public class Ninja extends Enemy {
 
     public Ninja(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+        //run animation
         frames = new Array<TextureRegion>();
-        for (int i = 0; i < 2; i++ )
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"),i * 578, 304, 16, 16));
-        walkAnimation = new Animation<TextureRegion>(0.4f, frames);
+        frames.add(screen.getAtlas().findRegion("enemyRun1"));
+        frames.add(screen.getAtlas().findRegion("enemyRun2"));
+        frames.add(screen.getAtlas().findRegion("enemyRun3"));
+        frames.add(screen.getAtlas().findRegion("enemyRun4"));
+        frames.add(screen.getAtlas().findRegion("enemyRun5"));
+        frames.add(screen.getAtlas().findRegion("enemyRun6"));
+
+        walkAnimation = new Animation <TextureRegion>(0.1f, frames);
+        frames.clear();
+
         stateTime = 0;
         setBounds(getX(), getY(), 16 / NinjaRun.PPM , 16 / NinjaRun.PPM);
         setToDestroy = false;
@@ -41,7 +50,21 @@ public class Ninja extends Enemy {
         if (setToDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
-            setRegion(new TextureRegion(screen.getAtlas().findRegion("Arcade - Ninja Gaiden - Ryu Hayabusa"), 578, 374, 16, 16));
+
+            //death animation
+            frames.clear();
+
+            frames.add(screen.getAtlas().findRegion("enemyDie1"));
+            frames.add(screen.getAtlas().findRegion("enemyDie2"));
+            frames.add(screen.getAtlas().findRegion("enemyDie3"));
+            frames.add(screen.getAtlas().findRegion("enemyDie4"));
+            frames.add(screen.getAtlas().findRegion("enemyDie5"));
+            frames.add(screen.getAtlas().findRegion("enemyDie6"));
+            frames.add(screen.getAtlas().findRegion("enemyDie7"));
+
+            dieAnimation = new Animation <TextureRegion>(0.1f, frames);
+            frames.clear();
+
             stateTime=0;
         } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);

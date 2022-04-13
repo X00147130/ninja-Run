@@ -60,7 +60,7 @@ public class PlayScreen implements Screen {
     private LinkedBlockingQueue<ItemDef> itemToSpawn;
 
     public PlayScreen(NinjaRun game) {
-        atlas = new TextureAtlas("NinjaRun.pack");
+        atlas = new TextureAtlas("ryu_and_enemies.pack");
 
         this.game = game;
         gamecam = new OrthographicCamera();
@@ -130,8 +130,7 @@ public class PlayScreen implements Screen {
             }
 
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                player.sword.setMotorSpeed(25);
-                player.sword.setMaxMotorTorque(20);
+
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
