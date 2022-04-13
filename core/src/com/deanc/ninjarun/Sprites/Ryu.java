@@ -174,14 +174,12 @@ public class Ryu extends Sprite {
                 region = ryuStand;
                 break;
         }
-        if(b2body!=null) {
-            if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
-                region.flip(true, false);
-                runningRight = false;
-            } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
-                region.flip(true, false);
-                runningRight = true;
-            }
+        if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
+            region.flip(true, false);
+            runningRight = false;
+        } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
+            region.flip(true, false);
+            runningRight = true;
         }
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
@@ -246,10 +244,10 @@ public class Ryu extends Sprite {
 
     public Fixture createAttack(){
         if(!isFlipX()){
-            b2body.applyLinearImpulse(new Vector2(1,0),b2body.getWorldCenter(),true);
+            b2body.applyForce(new Vector2(1,0),b2body.getWorldCenter(),true);
         }
         else {
-            b2body.applyLinearImpulse(new Vector2(-1,0),b2body.getWorldCenter(),true);
+            b2body.applyForce(new Vector2(-1,0),b2body.getWorldCenter(),true);
         }
         b2body.setAwake(true);
 
@@ -262,6 +260,7 @@ public class Ryu extends Sprite {
         else{
             head.set(new Vector2(-9/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
         }
+        attackdef = new FixtureDef();
         attackdef.shape = head;
         attackdef.isSensor = false;
         attackdef.filter.categoryBits= NinjaRun.ATTACK_BIT;

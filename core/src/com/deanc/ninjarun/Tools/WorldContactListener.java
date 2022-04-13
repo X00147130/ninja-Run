@@ -31,9 +31,9 @@ public class WorldContactListener implements ContactListener {
 
             case NinjaRun.ENEMY_BIT | NinjaRun.ATTACK_BIT:
                 if(fixA.getFilterData().categoryBits == NinjaRun.ATTACK_BIT)
-                    ((Ninja)fixA.getUserData()).attacked();
-                else
                     ((Ninja)fixB.getUserData()).attacked();
+                else
+                    ((Ninja)fixA.getUserData()).attacked();
                 break;
 
             case NinjaRun.ENEMY_BIT | NinjaRun.OBJECT_BIT:

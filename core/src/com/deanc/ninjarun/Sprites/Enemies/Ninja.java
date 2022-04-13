@@ -1,19 +1,26 @@
 package com.deanc.ninjarun.Sprites.Enemies;
 
+import static com.deanc.ninjarun.Sprites.Enemies.Ninja.State.RUNNING;
+import static com.deanc.ninjarun.Sprites.Enemies.Ninja.State.DEAD;
+
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
+import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Ninja extends Enemy {
+    //animation variables
+    public enum State{RUNNING, DEAD }
+    public State currentState;
+    public State previousState;
+    private boolean ninjaDead;
 
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
@@ -21,6 +28,7 @@ public class Ninja extends Enemy {
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
+    private boolean runningRight;
 
     private int enemyHitCounter;
 
@@ -38,12 +46,53 @@ public class Ninja extends Enemy {
         walkAnimation = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
+
         stateTime = 0;
         setBounds(getX(), getY(), 16 / NinjaRun.PPM , 16 / NinjaRun.PPM);
         setToDestroy = false;
         destroyed =false;
         enemyHitCounter = 0;
+        ninjaDead = false;
     }
+
+    public State getState() {
+        if(ninjaDead = true)
+            return Ninja.State.DEAD;
+
+        else
+            return RUNNING;
+
+    }
+
+    public TextureRegion getFrame(float dt) {
+        currentState = getState();
+
+        TextureRegion region;
+
+
+        switch (currentState) {
+            case DEAD:
+                region = dieAnimation.getKeyFrame(stateTime, false);
+                break;
+
+            case RUNNING:
+
+            default:
+                region = walkAnimation.getKeyFrame(stateTime,true);
+                break;
+        }
+        if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
+            region.flip(true, false);
+            runningRight = false;
+        } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
+            region.flip(true, false);
+            runningRight = true;
+        }
+        stateTime = currentState == previousState ? stateTime + dt : 0;
+        previousState = currentState;
+        return region;
+    }
+
 
     public void update(float dt) {
         stateTime += dt;
@@ -89,6 +138,7 @@ public class Ninja extends Enemy {
                 NinjaRun.BRICK_BIT |
                 NinjaRun.ENEMY_BIT |
                 NinjaRun.OBJECT_BIT|
+                NinjaRun.ATTACK_BIT|
                 NinjaRun.RYU_BIT;
 
         fdef.shape = shape;
@@ -102,11 +152,8 @@ public class Ninja extends Enemy {
 
     @Override
     public void attacked() {
-        if (enemyHitCounter < 1) {
-            enemyHitCounter++;
-        } else {
             setToDestroy = true;
             NinjaRun.manager.get("audio/sounds/stomp.wav", Sound.class).play();
         }
     }
-}
+

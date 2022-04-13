@@ -125,13 +125,14 @@ public class PlayScreen implements Screen {
     public void handleInput(float dt) {
         if (player.currentState != Ryu.State.DEAD) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 7f), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
             if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-
+                player.createAttack();
             }
+
 
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
                 player.b2body.applyLinearImpulse(new Vector2(0.5f, 0), player.b2body.getWorldCenter(), true);
