@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -46,6 +47,19 @@ public class Ninja extends Enemy {
         walkAnimation = new Animation <TextureRegion>(0.1f, frames);
         frames.clear();
 
+        //death animation
+        frames.clear();
+
+        frames.add(screen.getAtlas().findRegion("enemyDie1"));
+        frames.add(screen.getAtlas().findRegion("enemyDie2"));
+        frames.add(screen.getAtlas().findRegion("enemyDie3"));
+        frames.add(screen.getAtlas().findRegion("enemyDie4"));
+        frames.add(screen.getAtlas().findRegion("enemyDie5"));
+        frames.add(screen.getAtlas().findRegion("enemyDie6"));
+        frames.add(screen.getAtlas().findRegion("enemyDie7"));
+
+        dieAnimation = new Animation <TextureRegion>(0.1f, frames);
+        frames.clear();
 
         stateTime = 0;
         setBounds(getX(), getY(), 16 / NinjaRun.PPM , 16 / NinjaRun.PPM);
@@ -53,14 +67,15 @@ public class Ninja extends Enemy {
         destroyed =false;
         enemyHitCounter = 0;
         ninjaDead = false;
+        runningRight = true;
     }
 
     public State getState() {
-        if(ninjaDead = true)
+        if(ninjaDead == true)
             return Ninja.State.DEAD;
 
         else
-            return RUNNING;
+            return Ninja.State.RUNNING;
 
     }
 
@@ -68,7 +83,6 @@ public class Ninja extends Enemy {
         currentState = getState();
 
         TextureRegion region;
-
 
         switch (currentState) {
             case DEAD:
@@ -84,6 +98,7 @@ public class Ninja extends Enemy {
         if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
             region.flip(true, false);
             runningRight = false;
+
         } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
             region.flip(true, false);
             runningRight = true;
@@ -96,29 +111,16 @@ public class Ninja extends Enemy {
 
     public void update(float dt) {
         stateTime += dt;
+        setRegion(getFrame(dt));
         if (setToDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
-
-            //death animation
-            frames.clear();
-
-            frames.add(screen.getAtlas().findRegion("enemyDie1"));
-            frames.add(screen.getAtlas().findRegion("enemyDie2"));
-            frames.add(screen.getAtlas().findRegion("enemyDie3"));
-            frames.add(screen.getAtlas().findRegion("enemyDie4"));
-            frames.add(screen.getAtlas().findRegion("enemyDie5"));
-            frames.add(screen.getAtlas().findRegion("enemyDie6"));
-            frames.add(screen.getAtlas().findRegion("enemyDie7"));
-
-            dieAnimation = new Animation <TextureRegion>(0.1f, frames);
-            frames.clear();
-
             stateTime=0;
+
         } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-            setRegion(walkAnimation.getKeyFrame(stateTime, true));
+            setRegion(getFrame(dt));
         }
     }
 
@@ -152,8 +154,15 @@ public class Ninja extends Enemy {
 
     @Override
     public void attacked() {
+        if (enemyHitCounter > 2) {
+            enemyHitCounter ++;
+            setToDestroy = false;
+            b2body.applyLinearImpulse(new Vector2(2, 0),b2body.getWorldCenter(), true);
+        }
+        else {
             setToDestroy = true;
             NinjaRun.manager.get("audio/sounds/stomp.wav", Sound.class).play();
         }
     }
+}
 

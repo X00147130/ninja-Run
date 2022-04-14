@@ -23,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
 
@@ -61,11 +62,15 @@ public class Ryu extends Sprite {
 
     //Attack Variables
     public FixtureDef attackdef;
+    private boolean attacking;
+    private Fixture fix;
 
 
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
         defineRyu();
+
+        attacking = false;
 
         //initialising health variables
         health = 100;
@@ -132,7 +137,7 @@ public class Ryu extends Sprite {
         frames.add(screen.getAtlas().findRegion("attack5"));
         frames.add(screen.getAtlas().findRegion("attacka6"));
         frames.add(screen.getAtlas().findRegion("attacka7"));
-        ryuAttack = new Animation <TextureRegion>(0.1f, frames);
+        ryuAttack = new Animation <TextureRegion>(0.08f, frames);
         frames.clear();
     }
 
@@ -251,6 +256,7 @@ public class Ryu extends Sprite {
         }
         b2body.setAwake(true);
 
+
         //Collision Detection Line
 
         EdgeShape head = new EdgeShape();
@@ -271,6 +277,42 @@ public class Ryu extends Sprite {
         NinjaRun.manager.get("audio/sounds/coin.mp3",Sound.class).play();
         head.dispose();
         return fix1;
+    }
+
+    public boolean isAttacking(){
+        return attacking;
+    }
+
+    public void setIsAttacking(boolean attack){
+        attacking = attack;
+    }
+
+    public void attack(){
+        if(!attacking&& currentState != State.DEAD){
+            attacking = true;
+            Timer time = new Timer();
+            currentState = State.ATTACK;
+            Timer.Task task = time.scheduleTask(new Timer.Task(){
+                @Override
+                public void run() {
+                    currentState = State.STANDING;
+                    }
+                },0.5f);
+
+            fix = createAttack();
+            if(isAttacking() == true){
+                Timer.Task task1 = time.scheduleTask(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        while(b2body.getFixtureList().size > 1){
+                            b2body.destroyFixture(b2body.getFixtureList().pop());
+                        }
+                        attacking = false;
+                    }
+                },0.5f);
+            }
+
+        }
     }
 
 
