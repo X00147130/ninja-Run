@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -43,6 +44,7 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+    Texture backgroundImg;
 
     //Box2D Variables
     private World world;
@@ -66,6 +68,8 @@ public class PlayScreen implements Screen {
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch);
+
+        backgroundImg = new Texture("Texture1.jpg");
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("lvl1-1.tmx");
@@ -184,6 +188,7 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
+        //game.batch.draw(backgroundImg,0,0);
         player.draw(game.batch);
         for(Enemy enemy :  creator.getGoombas())
             enemy.draw(game.batch);
