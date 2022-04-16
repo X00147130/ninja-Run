@@ -51,7 +51,7 @@ public class health extends Item{
     @Override
     public void update(float dt) {
         super.update(dt);
-        NinjaRun.manager.get("audio/sounds/powerup.wav", Sound.class);
+        NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class);
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() /2);
         velocity.y= body.getLinearVelocity().y;
     }

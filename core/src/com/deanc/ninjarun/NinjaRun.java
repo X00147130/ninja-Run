@@ -52,13 +52,12 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/fireworks.mp3", Sound.class);
 		manager.load("audio/sounds/block.mp3", Sound.class);
 		manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
-		manager.load("audio/sounds/powerup.wav", Sound.class);
-		manager.load("audio/sounds/powerdown.wav", Sound.class);
 		manager.load("audio/sounds/stomp.wav", Sound.class);
 		manager.load("audio/sounds/mariodie.wav",Sound.class);
 		manager.load("audio/sounds/sexynakedbunny-ouch.mp3",Sound.class);
 		manager.load("audio/sounds/soundnimja-jump.wav",Sound.class);
 		manager.load("audio/sounds/getting-hit.wav",Sound.class);
+		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class);
 		manager.finishLoading();
 		setScreen(new MenuScreen(this));
 	}

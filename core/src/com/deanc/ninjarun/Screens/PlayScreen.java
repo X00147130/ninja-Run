@@ -129,6 +129,7 @@ public class PlayScreen implements Screen {
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
+
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 player.attack();
             }

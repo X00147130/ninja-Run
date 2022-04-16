@@ -43,6 +43,7 @@ public class MenuScreen implements Screen  {
     //Buttons
     Button playButton;
     Button quitButton;
+    Button levelButton;
     TextButton.TextButtonStyle buttonStyle;
     BitmapFont buttonFont;
 
@@ -70,12 +71,15 @@ public class MenuScreen implements Screen  {
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
         playButton  = new TextButton("Play",buttonStyle );
+        levelButton  = new TextButton("Level Select",buttonStyle );
         quitButton = new TextButton("Quit",buttonStyle);
 
         Label titleLabel = new Label(" Ninja Run", font);
         table.add(titleLabel).expandX();
         table.row();
         table.add(playButton).expandX().padTop(10);
+        table.row();
+        table.add(levelButton).expandX().padTop(10);
         table.row();
         table.add(quitButton).expandX().padTop(20);
         table.row();

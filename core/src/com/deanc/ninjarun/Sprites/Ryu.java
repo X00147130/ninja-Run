@@ -274,7 +274,7 @@ public class Ryu extends Sprite {
 
         Fixture fix1 = b2body.createFixture(attackdef);
         fix1.setUserData("attack");
-        NinjaRun.manager.get("audio/sounds/coin.mp3",Sound.class).play();
+        NinjaRun.manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class).play();
         head.dispose();
         return fix1;
     }
@@ -304,7 +304,7 @@ public class Ryu extends Sprite {
                 Timer.Task task1 = time.scheduleTask(new Timer.Task() {
                     @Override
                     public void run() {
-                        while(b2body.getFixtureList().size > 1){
+                        while(b2body.getFixtureList().size > 2){
                             b2body.destroyFixture(b2body.getFixtureList().pop());
                         }
                         attacking = false;
