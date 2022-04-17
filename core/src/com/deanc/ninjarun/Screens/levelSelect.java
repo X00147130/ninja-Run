@@ -94,24 +94,24 @@ public class levelSelect implements Screen {
         grid.setFillParent(true);
 
         //filling table
-        grid.add(pageLabel).expandX().padLeft(20);
+        grid.add(pageLabel).expandX().padLeft(150);
         grid.row();
-        grid.add(level1).expandX().padRight(10);
-        grid.add(level6).expandX();
+        grid.add(level1).expandX().padRight(90).padLeft(50);
+        grid.add(level6).expandX().padRight(50);
         grid.row();
-        grid.add(level2).expandX().padRight(10);
-        grid.add(level7).expandX();
+        grid.add(level2).expandX().padRight(90).padLeft(50);
+        grid.add(level7).expandX().padRight(50);
         grid.row();
-        grid.add(level3).expandX().padRight(10);
-        grid.add(level8).expandX();
+        grid.add(level3).expandX().padRight(90).padLeft(50);
+        grid.add(level8).expandX().padRight(50);
         grid.row();
-        grid.add(level4).expandX().padRight(10);
-        grid.add(level9).expandX();
+        grid.add(level4).expandX().padRight(90).padLeft(50);
+        grid.add(level9).expandX().padRight(50);
         grid.row();
-        grid.add(level5).expandX().padRight(10);
-        grid.add(level10).expandX();
+        grid.add(level5).expandX().padRight(90).padLeft(50);
+        grid.add(level10).expandX().padRight(50);
         grid.row();
-        grid.add(backButton).expandX().padTop(10);
+        grid.add(backButton).expandX().padTop(10).padLeft(150);
         screen.addActor(grid);
         Gdx.input.setInputProcessor(screen);
 
@@ -133,7 +133,9 @@ public class levelSelect implements Screen {
 
     @Override
     public void render(float delta) {
-
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        screen.draw();
     }
 
     @Override
@@ -158,9 +160,7 @@ public class levelSelect implements Screen {
 
     @Override
     public void show() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        screen.draw();
+
     }
 
     @Override

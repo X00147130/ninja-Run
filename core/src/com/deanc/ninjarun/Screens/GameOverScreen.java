@@ -53,11 +53,12 @@ public class GameOverScreen implements Screen {
         mainMenuButton = new TextButton(" Main Menu ", buttonStyle);
 
 
-        Label gameOverLabel = new Label(" GAME OVER ", font);
-        table.add(gameOverLabel).expandX().center().padLeft(150);
+        Label gameOverLabel = new Label(" YOU DIED ", font);
+        table.add(gameOverLabel).expandX();
         table.row();
-        table.add(playAgainButton).expandX().left().padTop(10).padLeft(50);
-        table.add(mainMenuButton).expandX().right().padTop(10).padRight(50);
+        table.add(playAgainButton).expandX().padTop(10);
+        table.row();
+        table.add(mainMenuButton).expandX().padTop(10);
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
 

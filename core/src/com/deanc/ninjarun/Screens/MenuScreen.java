@@ -75,7 +75,7 @@ public class MenuScreen implements Screen  {
         table.row();
         table.add(levelButton).expandX().padTop(10);
         table.row();
-        table.add(quitButton).expandX().padTop(20);
+        table.add(quitButton).expandX().padTop(10);
         table.row();
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
