@@ -1,8 +1,5 @@
 package com.deanc.ninjarun.Sprites.Enemies;
 
-import static com.deanc.ninjarun.Sprites.Enemies.Ninja.State.RUNNING;
-import static com.deanc.ninjarun.Sprites.Enemies.Ninja.State.DEAD;
-
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Ninja extends Enemy {
     //animation variables
@@ -133,11 +129,11 @@ public class Ninja extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(6 / NinjaRun.PPM);
+        shape.setRadius(5 / NinjaRun.PPM);
         fdef.filter.categoryBits = NinjaRun.ENEMY_BIT;
         fdef.filter.maskBits = NinjaRun.GROUND_BIT |
-                NinjaRun.COIN_BIT |
-                NinjaRun.BRICK_BIT |
+                NinjaRun.FINISH_BIT |
+                NinjaRun.PLATFORM_BIT |
                 NinjaRun.ENEMY_BIT |
                 NinjaRun.OBJECT_BIT|
                 NinjaRun.ATTACK_BIT|

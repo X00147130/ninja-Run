@@ -10,6 +10,7 @@ import com.deanc.ninjarun.Sprites.Enemies.Enemy;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Ryu;
+import com.deanc.ninjarun.Sprites.TileObjects.Finish;
 import com.deanc.ninjarun.Sprites.TileObjects.InteractiveTileObject;
 
 public class WorldContactListener implements ContactListener {
@@ -21,12 +22,12 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
-            case NinjaRun.RYU_HEAD_BIT | NinjaRun.BRICK_BIT:
-            case NinjaRun.RYU_HEAD_BIT | NinjaRun.COIN_BIT:
+            case NinjaRun.RYU_HEAD_BIT | NinjaRun.PLATFORM_BIT:
+            case NinjaRun.RYU_BIT | NinjaRun.FINISH_BIT:
                 if(fixA.getFilterData().categoryBits == NinjaRun.RYU_HEAD_BIT)
-                    ((InteractiveTileObject) fixB.getUserData()).onHeadHit((Ryu) fixA.getUserData());
-                else
-                    ((InteractiveTileObject) fixA.getUserData()).onHeadHit((Ryu) fixB.getUserData());
+                ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
+            else
+                ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
                 break;
 
             case NinjaRun.ENEMY_BIT | NinjaRun.ATTACK_BIT:

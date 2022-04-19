@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 
-public class levelSelect implements Screen {
+public class LevelSelect implements Screen {
 
     //Game
     private final Game GAME2 ;
@@ -54,7 +54,7 @@ public class levelSelect implements Screen {
     private SpriteBatch batch;
 
 
-    public levelSelect(final Game game) {
+    public LevelSelect(final Game game) {
         super();
 
         //Admin

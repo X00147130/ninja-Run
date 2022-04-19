@@ -34,8 +34,8 @@ public class health extends Item{
         fdef.filter.maskBits = NinjaRun.RYU_BIT |
                 NinjaRun.OBJECT_BIT |
                 NinjaRun.GROUND_BIT |
-                NinjaRun.BRICK_BIT |
-                NinjaRun.COIN_BIT;
+                NinjaRun.PLATFORM_BIT |
+                NinjaRun.FINISH_BIT;
 
         fdef.shape = shape;
         body.createFixture(fdef).setUserData(this);

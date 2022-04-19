@@ -21,7 +21,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
-import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
@@ -72,7 +71,7 @@ public class PlayScreen implements Screen {
         backgroundImg = new Texture("Texture1.jpg");
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("lvl1-1.tmx");
+        map = mapLoader.load("levels/level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / NinjaRun.PPM);
 
         //initiating game cam
@@ -154,9 +153,9 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
-        for(Enemy enemy :  creator.getGoombas()) {
+        for(Enemy enemy :  creator.getNinjas()) {
             enemy.update(dt);
-            if(enemy.getX() <player.getX() + 224 / NinjaRun.PPM)
+            if(enemy.getX() < player.getX() + 224 / NinjaRun.PPM)
                 enemy.b2body.setActive(true);
         }
 
@@ -188,9 +187,8 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
-        //game.batch.draw(backgroundImg,0,0);
         player.draw(game.batch);
-        for(Enemy enemy :  creator.getGoombas())
+        for(Enemy enemy :  creator.getNinjas())
             enemy.draw(game.batch);
 
         for(Item item : items)
@@ -207,6 +205,11 @@ public class PlayScreen implements Screen {
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
+
+        if(levelComplete()) {
+            game.setScreen(new LevelComplete(game));
+            dispose();
+        }
     }
 
     @Override
@@ -217,6 +220,15 @@ public class PlayScreen implements Screen {
 
     public boolean gameOver(){
         if(player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean levelComplete(){
+        if(player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 3){
             return true;
         }
         else{

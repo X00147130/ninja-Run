@@ -91,7 +91,7 @@ public class MenuScreen implements Screen  {
         levelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new levelSelect((NinjaRun)GAME));
+                GAME.setScreen(new LevelSelect((NinjaRun)GAME));
             }
         });
 

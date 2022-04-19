@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,10 +17,7 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.deanc.ninjarun.NinjaRun;
@@ -29,13 +25,14 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes
-    public enum State{ FALLING, JUMPING, STANDING, RUNNING, ATTACK, DEAD }
+    public enum State{ FALLING, JUMPING, STANDING, RUNNING, ATTACK, DEAD, COMPLETE}
     public State currentState;
     public State previousState;
 
 
     //Basic variables
     public World world;
+    private PlayScreen screen;
     public Body b2body;
     public Body arm;
     public TextureRegion ryuStand;
@@ -45,7 +42,8 @@ public class Ryu extends Sprite {
     private Animation <TextureRegion> ryuRun;
     private Animation <TextureRegion> ryuJump;
     private Animation <TextureRegion> ryuAttack;
-    private Animation<TextureRegion> ryuDead;
+    private Animation <TextureRegion> ryuDead;
+    private Animation<TextureRegion> ryuComplete;
     private boolean runningRight;
     private float stateTimer;
 
@@ -70,6 +68,7 @@ public class Ryu extends Sprite {
         this.world = screen.getWorld();
         defineRyu();
 
+        this.screen = screen;
         attacking = false;
 
         //initialising health variables
@@ -171,6 +170,10 @@ public class Ryu extends Sprite {
                 region = ryuAttack.getKeyFrame(stateTimer,true);
                 break;
 
+            case COMPLETE:
+                region = ryuComplete.getKeyFrame(stateTimer, true);
+                break;
+
             case FALLING:
 
             case STANDING:
@@ -207,6 +210,9 @@ public class Ryu extends Sprite {
         else if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             return State.ATTACK;
 
+        else if(screen.levelComplete() == true)
+            return State.COMPLETE;
+
         else
             return State.STANDING;
     }
@@ -224,8 +230,8 @@ public class Ryu extends Sprite {
         shape.setRadius(6 / PPM);
         fdef.filter.categoryBits = NinjaRun.RYU_BIT;
         fdef.filter.maskBits = NinjaRun.GROUND_BIT |
-                NinjaRun.COIN_BIT |
-                NinjaRun.BRICK_BIT|
+                NinjaRun.FINISH_BIT |
+                NinjaRun.PLATFORM_BIT |
                 NinjaRun.ENEMY_BIT|
                 NinjaRun.OBJECT_BIT|
                 NinjaRun.ITEM_BIT;
@@ -270,7 +276,7 @@ public class Ryu extends Sprite {
         attackdef.shape = head;
         attackdef.isSensor = false;
         attackdef.filter.categoryBits= NinjaRun.ATTACK_BIT;
-        attackdef.filter.maskBits = NinjaRun.ENEMY_BIT| NinjaRun.COIN_BIT;
+        attackdef.filter.maskBits = NinjaRun.ENEMY_BIT| NinjaRun.FINISH_BIT;
 
         Fixture fix1 = b2body.createFixture(attackdef);
         fix1.setUserData("attack");

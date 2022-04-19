@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Sprites.Ryu;
+
 
 public class GameOverScreen implements Screen {
     private Viewport viewport;
