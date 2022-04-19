@@ -22,11 +22,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Sprites.Ryu;
 
 public class LevelSelect implements Screen {
 
     //Game
-    private final Game GAME2 ;
+    private Game GAME ;
 
     //buttons
     Button level1;
@@ -52,16 +53,20 @@ public class LevelSelect implements Screen {
     private Viewport viewport;
     private Stage screen;
     private SpriteBatch batch;
+    private Ryu player;
 
 
     public LevelSelect(final Game game) {
         super();
 
         //Admin
-        this.GAME2 = game;
+        GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         screen = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();
+
+
+        NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).play();
 
         //Texture
         background = new Texture("Texture1.jpg");
@@ -118,14 +123,14 @@ public class LevelSelect implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME2.setScreen(new MenuScreen((NinjaRun) GAME2));
+                GAME.setScreen(new MenuScreen((NinjaRun) GAME));
             }
         });
 
         level1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME2.setScreen(new PlayScreen((NinjaRun)GAME2));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -167,7 +172,7 @@ public class LevelSelect implements Screen {
     public void dispose() {
         batch.dispose();
         screen.dispose();
-        GAME2.dispose();
+        GAME.dispose();
         background.dispose();
     }
 

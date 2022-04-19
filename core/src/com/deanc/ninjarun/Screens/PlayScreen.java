@@ -7,7 +7,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -43,7 +42,6 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-    Texture backgroundImg;
 
     //Box2D Variables
     private World world;
@@ -53,12 +51,13 @@ public class PlayScreen implements Screen {
     //Player variable
     private Ryu player;
 
-    //Audio variables
-    private Music music;
 
     //Sprite Variable
     private Array<Item> items;
     private LinkedBlockingQueue<ItemDef> itemToSpawn;
+
+    //finish level variable
+    public boolean complete = false;
 
     public PlayScreen(NinjaRun game) {
         atlas = new TextureAtlas("ryu_and_enemies.pack");
@@ -67,8 +66,6 @@ public class PlayScreen implements Screen {
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch);
-
-        backgroundImg = new Texture("Texture1.jpg");
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("levels/level1.tmx");
@@ -87,9 +84,7 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        music = NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
-        music.setLooping(true);
-        music.play();
+        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).play();
 
         items = new Array<Item>();
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
@@ -206,9 +201,11 @@ public class PlayScreen implements Screen {
             dispose();
         }
 
-        if(levelComplete()) {
-            game.setScreen(new LevelComplete(game));
-            dispose();
+        if(complete == true) {
+            if(player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
+                game.setScreen(new LevelComplete(game));
+                dispose();
+            }
         }
     }
 
@@ -227,13 +224,8 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public boolean levelComplete(){
-        if(player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 3){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setLevelComplete(boolean level){
+        complete = level;
     }
 
     @Override

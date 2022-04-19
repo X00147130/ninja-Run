@@ -138,6 +138,12 @@ public class Ryu extends Sprite {
         frames.add(screen.getAtlas().findRegion("attacka7"));
         ryuAttack = new Animation <TextureRegion>(0.08f, frames);
         frames.clear();
+
+        //Level Complete
+        frames.add(screen.getAtlas().findRegion("attack2"));
+        frames.add(screen.getAtlas().findRegion("attack3"));
+        ryuComplete = new Animation<TextureRegion>(0.2f,frames);
+        frames.clear();
     }
 
     public void update(float dt){
@@ -210,7 +216,7 @@ public class Ryu extends Sprite {
         else if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             return State.ATTACK;
 
-        else if(screen.levelComplete() == true)
+        else if(screen.complete == true)
             return State.COMPLETE;
 
         else

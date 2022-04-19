@@ -6,6 +6,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -64,12 +65,13 @@ public class LevelComplete implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(title).expandX();
+        table.add(title).expandX().padLeft(150);
         table.row();
-        table.add(nextLevelButton).expandX();
+
+        table.add(nextLevelButton).expandX().padLeft(150).padTop(20);
         table.row();
-        table.add(levelSelectButton).expandX().left();
-        table.add(menuButton).expandX().right();
+        table.add(levelSelectButton).expandX().left().padLeft(50);
+        table.add(menuButton).expandX().right().padRight(50);
         table.row();
 
         //Setting up the stage
@@ -88,6 +90,7 @@ public class LevelComplete implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 GAME.setScreen(new MenuScreen((NinjaRun)GAME));
+                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
             }
         });
 
@@ -95,6 +98,7 @@ public class LevelComplete implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 GAME.setScreen(new LevelSelect((NinjaRun)GAME));
+                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
             }
         });
     }

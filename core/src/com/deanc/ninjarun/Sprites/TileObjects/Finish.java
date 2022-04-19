@@ -18,7 +18,7 @@ public class Finish extends InteractiveTileObject {
     @Override
     public void onHit(Ryu ryu) {
         Gdx.app.log("Finish", "Collision");
-        screen.levelComplete();
+        screen.setLevelComplete(true);
         NinjaRun.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();
         }
 

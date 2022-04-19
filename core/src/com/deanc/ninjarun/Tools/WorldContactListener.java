@@ -22,9 +22,8 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
-            case NinjaRun.RYU_HEAD_BIT | NinjaRun.PLATFORM_BIT:
             case NinjaRun.RYU_BIT | NinjaRun.FINISH_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.RYU_HEAD_BIT)
+                if(fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
                 ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
             else
                 ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
