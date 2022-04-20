@@ -18,17 +18,16 @@ public class NinjaRun extends Game {
 	public static final float PPM = 100;
 
 	//Filter initializations
-	public static final short NOTHING_BIT = 0;
 	public static final short GROUND_BIT = 1;
-	public static final short MARIO_BIT = 2;
-	public static final short BRICK_BIT = 4;
-	public static final short COIN_BIT = 8;
-	public static final short DESTROYED_BIT = 16;
-	public static final short OBJECT_BIT = 32;
-	public static final short ENEMY_BIT = 64;
-	public static final short ENEMY_HEAD_BIT = 128;
-	public static final short ITEM_BIT = 256;
-	public static final short MARIO_HEAD_BIT = 512;
+	public static final short RYU_BIT = 2;
+	public static final short PLATFORM_BIT = 4;
+	public static final short FINISH_BIT = 8;
+	public static final short BARRIER_BIT = 16;
+	public static final short ENEMY_BIT = 32;
+	public static final short ITEM_BIT = 64;
+	public static final short RYU_HEAD_BIT = 128;
+	public static final short ATTACK_BIT = 256;
+	public static final short MONEY_BIT = 512;
 
 
 	//variables
@@ -50,17 +49,17 @@ public class NinjaRun extends Game {
 		manager.load("audio/music/yoitrax-warrior.mp3", Music.class);
 		manager.load("audio/music/yoitrax-ronin.mp3", Music.class);
 		manager.load("audio/music/mixkit-piano-horror-671.mp3", Music.class);
+		manager.load("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class);
 		manager.load("audio/sounds/coin.mp3", Sound.class);
 		manager.load("audio/sounds/fireworks.mp3", Sound.class);
 		manager.load("audio/sounds/block.mp3", Sound.class);
 		manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
-		manager.load("audio/sounds/powerup.wav", Sound.class);
-		manager.load("audio/sounds/powerdown.wav", Sound.class);
 		manager.load("audio/sounds/stomp.wav", Sound.class);
 		manager.load("audio/sounds/mariodie.wav",Sound.class);
 		manager.load("audio/sounds/sexynakedbunny-ouch.mp3",Sound.class);
 		manager.load("audio/sounds/soundnimja-jump.wav",Sound.class);
 		manager.load("audio/sounds/getting-hit.wav",Sound.class);
+		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class);
 		manager.finishLoading();
 		setScreen(new MenuScreen(this));
 	}

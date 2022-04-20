@@ -49,7 +49,7 @@ public abstract class InteractiveTileObject {
         fixture = body.createFixture(fdef);
     }
 
-    public abstract void onHeadHit(Ryu mario);
+    public abstract void onHit(Ryu ryu);
 
     public void setCategoryFilter(short filterBit){
         Filter filter = new Filter();

@@ -3,29 +3,23 @@ package com.deanc.ninjarun.Screens;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
@@ -43,6 +37,7 @@ public class MenuScreen implements Screen  {
     //Buttons
     Button playButton;
     Button quitButton;
+    Button levelButton;
     TextButton.TextButtonStyle buttonStyle;
     BitmapFont buttonFont;
 
@@ -54,9 +49,8 @@ public class MenuScreen implements Screen  {
         batch = new SpriteBatch();
 
         //make sure to credit Sebatian Schulz for the art
-        background = new Texture("Sekiro Fanart Sebastian Schulz.jpg");
-        mainBackground = new TextureRegion(background, 0, 0, 5600, 3000);
-
+        background = new Texture("logo.jpg");
+        mainBackground = new TextureRegion(background);
 
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
@@ -71,6 +65,7 @@ public class MenuScreen implements Screen  {
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
         playButton  = new TextButton("Play",buttonStyle );
+        levelButton  = new TextButton("Level Select",buttonStyle );
         quitButton = new TextButton("Quit",buttonStyle);
 
         Label titleLabel = new Label(" Ninja Run", font);
@@ -78,7 +73,9 @@ public class MenuScreen implements Screen  {
         table.row();
         table.add(playButton).expandX().padTop(10);
         table.row();
-        table.add(quitButton).expandX().padTop(20);
+        table.add(levelButton).expandX().padTop(10);
+        table.row();
+        table.add(quitButton).expandX().padTop(10);
         table.row();
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
@@ -91,10 +88,17 @@ public class MenuScreen implements Screen  {
             }
         });
 
+        levelButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GAME.setScreen(new LevelSelect((NinjaRun)GAME));
+            }
+        });
+
         quitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                System.exit(-1);
+                System.exit(0);
             }
         });
     }
@@ -108,7 +112,7 @@ public class MenuScreen implements Screen  {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(mainBackground,0,0,5600,3000);
+        batch.draw(mainBackground,0,0);
         batch.end();
         stage.draw();
     }

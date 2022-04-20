@@ -51,15 +51,16 @@ public class PlayScreen implements Screen {
     //Player variable
     private Ryu player;
 
-    //Audio variables
-    private Music music;
 
     //Sprite Variable
     private Array<Item> items;
     private LinkedBlockingQueue<ItemDef> itemToSpawn;
 
+    //finish level variable
+    public boolean complete = false;
+
     public PlayScreen(NinjaRun game) {
-        atlas = new TextureAtlas("Mario_and_enemies.pack");
+        atlas = new TextureAtlas("ryu_and_enemies.pack");
 
         this.game = game;
         gamecam = new OrthographicCamera();
@@ -67,7 +68,7 @@ public class PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("lvl1-1.tmx");
+        map = mapLoader.load("levels/level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / NinjaRun.PPM);
 
         //initiating game cam
@@ -83,9 +84,7 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        music = NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
-        music.setLooping(true);
-        music.play();
+        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).play();
 
         items = new Array<Item>();
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
@@ -124,8 +123,13 @@ public class PlayScreen implements Screen {
     public void handleInput(float dt) {
         if (player.currentState != Ryu.State.DEAD) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+            }
+
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                player.attack();
             }
 
 
@@ -137,24 +141,27 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
 
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
 
         player.update(dt);
-        for(Enemy enemy :  creator.getGoombas()) {
+        for (Enemy enemy : creator.getNinjas()) {
             enemy.update(dt);
-            if(enemy.getX() <player.getX() + 224 / NinjaRun.PPM)
+            if (enemy.getX() < player.getX() + 224 / NinjaRun.PPM)
                 enemy.b2body.setActive(true);
         }
 
-        for(Item item : items)
+        for (Item item : creator.getCoins())
+            item.update(dt);
+
+        for (Item item : creator.getVials())
             item.update(dt);
 
         hud.update(dt);
-        if(player.currentState != Ryu.State.DEAD) {
+        if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
         }
 
@@ -167,7 +174,7 @@ public class PlayScreen implements Screen {
         update(delta);
 
         //Clear Game Screen With Black
-        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //game map
@@ -179,10 +186,10 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Enemy enemy :  creator.getGoombas())
+        for (Enemy enemy : creator.getNinjas())
             enemy.draw(game.batch);
 
-        for(Item item : items)
+        for (Item item : items)
             item.draw(game.batch);
 
         game.batch.end();
@@ -190,26 +197,37 @@ public class PlayScreen implements Screen {
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        hud.draw(game.batch,delta );
+        hud.draw(game.batch, delta);
 
-        if(gameOver()){
+        if (gameOver()) {
             game.setScreen(new GameOverScreen(game));
             dispose();
+        }
+
+        if (complete == true) {
+            if (player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
+                game.setScreen(new LevelComplete(game));
+                dispose();
+            }
         }
     }
 
     @Override
     public void resize(int width, int height) {
-        gamePort.update(width,height);
+        gamePort.update(width, height);
     }
 
-    public boolean gameOver(){
-        if(player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3){
+
+    public boolean gameOver() {
+        if (player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
+    }
+
+    public void setLevelComplete(boolean level) {
+        complete = level;
     }
 
     @Override

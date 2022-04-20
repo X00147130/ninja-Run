@@ -12,12 +12,17 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.Sprites.Enemies.Goomba;
-import com.deanc.ninjarun.Sprites.TileObjects.Brick;
-import com.deanc.ninjarun.Sprites.TileObjects.coin;
+import com.deanc.ninjarun.Sprites.Enemies.Ninja;
+import com.deanc.ninjarun.Sprites.Items.Coins;
+import com.deanc.ninjarun.Sprites.Items.health;
+import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
+import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
+import com.deanc.ninjarun.Sprites.TileObjects.Finish;
 
 public class B2WorldCreator {
-    private Array<Goomba> goombas;
+    private Array<Ninja> ninjas;
+    private Array<Coins> coins;
+    private Array<health> vials;
 
 
 
@@ -31,7 +36,7 @@ public class B2WorldCreator {
         FixtureDef fdef = new FixtureDef();
         Body body;
 
-        //create ground bodies/fixtures
+        //create ground bodies fixtures
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -45,8 +50,8 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
 
-        //create ground pipes/fixtures
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+        //create ground fixtures
+        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -56,33 +61,58 @@ public class B2WorldCreator {
 
             shape.setAsBox(rect.getWidth() / 2 / NinjaRun.PPM, rect.getHeight() / 2 / NinjaRun.PPM);
             fdef.shape = shape;
-            fdef.filter.categoryBits = NinjaRun.OBJECT_BIT;
+            fdef.filter.categoryBits = NinjaRun.BARRIER_BIT;
             body.createFixture(fdef);
         }
 
-        //create ground bricks/fixtures
-        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-
-            // creation of Brick Object
-            new Brick(screen, object);
-        }
-
-        //create ground coins/fixtures
+        //create Platforms fixtures
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
 
-            // creation of coin object
-            new coin(screen, object);
+            // creation of Platform Objects
+            new Platforms(screen, object);
         }
 
-        // create all goombas e.g. multiple enemies
-        goombas = new Array<Goomba>();
-        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+        //create finish fixtures
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+
+            // creation of end tree object
+            new Finish(screen, object);
+        }
+
+        // create all ninjas e.g. multiple enemies
+        ninjas = new Array<Ninja>();
+        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            goombas.add(new Goomba(screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            ninjas.add(new Ninja(screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
         }
+
+        //create health fixtures
+        vials = new Array<health>();
+        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            // creation of health vials objects
+            vials.add(new health( screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+        }
+
+        //create Coins fixtures
+        coins = new Array<Coins>();
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            // creation of coin objects
+            coins.add(new Coins(screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+        }
+
+        //Create barriers
+        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            new Barrier(screen,object);
+        }
+
     }
 
-    public Array<Goomba> getGoombas() {
-        return goombas;
+    public Array<Ninja> getNinjas() {
+        return ninjas;
     }
+    public Array<health> getVials(){return vials;}
+    public Array<Coins> getCoins(){return coins;}
+
 }

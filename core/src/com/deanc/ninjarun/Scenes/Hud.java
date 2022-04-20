@@ -39,6 +39,7 @@ public class Hud implements Disposable {
     private ShapeRenderer background;
     private ShapeRenderer health;
     Label healthLabel;
+    Label coinLabel;
     Group group;
     static private boolean projectionMatrixSet;
 
@@ -55,16 +56,18 @@ public class Hud implements Disposable {
         countdownLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.RED));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.RED));
         healthLabel = new Label("HEALTH:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        coinLabel = new Label("COINS:", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         //group for health label scaling
         group = new Group();
         group.addActor(healthLabel);
         group.addAction(Actions.sequence(Actions.scaleTo(2f,2f,1f), Actions.scaleTo(1f,1f,1f)));
 
-
+       // table.add(coinLabel).expandX().left().padLeft(24);
         table.add(timeLabel).expandX().padTop(10).right().padRight(20);
         table.row();
         table.add(countdownLabel).expandX().right().padRight(24);
+
 
         stage.addActor(table);
 
@@ -114,9 +117,7 @@ public class Hud implements Disposable {
         }
         health.end();
 
-        //batch.begin();
-        //group.draw(batch,worldTimer);
-        //batch.end();
+
 
     }
 }

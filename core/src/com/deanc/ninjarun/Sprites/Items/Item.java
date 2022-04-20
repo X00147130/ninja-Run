@@ -12,7 +12,6 @@ import com.deanc.ninjarun.Sprites.Ryu;
 public abstract class Item extends Sprite {
     protected PlayScreen screen;
     protected World world;
-    protected Vector2 velocity;
     protected boolean todestroy;
     protected boolean destroyed;
     protected Body body;
@@ -46,10 +45,4 @@ public abstract class Item extends Sprite {
         todestroy = true;
     }
 
-    public void reverseVelocity(boolean x, boolean y){
-        if(x)
-            velocity.x = -velocity.x;
-        if(y)
-            velocity.y = -velocity.y;
-    }
 }
