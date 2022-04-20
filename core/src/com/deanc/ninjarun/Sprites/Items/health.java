@@ -2,7 +2,6 @@ package com.deanc.ninjarun.Sprites.Items;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -17,7 +16,6 @@ public class health extends Item{
         super(screen, x, y);
         atlas = new TextureAtlas("items.pack");
         setRegion(atlas.findRegion("health"));
-        velocity = new Vector2(0.7f ,0);
     }
 
     @Override
@@ -32,7 +30,6 @@ public class health extends Item{
         shape.setRadius(6 / NinjaRun.PPM);
         fdef.filter.categoryBits = NinjaRun.ITEM_BIT;
         fdef.filter.maskBits = NinjaRun.RYU_BIT |
-                NinjaRun.OBJECT_BIT |
                 NinjaRun.GROUND_BIT |
                 NinjaRun.PLATFORM_BIT |
                 NinjaRun.FINISH_BIT;
@@ -46,13 +43,12 @@ public class health extends Item{
     public void useItem(Ryu ryu) {
         destroy();
         Ryu.setHitCounter(0);
+        NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class).play();
     }
 
     @Override
     public void update(float dt) {
         super.update(dt);
-        NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class);
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() /2);
-        velocity.y= body.getLinearVelocity().y;
+        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
     }
 }

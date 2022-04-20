@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Sprites.Enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -40,7 +41,7 @@ public class Ninja extends Enemy {
         frames.add(screen.getAtlas().findRegion("enemyRun5"));
         frames.add(screen.getAtlas().findRegion("enemyRun6"));
 
-        walkAnimation = new Animation <TextureRegion>(0.1f, frames);
+        walkAnimation = new Animation <TextureRegion>(0.3f, frames);
         frames.clear();
 
         //death animation
@@ -67,12 +68,12 @@ public class Ninja extends Enemy {
     }
 
     public State getState() {
-        if(ninjaDead == true)
+        if(ninjaDead == true) {
             return Ninja.State.DEAD;
-
-        else
+        }
+        else {
             return Ninja.State.RUNNING;
-
+        }
     }
 
     public TextureRegion getFrame(float dt) {
@@ -109,9 +110,11 @@ public class Ninja extends Enemy {
         stateTime += dt;
         setRegion(getFrame(dt));
         if (setToDestroy && !destroyed) {
+            ninjaDead = true;
             world.destroyBody(b2body);
             destroyed = true;
             stateTime=0;
+
 
         } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);
@@ -135,7 +138,7 @@ public class Ninja extends Enemy {
                 NinjaRun.FINISH_BIT |
                 NinjaRun.PLATFORM_BIT |
                 NinjaRun.ENEMY_BIT |
-                NinjaRun.OBJECT_BIT|
+                NinjaRun.BARRIER_BIT |
                 NinjaRun.ATTACK_BIT|
                 NinjaRun.RYU_BIT;
 
@@ -150,15 +153,8 @@ public class Ninja extends Enemy {
 
     @Override
     public void attacked() {
-        if (enemyHitCounter > 2) {
-            enemyHitCounter ++;
-            setToDestroy = false;
-            b2body.applyLinearImpulse(new Vector2(2, 0),b2body.getWorldCenter(), true);
-        }
-        else {
             setToDestroy = true;
             NinjaRun.manager.get("audio/sounds/stomp.wav", Sound.class).play();
-        }
     }
 }
 

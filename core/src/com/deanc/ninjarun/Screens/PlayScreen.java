@@ -128,7 +128,7 @@ public class PlayScreen implements Screen {
             }
 
 
-            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 player.attack();
             }
 
@@ -141,24 +141,27 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
 
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
 
         player.update(dt);
-        for(Enemy enemy :  creator.getNinjas()) {
+        for (Enemy enemy : creator.getNinjas()) {
             enemy.update(dt);
-            if(enemy.getX() < player.getX() + 224 / NinjaRun.PPM)
+            if (enemy.getX() < player.getX() + 224 / NinjaRun.PPM)
                 enemy.b2body.setActive(true);
         }
 
-        for(Item item : items)
+        for (Item item : creator.getCoins())
+            item.update(dt);
+
+        for (Item item : creator.getVials())
             item.update(dt);
 
         hud.update(dt);
-        if(player.currentState != Ryu.State.DEAD) {
+        if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
         }
 
@@ -171,7 +174,7 @@ public class PlayScreen implements Screen {
         update(delta);
 
         //Clear Game Screen With Black
-        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //game map
@@ -183,10 +186,10 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Enemy enemy :  creator.getNinjas())
+        for (Enemy enemy : creator.getNinjas())
             enemy.draw(game.batch);
 
-        for(Item item : items)
+        for (Item item : items)
             item.draw(game.batch);
 
         game.batch.end();
@@ -194,15 +197,15 @@ public class PlayScreen implements Screen {
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        hud.draw(game.batch,delta );
+        hud.draw(game.batch, delta);
 
-        if(gameOver()){
+        if (gameOver()) {
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
 
-        if(complete == true) {
-            if(player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
+        if (complete == true) {
+            if (player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
                 game.setScreen(new LevelComplete(game));
                 dispose();
             }
@@ -211,20 +214,19 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gamePort.update(width,height);
+        gamePort.update(width, height);
     }
 
 
-    public boolean gameOver(){
-        if(player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3){
+    public boolean gameOver() {
+        if (player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public void setLevelComplete(boolean level){
+    public void setLevelComplete(boolean level) {
         complete = level;
     }
 

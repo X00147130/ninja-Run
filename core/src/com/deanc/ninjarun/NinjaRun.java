@@ -22,7 +22,7 @@ public class NinjaRun extends Game {
 	public static final short RYU_BIT = 2;
 	public static final short PLATFORM_BIT = 4;
 	public static final short FINISH_BIT = 8;
-	public static final short OBJECT_BIT = 16;
+	public static final short BARRIER_BIT = 16;
 	public static final short ENEMY_BIT = 32;
 	public static final short ITEM_BIT = 64;
 	public static final short RYU_HEAD_BIT = 128;
@@ -49,6 +49,7 @@ public class NinjaRun extends Game {
 		manager.load("audio/music/yoitrax-warrior.mp3", Music.class);
 		manager.load("audio/music/yoitrax-ronin.mp3", Music.class);
 		manager.load("audio/music/mixkit-piano-horror-671.mp3", Music.class);
+		manager.load("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class);
 		manager.load("audio/sounds/coin.mp3", Sound.class);
 		manager.load("audio/sounds/fireworks.mp3", Sound.class);
 		manager.load("audio/sounds/block.mp3", Sound.class);

@@ -34,7 +34,6 @@ public class Ryu extends Sprite {
     public World world;
     private PlayScreen screen;
     public Body b2body;
-    public Body arm;
     public TextureRegion ryuStand;
 
 
@@ -216,8 +215,10 @@ public class Ryu extends Sprite {
         else if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             return State.ATTACK;
 
-        else if(screen.complete == true)
+        else if(screen.complete == true) {
             return State.COMPLETE;
+
+        }
 
         else
             return State.STANDING;
@@ -239,7 +240,7 @@ public class Ryu extends Sprite {
                 NinjaRun.FINISH_BIT |
                 NinjaRun.PLATFORM_BIT |
                 NinjaRun.ENEMY_BIT|
-                NinjaRun.OBJECT_BIT|
+                NinjaRun.MONEY_BIT|
                 NinjaRun.ITEM_BIT;
 
         fdef.shape = shape;

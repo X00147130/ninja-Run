@@ -13,11 +13,16 @@ import com.badlogic.gdx.utils.Array;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
+import com.deanc.ninjarun.Sprites.Items.Coins;
+import com.deanc.ninjarun.Sprites.Items.health;
+import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
 import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
 import com.deanc.ninjarun.Sprites.TileObjects.Finish;
 
 public class B2WorldCreator {
     private Array<Ninja> ninjas;
+    private Array<Coins> coins;
+    private Array<health> vials;
 
 
 
@@ -56,7 +61,7 @@ public class B2WorldCreator {
 
             shape.setAsBox(rect.getWidth() / 2 / NinjaRun.PPM, rect.getHeight() / 2 / NinjaRun.PPM);
             fdef.shape = shape;
-            fdef.filter.categoryBits = NinjaRun.OBJECT_BIT;
+            fdef.filter.categoryBits = NinjaRun.BARRIER_BIT;
             body.createFixture(fdef);
         }
 
@@ -80,9 +85,34 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             ninjas.add(new Ninja(screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
         }
+
+        //create health fixtures
+        vials = new Array<health>();
+        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            // creation of health vials objects
+            vials.add(new health( screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+        }
+
+        //create Coins fixtures
+        coins = new Array<Coins>();
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            // creation of coin objects
+            coins.add(new Coins(screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+        }
+
+        //Create barriers
+        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            new Barrier(screen,object);
+        }
+
     }
 
     public Array<Ninja> getNinjas() {
         return ninjas;
     }
+    public Array<health> getVials(){return vials;}
+    public Array<Coins> getCoins(){return coins;}
+
 }

@@ -10,7 +10,6 @@ import com.deanc.ninjarun.Sprites.Enemies.Enemy;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Ryu;
-import com.deanc.ninjarun.Sprites.TileObjects.Finish;
 import com.deanc.ninjarun.Sprites.TileObjects.InteractiveTileObject;
 
 public class WorldContactListener implements ContactListener {
@@ -36,7 +35,7 @@ public class WorldContactListener implements ContactListener {
                     ((Ninja)fixA.getUserData()).attacked();
                 break;
 
-            case NinjaRun.ENEMY_BIT | NinjaRun.OBJECT_BIT:
+            case NinjaRun.ENEMY_BIT | NinjaRun.BARRIER_BIT:
                 if (fixA.getFilterData().categoryBits == NinjaRun.ENEMY_BIT)
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 else
@@ -53,14 +52,16 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case NinjaRun.ITEM_BIT | NinjaRun.OBJECT_BIT:
-                if (fixA.getFilterData().categoryBits == NinjaRun.ITEM_BIT)
-                    ((Item) fixA.getUserData()).reverseVelocity(true, false);
-                else
-                    ((Item) fixB.getUserData()).reverseVelocity(true, false);
-                break;
+
             case NinjaRun.ITEM_BIT | NinjaRun.RYU_BIT:
                 if (fixA.getFilterData().categoryBits == NinjaRun.ITEM_BIT)
+                    ((Item) fixA.getUserData()).useItem((Ryu) fixB.getUserData());
+                else
+                    ((Item) fixB.getUserData()).useItem((Ryu) fixA.getUserData());
+                break;
+
+            case NinjaRun.MONEY_BIT | NinjaRun.RYU_BIT:
+                if (fixA.getFilterData().categoryBits == NinjaRun.MONEY_BIT)
                     ((Item) fixA.getUserData()).useItem((Ryu) fixB.getUserData());
                 else
                     ((Item) fixB.getUserData()).useItem((Ryu) fixA.getUserData());
