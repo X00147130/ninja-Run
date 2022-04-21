@@ -83,7 +83,7 @@ public class MenuScreen implements Screen  {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });

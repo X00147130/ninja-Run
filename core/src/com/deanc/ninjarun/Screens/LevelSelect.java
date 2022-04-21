@@ -54,6 +54,7 @@ public class LevelSelect implements Screen {
     private Stage screen;
     private SpriteBatch batch;
     private Ryu player;
+    private int level = 1;
 
 
     public LevelSelect(final Game game) {
@@ -64,7 +65,6 @@ public class LevelSelect implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         screen = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();
-
 
         NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).play();
 
@@ -130,7 +130,79 @@ public class LevelSelect implements Screen {
         level1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,2));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level3.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level4.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level5.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level6.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level7.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level8.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level9.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level10.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });

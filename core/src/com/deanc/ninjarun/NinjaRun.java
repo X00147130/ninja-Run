@@ -15,7 +15,7 @@ public class NinjaRun extends Game {
 	//constants
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
-	public static final float PPM = 100;
+	public static final float PPM = 150;
 
 	//Filter initializations
 	public static final short GROUND_BIT = 1;

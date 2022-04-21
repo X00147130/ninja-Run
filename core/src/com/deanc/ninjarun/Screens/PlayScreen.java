@@ -59,16 +59,20 @@ public class PlayScreen implements Screen {
     //finish level variable
     public boolean complete = false;
 
-    public PlayScreen(NinjaRun game) {
+    //level variable
+    private int level = 1;
+
+    public PlayScreen(NinjaRun game, int level) {
         atlas = new TextureAtlas("ryu_and_enemies.pack");
 
         this.game = game;
+        this.level = level;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("levels/level1.tmx");
+        map = mapLoader.load("levels/Level"+level+".tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / NinjaRun.PPM);
 
         //initiating game cam
@@ -200,13 +204,13 @@ public class PlayScreen implements Screen {
         hud.draw(game.batch, delta);
 
         if (gameOver()) {
-            game.setScreen(new GameOverScreen(game));
+            game.setScreen(new GameOverScreen(game, level));
             dispose();
         }
 
         if (complete == true) {
             if (player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
-                game.setScreen(new LevelComplete(game));
+                game.setScreen(new LevelComplete(game, level));
                 dispose();
             }
         }

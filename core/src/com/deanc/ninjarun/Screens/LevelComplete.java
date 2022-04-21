@@ -29,6 +29,10 @@ public class LevelComplete implements Screen {
     private Viewport screen;
     private Stage stage;
 
+    //Next level button variables
+    private int map;
+
+
     //Buttons
     private Button menuButton;
     private Button nextLevelButton;
@@ -38,12 +42,14 @@ public class LevelComplete implements Screen {
 
     private Label title;
 
-    public LevelComplete(Game game){
+    public LevelComplete(Game game, int level){
         super();
         //admin setup
         this.GAME = game;
         screen = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(screen,((NinjaRun) game).batch);
+        map = level + 1;
+
 
         //TextButton Style Admin
         buttonstyle = new TextButton.TextButtonStyle();
@@ -79,12 +85,12 @@ public class LevelComplete implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting up ClickListners for buttons
-       // nextLevelButton.addListener(new ClickListener(){
-        //   @Override
-        //   public void clicked(InputEvent event, float x, float y){
-         //      GAME.setScreen();
-        //   }
-       // });
+       nextLevelButton.addListener(new ClickListener(){
+           @Override
+           public void clicked(InputEvent event, float x, float y){
+               GAME.setScreen(new PlayScreen((NinjaRun)GAME, map));
+           }
+        });
 
         menuButton.addListener(new ClickListener(){
             @Override
