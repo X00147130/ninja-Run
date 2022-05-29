@@ -66,6 +66,13 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Item) fixB.getUserData()).useItem((Ryu) fixA.getUserData());
                 break;
+
+            case NinjaRun.SKY_BIT | NinjaRun.RYU_BIT:
+                if (fixA.getFilterData().categoryBits == NinjaRun.SKY_BIT)
+                    ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
+                else
+                    ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
+                break;
         }
     }
 

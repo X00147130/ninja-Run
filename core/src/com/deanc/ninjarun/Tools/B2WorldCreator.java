@@ -18,6 +18,7 @@ import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
 import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
 import com.deanc.ninjarun.Sprites.TileObjects.Finish;
+import com.deanc.ninjarun.Sprites.TileObjects.Sky;
 
 public class B2WorldCreator {
     private Array<Ninja> ninjas;
@@ -105,6 +106,11 @@ public class B2WorldCreator {
         //Create barriers
         for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             new Barrier(screen,object);
+        }
+
+        //Sky limit
+        for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
+            new Sky(screen,object);
         }
 
     }

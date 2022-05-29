@@ -62,10 +62,15 @@ public class Ryu extends Sprite {
     private boolean attacking;
     private Fixture fix;
 
+    //movement variables
+    private Vector2 limit;
+
 
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
         defineRyu();
+
+        limit = new Vector2(0,0);
 
         this.screen = screen;
         attacking = false;
@@ -241,6 +246,7 @@ public class Ryu extends Sprite {
                 NinjaRun.PLATFORM_BIT |
                 NinjaRun.ENEMY_BIT|
                 NinjaRun.MONEY_BIT|
+                NinjaRun.SKY_BIT|
                 NinjaRun.ITEM_BIT;
 
         fdef.shape = shape;
@@ -274,10 +280,10 @@ public class Ryu extends Sprite {
 
         EdgeShape head = new EdgeShape();
         if(!isFlipX()){
-            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(9/NinjaRun.PPM, 0 / NinjaRun.PPM));
+            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(12/NinjaRun.PPM, 0 / NinjaRun.PPM));
         }
         else{
-            head.set(new Vector2(-9/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
+            head.set(new Vector2(-12/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
         }
         attackdef = new FixtureDef();
         attackdef.shape = head;
@@ -322,7 +328,7 @@ public class Ryu extends Sprite {
                         }
                         attacking = false;
                     }
-                },0.5f);
+                },0.2f);
             }
 
         }
@@ -372,5 +378,12 @@ public class Ryu extends Sprite {
         hitCounter = resetHits;
     }
 
-
+    public void reverseVelocity(boolean x, boolean y){
+        if(x){
+            limit.x = -limit.x;
+        }
+        if(y) {
+            limit.y = -limit.y;
+        }
+    }
 }

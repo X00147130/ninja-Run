@@ -28,6 +28,7 @@ public class NinjaRun extends Game {
 	public static final short RYU_HEAD_BIT = 128;
 	public static final short ATTACK_BIT = 256;
 	public static final short MONEY_BIT = 512;
+	public static final short SKY_BIT = 1024;
 
 
 	//variables
