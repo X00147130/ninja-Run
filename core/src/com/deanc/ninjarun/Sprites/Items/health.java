@@ -1,6 +1,7 @@
 package com.deanc.ninjarun.Sprites.Items;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -10,12 +11,12 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class health extends Item{
-    public TextureAtlas atlas;
+    private Texture health;
 
     public health(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        atlas = new TextureAtlas("items.pack");
-        setRegion(atlas.findRegion("health"));
+        health = new Texture("health.png");// clipart used
+
     }
 
     @Override
@@ -50,6 +51,6 @@ public class health extends Item{
     public void update(float dt) {
         super.update(dt);
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
-        setRegion(atlas.findRegion("health"));
+        getTexture();
     }
 }

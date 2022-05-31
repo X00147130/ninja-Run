@@ -7,13 +7,22 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -62,14 +71,20 @@ public class PlayScreen implements Screen {
     //level variable
     private int level = 1;
 
-    public PlayScreen(NinjaRun game, int level) {
+    //paused variables
+    private boolean paused = false;
+    private float pausedX;
+    private float pausedY;
+
+    public PlayScreen(NinjaRun g, int level) {
+
         atlas = new TextureAtlas("ryu_and_enemies.pack");
 
-        this.game = game;
+        this.game = g;
         this.level = level;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
-        hud = new Hud(game.batch);
+        hud = new Hud(game.batch, game);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("levels/Level"+level+".tmx");
@@ -125,14 +140,12 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt) {
-        int count = 0;
+        //int count = 0;  for jump limiter but not ready yet
         if (player.currentState != Ryu.State.DEAD) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
-
-
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 player.attack();
@@ -144,6 +157,16 @@ public class PlayScreen implements Screen {
 
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.5f, 0), player.b2body.getWorldCenter(), true);
+
+            if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                game.pause();
+                if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+                    game.resume();
+                }
+                else if(Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)){
+                    game.setScreen(new MenuScreen(game));
+                }
+            }
         }
     }
 
@@ -178,6 +201,10 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
+
+        if (paused = true){
+            delta = 0;
+        }
 
         //Clear Game Screen With Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -238,12 +265,16 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-
+            if (paused = true){
+                pausedX = player.getX();
+                pausedY = player.getY();
+        }
     }
 
     @Override
     public void resume() {
-
+            player.setX(pausedX);
+            player.setY(pausedY);
     }
 
     @Override

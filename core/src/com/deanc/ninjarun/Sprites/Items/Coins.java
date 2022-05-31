@@ -2,7 +2,9 @@ package com.deanc.ninjarun.Sprites.Items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,14 +15,12 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Coins extends Item {
-    public TextureAtlas atlas;
-    private Animation<TextureRegion> coins;
+    private Texture coin;
     private float stateTimer;
 
     public Coins(PlayScreen screen,float  x, float y) {
         super(screen, x, y);
-        atlas = new TextureAtlas("items.pack");
-        setRegion(atlas.findRegion("coins6"));
+        coin = new Texture("coins.png");// clipart used
     }
 
     @Override
@@ -58,5 +58,12 @@ public class Coins extends Item {
 
     }
 
+    @Override
+    public void draw(Batch batch) {
+        super.draw(batch);
+        batch.begin();
+        batch.draw(coin,0,0);
+        batch.end();
+    }
 
 }
