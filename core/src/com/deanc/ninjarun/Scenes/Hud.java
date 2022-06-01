@@ -1,16 +1,13 @@
 package com.deanc.ninjarun.Scenes;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,9 +22,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Screens.MenuScreen;
 import com.deanc.ninjarun.Screens.PauseScreen;
-import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Hud implements Disposable {
@@ -40,9 +35,8 @@ public class Hud implements Disposable {
     Label countdownLabel;
 
     Label timeLabel;
-    private SpriteBatch batch;
-    //health bar
 
+    //health bar
     private ShapeRenderer border;
     private ShapeRenderer background;
     private ShapeRenderer health;
@@ -50,16 +44,21 @@ public class Hud implements Disposable {
     Label coinLabel;
     Group group;
     static private boolean projectionMatrixSet;
-    //Image Button Variable
 
+
+    //Image Button Variable
     private ImageButton pause;
     private Texture image;
     private Drawable draw;
     private NinjaRun gameplay;
+    public final Screen play;
+    private boolean isPaused = false;
 
-    public Hud(SpriteBatch sb, final NinjaRun game){
+
+    public Hud(SpriteBatch sb, final NinjaRun game, final Screen paused){
         worldTimer=250;
         gameplay = game;
+        play = paused;
 
         //Image button
         image = new Texture("pause.png");
@@ -90,23 +89,26 @@ public class Hud implements Disposable {
         table.row();
 
 
+        pause.setPosition(175,165);
+        pause.setSize(50,50);
         stage.addActor(table);
         stage.addActor(pause);
-        pause.setPosition(0,165);
-        pause.setSize(30,30);
+
+
 
         pause.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameplay.setScreen(new PauseScreen(gameplay));
             }
-        });
+       });
 
         // health bar initialisation
         border = new ShapeRenderer();
         background = new ShapeRenderer();
         health = new ShapeRenderer();
         projectionMatrixSet = false;
+
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -152,6 +154,11 @@ public class Hud implements Disposable {
 
 
     }
+    public Screen getPlayScreen(){
+        return play;
+    }
+
+
     @Override
     public void dispose() {
         stage.dispose();

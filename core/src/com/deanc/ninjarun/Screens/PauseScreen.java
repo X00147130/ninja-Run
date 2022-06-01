@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 
@@ -38,6 +40,7 @@ public class PauseScreen implements Screen {
 
     //Admin
     private NinjaRun game;
+    private Screen screen;
     private Viewport viewport;
 
 
@@ -45,14 +48,13 @@ public class PauseScreen implements Screen {
     public PauseScreen(NinjaRun gameplay){
 
         game = gameplay;
-
-        viewport = new FitViewport(NinjaRun.V_WIDTH , NinjaRun.V_HEIGHT,  new OrthographicCamera());
+        screen = gameplay.getScreen();
+        viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
         stage = new Stage(viewport);
 
         //Label set up
         style = new Label.LabelStyle(new BitmapFont(), RED);
         titleLabel = new Label("PAUSED",style);
-        titleLabel.setSize(90,90);
 
         //Button Set Up
         font = new BitmapFont();
@@ -65,11 +67,15 @@ public class PauseScreen implements Screen {
 
 
         table = new Table ();
-        table.add(titleLabel).expandX();
+        table.center();
+        table.setFillParent(true);
+
+        table.add(titleLabel).width(70).height(60).center().padLeft(10);
         table.row();
-        table.add(resume).expandX();
         table.row();
-        table.add(quit).expandX();
+        table.add(resume).width(30).height(20).center();
+        table.row();
+        table.add(quit).width(30).height(20).center();
 
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
@@ -78,7 +84,8 @@ public class PauseScreen implements Screen {
         resume.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                game.setScreen(new PlayScreen((NinjaRun)game,1));
+                game.setScreen(screen);
+                screen.resume();
             }
         });
 
@@ -86,6 +93,7 @@ public class PauseScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 game.setScreen(new MenuScreen (game));
+                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).stop();
             }
         });
 
@@ -104,7 +112,6 @@ public class PauseScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.deanc.ninjarun.Sprites.Items;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -11,11 +12,10 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class health extends Item{
-    private Texture health;
 
     public health(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        health = new Texture("health.png");// clipart used
+        setRegion(new Texture("health.png"));// clipart used
 
     }
 
@@ -51,6 +51,5 @@ public class health extends Item{
     public void update(float dt) {
         super.update(dt);
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
-        getTexture();
     }
 }

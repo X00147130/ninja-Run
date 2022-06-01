@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -15,12 +16,10 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Coins extends Item {
-    private Texture coin;
-    private float stateTimer;
 
     public Coins(PlayScreen screen,float  x, float y) {
         super(screen, x, y);
-        coin = new Texture("coins.png");// clipart used
+        setRegion(new Texture("coins6.png"));// clipart used
     }
 
     @Override
@@ -41,7 +40,6 @@ public class Coins extends Item {
 
         fdef.shape = shape;
         body.createFixture(fdef).setUserData(this);
-
     }
 
     @Override
@@ -61,9 +59,6 @@ public class Coins extends Item {
     @Override
     public void draw(Batch batch) {
         super.draw(batch);
-        batch.begin();
-        batch.draw(coin,0,0);
-        batch.end();
     }
 
 }

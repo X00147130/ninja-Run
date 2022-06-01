@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
+import com.deanc.ninjarun.Sprites.Items.Coins;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
@@ -63,7 +64,7 @@ public class PlayScreen implements Screen {
 
     //Sprite Variable
     private Array<Item> items;
-    private LinkedBlockingQueue<ItemDef> itemToSpawn;
+    public LinkedBlockingQueue<ItemDef> itemToSpawn;
 
     //finish level variable
     public boolean complete = false;
@@ -71,20 +72,16 @@ public class PlayScreen implements Screen {
     //level variable
     private int level = 1;
 
-    //paused variables
-    private boolean paused = false;
-    private float pausedX;
-    private float pausedY;
-
     public PlayScreen(NinjaRun g, int level) {
 
+        //admin
         atlas = new TextureAtlas("ryu_and_enemies.pack");
 
         this.game = g;
         this.level = level;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
-        hud = new Hud(game.batch, game);
+        hud = new Hud(game.batch, game,game.getScreen());
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("levels/Level"+level+".tmx");
@@ -153,22 +150,14 @@ public class PlayScreen implements Screen {
 
 
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
-                player.b2body.applyLinearImpulse(new Vector2(0.5f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0.2f, 0), player.b2body.getWorldCenter(), true);
 
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
-                player.b2body.applyLinearImpulse(new Vector2(-0.5f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(-0.2f, 0), player.b2body.getWorldCenter(), true);
 
-            if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-                game.pause();
-                if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
-                    game.resume();
-                }
-                else if(Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)){
-                    game.setScreen(new MenuScreen(game));
-                }
-            }
         }
     }
+
 
     public void update(float dt) {
         handleInput(dt);
@@ -202,9 +191,6 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         update(delta);
 
-        if (paused = true){
-            delta = 0;
-        }
 
         //Clear Game Screen With Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -225,6 +211,17 @@ public class PlayScreen implements Screen {
         for (Item item : items)
             item.draw(game.batch);
 
+        if (creator.getCoins().notEmpty()) {
+            for (Item item : creator.getCoins()) {
+                item.draw(game.batch);
+            }
+        }
+
+        if (creator.getVials().notEmpty()) {
+            for (Item item : creator.getVials()) {
+                item.draw(game.batch);
+            }
+        }
         game.batch.end();
 
         //Set to draw what hud sees
@@ -250,7 +247,6 @@ public class PlayScreen implements Screen {
         gamePort.update(width, height);
     }
 
-
     public boolean gameOver() {
         if (player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3) {
             return true;
@@ -265,16 +261,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-            if (paused = true){
-                pausedX = player.getX();
-                pausedY = player.getY();
-        }
     }
 
     @Override
     public void resume() {
-            player.setX(pausedX);
-            player.setY(pausedY);
     }
 
     @Override

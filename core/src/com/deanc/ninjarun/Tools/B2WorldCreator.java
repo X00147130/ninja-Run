@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -14,6 +15,7 @@ import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Coins;
+import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
 import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
@@ -101,6 +103,7 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             // creation of coin objects
             coins.add(new Coins(screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+
         }
 
         //Create barriers
