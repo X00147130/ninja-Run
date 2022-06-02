@@ -60,5 +60,4 @@ public class Coins extends Item {
     public void draw(Batch batch) {
         super.draw(batch);
     }
-
 }

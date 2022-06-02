@@ -46,4 +46,8 @@ public abstract class Item extends Sprite {
         todestroy = true;
     }
 
+    public boolean getDestroyed(){
+        return destroyed;
+    }
+
 }

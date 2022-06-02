@@ -61,6 +61,7 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/soundnimja-jump.wav",Sound.class);
 		manager.load("audio/sounds/getting-hit.wav",Sound.class);
 		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class);
+		manager.load("audio/sounds/healthDrink.wav", Sound.class);
 		manager.finishLoading();
 		setScreen(new MenuScreen(this));
 	}

@@ -44,7 +44,7 @@ public class health extends Item{
     public void useItem(Ryu ryu) {
         destroy();
         Ryu.setHitCounter(0);
-        NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class).play();
+        NinjaRun.manager.get("audio/sounds/healthDrink.wav", Sound.class).play();
     }
 
     @Override

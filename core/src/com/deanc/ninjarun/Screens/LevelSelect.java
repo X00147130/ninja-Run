@@ -162,7 +162,7 @@ public class LevelSelect implements Screen {
         level5.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,5));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -170,7 +170,7 @@ public class LevelSelect implements Screen {
         level6.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,6));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });

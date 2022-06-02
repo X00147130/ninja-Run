@@ -342,7 +342,7 @@ public class Ryu extends Sprite {
         Music music = NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class);
         music.setLooping(true);
 
-        if(hitCounter < 1){    //ryu is pushed back and says ow
+        if(hitCounter < 2){    //ryu is pushed back and says ow
             b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
             NinjaRun.manager.get("audio/sounds/getting-hit.wav", Sound.class).play();
 
@@ -358,7 +358,7 @@ public class Ryu extends Sprite {
             for (Fixture fixture : b2body.getFixtureList())
                 fixture.setFilterData(filter);
             b2body.applyLinearImpulse(new Vector2(-1f,2f), b2body.getWorldCenter(), true);
-            hitCounter = 2;
+            hitCounter = 3;
         }
     }
 
