@@ -16,6 +16,7 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Coins;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
+import com.deanc.ninjarun.Sprites.Items.Shuriken;
 import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
 import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
@@ -26,7 +27,7 @@ public class B2WorldCreator {
     private Array<Ninja> ninjas;
     private Array<Coins> coins;
     private Array<health> vials;
-
+    private Array<Shuriken> shurikens;
 
 
     public B2WorldCreator(PlayScreen screen) {
@@ -115,6 +116,14 @@ public class B2WorldCreator {
         for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
             new Sky(screen,object);
         }
+        //create Coins fixtures
+        shurikens = new Array<Shuriken>();
+        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            // creation of coin objects
+            shurikens.add(new Shuriken(screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+
+        }
 
     }
 
@@ -123,5 +132,6 @@ public class B2WorldCreator {
     }
     public Array<health> getVials(){return vials;}
     public Array<Coins> getCoins(){return coins;}
+    public Array<Shuriken> getShurikens(){return shurikens;}
 
 }

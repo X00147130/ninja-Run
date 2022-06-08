@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="79">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="82">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="981" source="Ground.tsx"/>
  <tileset firstgid="1716" source="AutumnHillsWall1x4_16.tsx"/>
@@ -108,5 +108,10 @@
  <objectgroup id="10" name="skylimit">
   <object id="73" x="0" y="0" width="3840"/>
   <object id="78" x="0" y="0" width="3840"/>
+ </objectgroup>
+ <objectgroup id="11" name="Shuriken">
+  <object id="79" x="304" y="160" width="16" height="16"/>
+  <object id="80" x="1664" y="160" width="16" height="16"/>
+  <object id="81" x="2656" y="160" width="16" height="16"/>
  </objectgroup>
 </map>

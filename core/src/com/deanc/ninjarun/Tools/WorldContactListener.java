@@ -73,6 +73,13 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
                 break;
+
+            case NinjaRun.WEAPON_BIT | NinjaRun.RYU_BIT:
+                if (fixA.getFilterData().categoryBits == NinjaRun.WEAPON_BIT)
+                    ((Item) fixA.getUserData()).useItem((Ryu) fixB.getUserData());
+                else
+                    ((Item) fixB.getUserData()).useItem((Ryu) fixA.getUserData());
+                break;
         }
     }
 
