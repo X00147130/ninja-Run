@@ -22,6 +22,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
+import com.deanc.ninjarun.Sprites.Items.Item;
+import com.deanc.ninjarun.Sprites.Items.ItemDef;
+import com.deanc.ninjarun.Sprites.Items.Throwable;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes
@@ -65,6 +68,11 @@ public class Ryu extends Sprite {
     //movement variables
     private Vector2 limit;
 
+    //throwable variables
+    private Array<Item> shurikens;
+    private int pouch;
+    private boolean canThrow = true;
+
 
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
@@ -74,6 +82,10 @@ public class Ryu extends Sprite {
 
         this.screen = screen;
         attacking = false;
+
+        //initialising throwables variables
+        shurikens = new Array<Item>();
+
 
         //initialising health variables
         health = 100;
@@ -247,9 +259,13 @@ public class Ryu extends Sprite {
                 NinjaRun.ENEMY_BIT|
                 NinjaRun.MONEY_BIT|
                 NinjaRun.SKY_BIT|
-                NinjaRun.ITEM_BIT;
+                NinjaRun.ITEM_BIT|
+                NinjaRun.WEAPON_BIT;
 
         fdef.shape = shape;
+        fdef.restitution = 0f;
+        fdef.friction = 2f;
+        b2body.setGravityScale(1.5f);
         b2body.createFixture(fdef).setUserData(this);
 
 
@@ -385,5 +401,34 @@ public class Ryu extends Sprite {
         if(y) {
             limit.y = -limit.y;
         }
+    }
+
+    public void setAmmo(int ammo){
+        pouch += ammo;
+    }
+
+    public void shuriken(){
+        for(int i = 0;  i <= pouch; i++){
+            shurikens.add(new Throwable(screen,b2body.getPosition().x + 1,b2body.getPosition().y));
+        }
+    }
+
+    public boolean isCanThrow() {
+        return canThrow;
+    }
+
+    public void setCanThrow(boolean canThrow) {
+        this.canThrow = canThrow;
+    }
+
+    public void throwShurikens(){
+        if(canThrow){
+            if(pouch > 0){
+                canThrow = false;
+                screen.spawnItem(new ItemDef(new Vector2(b2body.getPosition().x + 1,b2body.getPosition().y), com.deanc.ninjarun.Sprites.Items.Throwable.class));
+                pouch--;
+            }
+        }
+
     }
 }

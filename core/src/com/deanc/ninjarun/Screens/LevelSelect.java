@@ -178,7 +178,7 @@ public class LevelSelect implements Screen {
         level7.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,7));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -186,7 +186,7 @@ public class LevelSelect implements Screen {
         level8.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,8));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -194,7 +194,7 @@ public class LevelSelect implements Screen {
         level9.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,9));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -202,7 +202,7 @@ public class LevelSelect implements Screen {
         level10.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,10));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });

@@ -34,6 +34,7 @@ import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.Ryu;
+import com.deanc.ninjarun.Sprites.TileObjects.Shuriken;
 import com.deanc.ninjarun.Tools.B2WorldCreator;
 import com.deanc.ninjarun.Tools.WorldContactListener;
 
@@ -71,6 +72,8 @@ public class PlayScreen implements Screen {
 
     //level variable
     private int level = 1;
+
+    //
 
     public PlayScreen(NinjaRun g, int level) {
 
@@ -140,7 +143,7 @@ public class PlayScreen implements Screen {
         //int count = 0;  for jump limiter but not ready yet
         if (player.currentState != Ryu.State.DEAD) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
@@ -149,12 +152,20 @@ public class PlayScreen implements Screen {
             }
 
 
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
-                player.b2body.applyLinearImpulse(new Vector2(0.2f, 0), player.b2body.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+                player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
 
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
-                player.b2body.applyLinearImpulse(new Vector2(-0.2f, 0), player.b2body.getWorldCenter(), true);
+            }
 
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+                player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)){
+                player.throwShurikens();
+            }
+        }
+        else{
+            player.b2body.setLinearVelocity(new Vector2(0,0));
         }
     }
 
@@ -177,6 +188,7 @@ public class PlayScreen implements Screen {
 
         for (Item item : creator.getVials())
             item.update(dt);
+
 
         hud.update(dt);
         if (player.currentState != Ryu.State.DEAD) {
@@ -222,6 +234,7 @@ public class PlayScreen implements Screen {
                 item.draw(game.batch);
             }
         }
+
         game.batch.end();
 
         //Set to draw what hud sees
@@ -253,6 +266,10 @@ public class PlayScreen implements Screen {
         } else {
             return false;
         }
+    }
+
+    public Ryu getPlayer(){
+        return player;
     }
 
     public void setLevelComplete(boolean level) {
