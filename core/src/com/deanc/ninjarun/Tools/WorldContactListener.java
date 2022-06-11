@@ -75,19 +75,6 @@ public class WorldContactListener implements ContactListener {
                     ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
                 break;
 
-            case NinjaRun.WEAPON_BIT | NinjaRun.RYU_BIT:
-                if (fixA.getFilterData().categoryBits == NinjaRun.WEAPON_BIT)
-                    ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
-                else
-                    ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
-                break;
-
-            case NinjaRun.ENEMY_BIT | NinjaRun.SHURIKEN_BIT :
-                if (fixA.getFilterData().categoryBits == NinjaRun.ENEMY_BIT)
-                    ((Ninja) fixA.getUserData()).attacked();
-                else
-                    ((Ninja) fixB.getUserData()).attacked();
-                break;
         }
     }
 

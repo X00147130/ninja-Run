@@ -18,7 +18,6 @@ public class NinjaRun extends Game {
 	public static final float PPM = 150;
 
 	//Filter initializations
-	public static final short DESTROYED_BIT = 0;
 	public static final short GROUND_BIT = 1;
 	public static final short RYU_BIT = 2;
 	public static final short PLATFORM_BIT = 4;
@@ -30,8 +29,6 @@ public class NinjaRun extends Game {
 	public static final short ATTACK_BIT = 256;
 	public static final short MONEY_BIT = 512;
 	public static final short SKY_BIT = 1024;
-	public static final short WEAPON_BIT = 2048;
-	public static final short SHURIKEN_BIT= 4096;
 
 
 	//variables

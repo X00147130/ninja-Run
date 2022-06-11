@@ -14,7 +14,6 @@ import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 import com.deanc.ninjarun.Sprites.Items.Coins;
-import com.deanc.ninjarun.Sprites.TileObjects.Shuriken;
 import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
 import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
