@@ -36,8 +36,9 @@ public class MenuScreen implements Screen  {
 
     //Buttons
     Button playButton;
-    Button quitButton;
     Button levelButton;
+    Button settingsButton;
+    Button quitButton;
     TextButton.TextButtonStyle buttonStyle;
     BitmapFont buttonFont;
 
@@ -49,8 +50,10 @@ public class MenuScreen implements Screen  {
         batch = new SpriteBatch();
 
         //make sure to credit Sebatian Schulz for the art
-        background = new Texture("logo.jpg");
+        background = new Texture("backgroundimg.jpg");
         mainBackground = new TextureRegion(background);
+        mainBackground.setRegionHeight(viewport.getScreenHeight());
+        mainBackground.setRegionWidth(viewport.getScreenWidth());
 
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
@@ -64,16 +67,20 @@ public class MenuScreen implements Screen  {
         buttonFont = new BitmapFont();
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
-        playButton  = new TextButton("Play",buttonStyle );
+        playButton  = new TextButton("Start",buttonStyle );
         levelButton  = new TextButton("Level Select",buttonStyle );
+        settingsButton  = new TextButton("Settings",buttonStyle );
         quitButton = new TextButton("Quit",buttonStyle);
 
         Label titleLabel = new Label(" Ninja Run", font);
-        table.add(titleLabel).expandX();
+        titleLabel.setSize(90,110);
+        table.add(titleLabel).expandX().setActorHeight(110);
         table.row();
         table.add(playButton).expandX().padTop(10);
         table.row();
         table.add(levelButton).expandX().padTop(10);
+        table.row();
+        table.add(settingsButton).expandX().padTop(10);
         table.row();
         table.add(quitButton).expandX().padTop(10);
         table.row();
@@ -92,6 +99,13 @@ public class MenuScreen implements Screen  {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GAME.setScreen(new LevelSelect((NinjaRun)GAME));
+            }
+        });
+
+        settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GAME.setScreen(new Settings((NinjaRun)GAME));
             }
         });
 

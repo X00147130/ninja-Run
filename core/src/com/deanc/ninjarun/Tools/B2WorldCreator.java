@@ -24,7 +24,6 @@ public class B2WorldCreator {
     private Array<Ninja> ninjas;
     private Array<Coins> coins;
     private Array<health> vials;
-    private Array<Shuriken> shurikens;
 
 
     public B2WorldCreator(PlayScreen screen) {
@@ -113,11 +112,6 @@ public class B2WorldCreator {
         for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
             new Sky(screen,object);
         }
-        //create Coins fixtures
-        shurikens = new Array<Shuriken>();
-        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
-            shurikens.add(new Shuriken(screen,object));
-        }
 
     }
 
@@ -126,6 +120,5 @@ public class B2WorldCreator {
     }
     public Array<health> getVials(){return vials;}
     public Array<Coins> getCoins(){return coins;}
-    public Array<Shuriken> getShurikens(){return shurikens;}
 
 }

@@ -99,8 +99,4 @@
  <objectgroup id="10" name="skylimit">
   <object id="83" x="-16" y="0" width="3856"/>
  </objectgroup>
- <objectgroup id="11" name="Shuriken">
-  <object id="86" x="704" y="176" width="16" height="16"/>
-  <object id="87" x="2832" y="176" width="16" height="16"/>
- </objectgroup>
 </map>

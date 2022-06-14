@@ -3,10 +3,15 @@ package com.deanc.ninjarun.Screens;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.utils.compression.CRC.Table;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -14,43 +19,69 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.deanc.ninjarun.NinjaRun;
 
 public class Settings implements Screen {
+    private final Game GAME;
+    private Viewport viewport;
+    private SpriteBatch batch;
+
     private Button backButton;
     public Button mute;
     private Texture image;
     private TextureRegionDrawable draw;
-    Slider volume;
-    Skin skin=new Skin(Gdx.files.internal("skin/uiskin.json"));
+    /*Slider music;
+    Slider sound;
+    Skin skin=new Skin(Gdx.files.internal(""));*/
 
     Stage stage = new Stage();
     TextButton.TextButtonStyle textStyle;
     BitmapFont buttonFont;
 
-    public Settings(){
+    public Settings(final Game game){
+        this.GAME = game;
+        viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
+        stage = new Stage(viewport, ((NinjaRun) game).batch);
+        batch = new SpriteBatch();
 
         textStyle = new TextButton.TextButtonStyle();
         buttonFont = new BitmapFont();
         textStyle.font = buttonFont;
         textStyle.fontColor = RED;
-        image = new Texture("mute.png");
+        image = new Texture("mute.jpg");
         draw = new TextureRegionDrawable(image);
 
-        volume = new Slider(0,100,1,false,skin);
+       /* music = new Slider(0,100,1,false,skin);
+        sound = new Slider(0,100,1,false,skin);*/
 
         backButton = new TextButton("BACK",textStyle);
-        mute = new ImageButton(draw);
+        /*mute = new ImageButton(draw);
+        mute.toggle();*/
         Table table = new Table();
         table.setFillParent(true);
         table.center();
 
-        table.add(volume).center().expandX();
+        /*table.add(music).center().expandX();
         table.row();
+        table.add(sound).center().expandX();*/
+        /*table.add(mute).center().expandX().top().right();
+        table.row();*/
         table.add(backButton).center().expandX();
         table.row();
 
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                GAME.setScreen(new MenuScreen(GAME));
+            }
+        });
+
         stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
 
 
 
@@ -63,12 +94,18 @@ public class Settings implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        /*batch.begin();
+        batch.draw();
+        batch.end();*/
+        stage.draw();
 
     }
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width,height,true);
     }
 
     @Override
@@ -88,6 +125,7 @@ public class Settings implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        GAME.dispose();
     }
 }

@@ -104,8 +104,4 @@
  <objectgroup id="10" name="skylimit">
   <object id="61" x="-16" y="0" width="3856"/>
  </objectgroup>
- <objectgroup id="11" name="Shuriken">
-  <object id="62" x="368" y="176" width="16" height="16"/>
-  <object id="63" x="352" y="176" width="16" height="16"/>
- </objectgroup>
 </map>

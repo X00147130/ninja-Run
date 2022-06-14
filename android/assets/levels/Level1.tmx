@@ -109,9 +109,4 @@
   <object id="73" x="0" y="0" width="3840"/>
   <object id="78" x="0" y="0" width="3840"/>
  </objectgroup>
- <objectgroup id="11" name="Shuriken">
-  <object id="79" x="304" y="160" width="16" height="16"/>
-  <object id="80" x="1664" y="160" width="16" height="16"/>
-  <object id="81" x="2656" y="160" width="16" height="16"/>
- </objectgroup>
 </map>

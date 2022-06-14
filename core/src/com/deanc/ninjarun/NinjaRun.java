@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.deanc.ninjarun.Screens.LogoScreen;
 import com.deanc.ninjarun.Screens.MenuScreen;
 import com.deanc.ninjarun.Screens.PlayScreen;
 
@@ -63,7 +64,7 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class);
 		manager.load("audio/sounds/healthDrink.wav", Sound.class);
 		manager.finishLoading();
-		setScreen(new MenuScreen(this));
+		setScreen(new LogoScreen(this));
 	}
 
 	@Override

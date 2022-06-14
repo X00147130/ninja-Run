@@ -25,6 +25,7 @@ import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.Ryu;
 import com.deanc.ninjarun.Tools.B2WorldCreator;
+import com.deanc.ninjarun.Tools.Controller;
 import com.deanc.ninjarun.Tools.WorldContactListener;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -62,7 +63,8 @@ public class PlayScreen implements Screen {
     //level variable
     private int level = 1;
 
-    //
+    //controller creation
+    Controller controller;
 
     public PlayScreen(NinjaRun g, int level) {
 
@@ -74,6 +76,8 @@ public class PlayScreen implements Screen {
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen());
+        controller = new Controller();
+
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("levels/Level"+level+".tmx");
@@ -149,9 +153,6 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
                 player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
             }
-            if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)){
-                player.throwShurikens();
-            }
         }
         else{
             player.b2body.setLinearVelocity(new Vector2(0,0));
@@ -193,6 +194,7 @@ public class PlayScreen implements Screen {
         update(delta);
 
 
+
         //Clear Game Screen With Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -228,6 +230,7 @@ public class PlayScreen implements Screen {
 
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        controller.draw();
         hud.stage.draw();
         hud.draw(game.batch, delta);
 
@@ -247,6 +250,7 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
+        controller.resize(width, height);
     }
 
     public boolean gameOver() {

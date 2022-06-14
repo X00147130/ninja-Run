@@ -249,8 +249,7 @@ public class Ryu extends Sprite {
                 NinjaRun.ENEMY_BIT|
                 NinjaRun.MONEY_BIT|
                 NinjaRun.SKY_BIT|
-                NinjaRun.ITEM_BIT|
-                NinjaRun.WEAPON_BIT;
+                NinjaRun.ITEM_BIT;
 
         fdef.shape = shape;
         fdef.restitution = 0f;
@@ -360,7 +359,7 @@ public class Ryu extends Sprite {
             NinjaRun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play();
             ryuIsDead = true;
             Filter filter = new Filter();
-            filter.maskBits = NinjaRun.GROUND_BIT;
+            filter.maskBits = NinjaRun.GROUND_BIT|NinjaRun.PLATFORM_BIT;
             for (Fixture fixture : b2body.getFixtureList())
                 fixture.setFilterData(filter);
             b2body.applyLinearImpulse(new Vector2(-1f,2f), b2body.getWorldCenter(), true);
