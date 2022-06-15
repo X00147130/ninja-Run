@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -140,7 +141,7 @@ public class PlayScreen implements Screen {
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.attack();
             }
 
@@ -230,7 +231,9 @@ public class PlayScreen implements Screen {
 
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        controller.draw();
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            controller.draw();
+        }
         hud.stage.draw();
         hud.draw(game.batch, delta);
 

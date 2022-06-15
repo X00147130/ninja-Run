@@ -32,25 +32,13 @@ public class LogoScreen implements Screen {
         batch = new SpriteBatch();
         stage = new Stage(viewport);
 
-        background = new Texture("logo_size_invert.jpg");
+        background = new Texture("logos/logo_transparent_background.png");
         backgroundIMG = new Image(background);
-        backgroundIMG.setHeight(100);
-        backgroundIMG.setWidth(100);
 
         Table table = new Table();
         table.setFillParent(true);
 
-        table.add();
-        table.add();
-        table.add();
-        table.row().pad(5,5,5,5);
-        table.add();
         table.add(backgroundIMG);
-        table.add();
-        table.row().pad(5,5,5,5);
-        table.add();
-        table.add();
-        table.add();
 
 
         stage.addActor(table);

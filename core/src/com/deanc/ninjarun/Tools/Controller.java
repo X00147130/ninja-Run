@@ -2,6 +2,7 @@ package com.deanc.ninjarun.Tools;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -111,6 +112,46 @@ public class Controller {
         table.add();
 
         stage.addActor(table);
+
+        stage.addListener(new InputListener(){
+
+            @Override
+            public boolean keyDown(InputEvent event, int keycode){
+                switch(keycode){
+                    case Input.Keys.UP:
+                        upPressed = true;
+                        break;
+                    case Input.Keys.DOWN:
+                        downPressed = true;
+                        break;
+                    case Input.Keys.LEFT:
+                        leftPressed = true;
+                    case Input.Keys.RIGHT:
+                        rightPressed = true;
+                        break;
+                }
+                return true;
+            }
+
+            @Override
+            public boolean keyUp(InputEvent event, int keycode){
+                switch(keycode){
+                    case Input.Keys.UP:
+                        upPressed = false;
+                        break;
+                    case Input.Keys.DOWN:
+                        downPressed = false;
+                        break;
+                    case Input.Keys.LEFT:
+                        leftPressed = false;
+                    case Input.Keys.RIGHT:
+                        rightPressed = false;
+                        break;
+                }
+                return true;
+            }
+
+        });
     }
     public void draw(){
         stage.draw();

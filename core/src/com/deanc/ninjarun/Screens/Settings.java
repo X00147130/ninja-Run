@@ -36,7 +36,7 @@ public class Settings implements Screen {
     private TextureRegionDrawable draw;
     /*Slider music;
     Slider sound;
-    Skin skin=new Skin(Gdx.files.internal(""));*/
+    Skin skin=new Skin(Gdx.files.internal(" "));*/
 
     Stage stage = new Stage();
     TextButton.TextButtonStyle textStyle;
