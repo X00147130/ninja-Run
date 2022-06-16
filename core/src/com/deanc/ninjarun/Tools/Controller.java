@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
@@ -31,12 +33,9 @@ public class Controller {
         stage = new Stage(view);
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.left().bottom();
-        table.setFillParent(true);
 
         Image upImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
-        upImg.setSize(20,20);
+        upImg.setSize(30,30);
         upImg.addListener(new InputListener(){
 
             @Override
@@ -51,8 +50,8 @@ public class Controller {
             }
         });
 
-        Image downImg = new Image(new Texture("favpng_down-arrow-clip-art.png "));
-        downImg.setSize(20,20);
+        Image downImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
+        downImg.setSize(30,30);
         downImg.addListener(new InputListener(){
 
             @Override
@@ -67,8 +66,8 @@ public class Controller {
             }
         });
 
-        Image rightImg = new Image(new Texture("favpng_right-arrow-clip-art.png"));
-        rightImg.setSize(20,20);
+        Image rightImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
+        rightImg.setSize(30,30);
         rightImg.addListener(new InputListener(){
 
             @Override
@@ -83,8 +82,8 @@ public class Controller {
             }
         });
 
-        Image leftImg = new Image(new Texture("favpng_left-arrow-clip-art.png "));
-        leftImg.setSize(20,20);
+        Image leftImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
+        leftImg.setSize(30,30);
         leftImg.addListener(new InputListener(){
 
             @Override
@@ -99,19 +98,27 @@ public class Controller {
             }
         });
 
-        table.add();
-        table.add(upImg).size(upImg.getWidth(),upImg.getHeight());
-        table.add();
+        Table table = new Table();
+        table.left().bottom();
+        table.setFillParent(true);
+
+        Table action = new Table();
+        action.right().bottom();
+        action.setFillParent(true);
+
         table.row().pad(5,5,5,5);
         table.add(leftImg).size(leftImg.getWidth(),leftImg.getHeight());
         table.add();
         table.add(rightImg).size(rightImg.getWidth(),rightImg.getHeight());
         table.row().padBottom(5);
-        table.add();
-        table.add(downImg).size(downImg.getWidth(),downImg.getHeight());
-        table.add();
 
         stage.addActor(table);
+
+        action.add(upImg).size(upImg.getWidth(),upImg.getHeight()).padRight(10);
+        action.add();
+        action.add(downImg).size(downImg.getWidth(),downImg.getHeight()).padLeft(10);
+
+        stage.addActor(action);
 
         stage.addListener(new InputListener(){
 

@@ -74,8 +74,10 @@ public class LevelComplete implements Screen {
         table.add(title).expandX().padLeft(150);
         table.row();
 
-        table.add(nextLevelButton).expandX().padLeft(150).padTop(20);
-        table.row();
+        if(map != 11) {
+            table.add(nextLevelButton).expandX().padLeft(150).padTop(20);
+            table.row();
+        }
         table.add(levelSelectButton).expandX().left().padLeft(50);
         table.add(menuButton).expandX().right().padRight(50);
         table.row();
@@ -85,12 +87,14 @@ public class LevelComplete implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting up ClickListners for buttons
-       nextLevelButton.addListener(new ClickListener(){
-           @Override
-           public void clicked(InputEvent event, float x, float y){
-               GAME.setScreen(new PlayScreen((NinjaRun)GAME, map));
-           }
-        });
+      if(map != 11) {
+          nextLevelButton.addListener(new ClickListener() {
+              @Override
+              public void clicked(InputEvent event, float x, float y) {
+                  GAME.setScreen(new PlayScreen((NinjaRun) GAME, map));
+              }
+          });
+      }
 
         menuButton.addListener(new ClickListener(){
             @Override

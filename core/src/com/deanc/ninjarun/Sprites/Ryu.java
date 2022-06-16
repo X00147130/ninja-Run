@@ -155,7 +155,12 @@ public class Ryu extends Sprite {
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
         setRegion(getFrame(dt));
-
+        if(getY() < 0){
+            ryuIsDead = true;
+            b2body.applyLinearImpulse(new Vector2(0, 3f), b2body.getWorldCenter(), true);
+            NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+            NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).play();
+        }
     }
 
 

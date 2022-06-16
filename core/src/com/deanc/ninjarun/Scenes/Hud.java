@@ -56,7 +56,7 @@ public class Hud implements Disposable {
 
 
     public Hud(SpriteBatch sb, final NinjaRun game, final Screen paused){
-        worldTimer=250;
+        worldTimer=00;
         gameplay = game;
         play = paused;
 
@@ -112,6 +112,7 @@ public class Hud implements Disposable {
     public void update(float dt) {
     }
 
+
     public void draw(SpriteBatch batch, float alpha){
         if(!projectionMatrixSet){
             border.setProjectionMatrix(batch.getProjectionMatrix());
@@ -124,20 +125,22 @@ public class Hud implements Disposable {
         border.end();
 
         background.begin(ShapeRenderer.ShapeType.Filled);
-        background.setColor(Color.RED);
+        background.setColor(Color.BLACK);
         background.rect(5, 185, 99, 6);
         background.end();
 
         health.begin(ShapeRenderer.ShapeType.Filled);
-        health.setColor(Color.GREEN);
         if(Ryu.getHitCounter() == 0) {
             health.rect(5, 185, 99, 6);
+            health.setColor(Color.GREEN);
         }
         else if (Ryu.getHitCounter() == 1){
             health.rect(5,185,66,6);
+            health.setColor(Color.YELLOW);
         }
         else if (Ryu.getHitCounter() == 2){
             health.rect(5,185,33,6);
+            health.setColor(Color.RED);
         }
         else if (Ryu.getHitCounter() == 3){
             health.rect(5,185,0,6);

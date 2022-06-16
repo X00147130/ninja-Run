@@ -2,6 +2,7 @@ package com.deanc.ninjarun;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -65,6 +66,10 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/healthDrink.wav", Sound.class);
 		manager.finishLoading();
 		setScreen(new LogoScreen(this));
+	}
+
+	public void muteMusic(){
+
 	}
 
 	@Override

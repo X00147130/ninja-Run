@@ -134,24 +134,24 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt) {
-        //int count = 0;  for jump limiter but not ready yet
+       // int count = 0;  //for jump limiter but not ready yet
         if (player.currentState != Ryu.State.DEAD) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) || controller.isUpPressed() == true) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                 NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
             }
 
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || controller.isDownPressed() == true) {
                 player.attack();
             }
 
 
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2 || controller.isRightPressed() && player.b2body.getLinearVelocity().x <=2) {
                 player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
 
             }
 
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2 || controller.isLeftPressed() && player.b2body.getLinearVelocity().x >=-2) {
                 player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
             }
         }
@@ -182,6 +182,7 @@ public class PlayScreen implements Screen {
 
 
         hud.update(dt);
+
         if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
         }
@@ -193,8 +194,6 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-
-
 
         //Clear Game Screen With Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -234,6 +233,7 @@ public class PlayScreen implements Screen {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             controller.draw();
         }
+
         hud.stage.draw();
         hud.draw(game.batch, delta);
 
