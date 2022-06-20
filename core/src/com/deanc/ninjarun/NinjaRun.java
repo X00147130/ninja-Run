@@ -18,6 +18,8 @@ public class NinjaRun extends Game {
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
 	public static final float PPM = 150;
+	public static final float MAX_VOL = 100;
+	public static final float MIN_VOL = 0;
 
 	//Filter initializations
 	public static final short GROUND_BIT = 1;
@@ -35,6 +37,7 @@ public class NinjaRun extends Game {
 
 	//variables
 	public SpriteBatch batch;
+	public static float volume = 0;
 
 	/* WARING Using AssetManager in a static way can cause issues, especially on Android.
 	Instead you may want to pass around AssetManager to those classes that need it.
@@ -68,7 +71,8 @@ public class NinjaRun extends Game {
 		setScreen(new LogoScreen(this));
 	}
 
-	public void muteMusic(){
+	public void setVolume(float volume){
+		this.volume = volume;
 
 	}
 

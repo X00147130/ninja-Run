@@ -24,7 +24,7 @@ public class LogoScreen implements Screen {
     private Image backgroundIMG;
     private Stage stage;
     private float timeSeconds = 0f;
-    private float period = 6f;
+    private float period = 4f;
 
     public LogoScreen(Game game) {
         this.GAME = game;
@@ -32,7 +32,7 @@ public class LogoScreen implements Screen {
         batch = new SpriteBatch();
         stage = new Stage(viewport);
 
-        background = new Texture("logos/logo_transparent_background.png");
+        background = new Texture("logos/logo_white_background.jpg");
         backgroundIMG = new Image(background);
 
         Table table = new Table();

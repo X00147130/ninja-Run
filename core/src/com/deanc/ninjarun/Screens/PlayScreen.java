@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
+import com.deanc.ninjarun.Sprites.Items.Coins;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
@@ -57,6 +58,7 @@ public class PlayScreen implements Screen {
     //Sprite Variable
     private Array<Item> items;
     public LinkedBlockingQueue<ItemDef> itemToSpawn;
+    private int coins;
 
     //finish level variable
     public boolean complete = false;
@@ -76,7 +78,7 @@ public class PlayScreen implements Screen {
         this.level = level;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
-        hud = new Hud(game.batch, game,game.getScreen());
+        hud = new Hud(game.batch, game,game.getScreen(),this);
         controller = new Controller();
 
 
@@ -101,6 +103,7 @@ public class PlayScreen implements Screen {
 
         items = new Array<Item>();
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
+        coins = 0;
     }
 
     public void spawnItem(ItemDef idef) {
@@ -135,31 +138,64 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt) {
        // int count = 0;  //for jump limiter but not ready yet
-        if (player.currentState != Ryu.State.DEAD) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) || controller.isUpPressed() == true) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
-                NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
-            }
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            if (player.currentState != Ryu.State.DEAD) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+                    NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                }
 
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || controller.isDownPressed() == true) {
-                player.attack();
-            }
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                    player.attack();
+                }
 
 
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2 || controller.isRightPressed() && player.b2body.getLinearVelocity().x <=2) {
-                player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
 
-            }
+                }
 
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2 || controller.isLeftPressed() && player.b2body.getLinearVelocity().x >=-2) {
-                player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+                    player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
+                }
+            } else {
+                player.b2body.setLinearVelocity(new Vector2(0, 0));
             }
         }
-        else{
-            player.b2body.setLinearVelocity(new Vector2(0,0));
+        else if(Gdx.app.getType() == Application.ApplicationType.Android){
+            if (player.currentState != Ryu.State.DEAD) {
+                if (controller.isUpPressed() == true) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+                    NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                }
+
+                if (controller.isDownPressed() == true) {
+                    player.attack();
+                }
+
+
+                if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
+
+                }
+
+                if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2) {
+                    player.b2body.applyLinearImpulse(new Vector2(-0.25f, 0), player.b2body.getWorldCenter(), true);
+                }
+            } else {
+                player.b2body.setLinearVelocity(new Vector2(0, 0));
+            }
         }
     }
 
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
 
     public void update(float dt) {
         handleInput(dt);
@@ -285,6 +321,12 @@ public class PlayScreen implements Screen {
 
     }
 
+
+    public void coins (){
+        if(creator.getCoins().size > 0){
+            coins = creator.getCoins().size;
+        }
+    }
     @Override
     public void dispose() {
         map.dispose();

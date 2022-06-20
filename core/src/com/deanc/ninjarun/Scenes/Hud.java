@@ -30,7 +30,7 @@ public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    private int worldTimer;
+    private int coinPouch = 0;
     private Coins coin;
 
     Label coinpouchLabel;
@@ -53,13 +53,16 @@ public class Hud implements Disposable {
     private NinjaRun gameplay;
     public final Screen play;
     private boolean isPaused = false;
+    private PlayScreen playScreen;
 
 
-    public Hud(SpriteBatch sb, final NinjaRun game, final Screen paused){
-        worldTimer=00;
+    public Hud(SpriteBatch sb, final NinjaRun game, final Screen paused, PlayScreen playScreen){
         gameplay = game;
         play = paused;
 
+        this.playScreen = playScreen;
+
+        coinPouch = playScreen.getCoins();
 
         //Image button
         image = new Texture("pause.png");
@@ -74,7 +77,7 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        coinpouchLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        coinpouchLabel = new Label(String.format("%03d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
         timeLabel = new Label("TIME:", new Label.LabelStyle(new BitmapFont(), Color.RED));
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         coinLabel = new Label("COINS:", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
@@ -110,6 +113,7 @@ public class Hud implements Disposable {
     }
 
     public void update(float dt) {
+        coinpouchLabel = new Label(String.format("%03d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
     }
 
 

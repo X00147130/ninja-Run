@@ -34,7 +34,7 @@ public class Controller {
         Gdx.input.setInputProcessor(stage);
 
 
-        Image upImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
+        Image upImg = new Image(new Texture("jumpArrow.png"));
         upImg.setSize(30,30);
         upImg.addListener(new InputListener(){
 
@@ -50,8 +50,8 @@ public class Controller {
             }
         });
 
-        Image downImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
-        downImg.setSize(30,30);
+        Image downImg = new Image(new Texture("attack button.png"));
+        downImg.setSize(50,30);
         downImg.addListener(new InputListener(){
 
             @Override
@@ -66,7 +66,7 @@ public class Controller {
             }
         });
 
-        Image rightImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
+        Image rightImg = new Image(new Texture("rightArrow.png"));
         rightImg.setSize(30,30);
         rightImg.addListener(new InputListener(){
 
@@ -82,7 +82,7 @@ public class Controller {
             }
         });
 
-        Image leftImg = new Image(new Texture("favpng_up-arrow-clip-art.png"));
+        Image leftImg = new Image(new Texture("LTd5arLKc.png"));
         leftImg.setSize(30,30);
         leftImg.addListener(new InputListener(){
 
