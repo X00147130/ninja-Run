@@ -15,7 +15,7 @@ public class health extends Item{
 
     public health(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        setRegion(new Texture("health.png"));// clipart used
+        setRegion(new Texture("health_vial1.png"));// clipart used
 
     }
 

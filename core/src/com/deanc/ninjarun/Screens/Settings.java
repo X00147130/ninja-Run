@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -25,7 +26,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
@@ -47,6 +50,8 @@ public class Settings implements Screen {
     TextButton.TextButtonStyle textStyle;
     BitmapFont buttonFont;
 
+    float startX;
+
     public Settings(final Game game){
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
@@ -60,17 +65,53 @@ public class Settings implements Screen {
         image = new Texture("mute.jpg");
         draw = new TextureRegionDrawable(image);
 
-        music = new Slider(0,100,1,false,skin);
-        sound = new Slider(0,100,1,false,skin);
+        music = new Slider(0f,1f,0.01f,false,skin);
+        music.setValue(((NinjaRun) GAME).getVolume());
+
+        sound = new Slider(0f,1f,0.01f,false,skin);
+        sound.setValue(((NinjaRun) GAME).getVolume());
+
+        music.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(!music.isDragging()){
+                    ((NinjaRun) GAME).setVolume(music.getValue());
+                    ((NinjaRun) GAME).music.setVolume(((NinjaRun) GAME).getVolume());
+                }
+            }
+        });
+
+        sound.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(!sound.isDragging()){
+                    ((NinjaRun) GAME).setSoundVolume(sound.getValue());
+                    manager.get("audio/sounds/coin.wav", Sound.class).play(((NinjaRun) GAME).getSoundVolume());
+                }
+            }
+        });
+
+        Container<Slider> container = new Container<Slider>(music);
+        container.setTransform(true); // enables scaling and rotation
+        container.setSize(300,100);
+        container.setOrigin(container.getWidth() / 2 , container.getHeight() / 2);
+        container.setScale(1);
+
+        Container<Slider> container1 = new Container<Slider>(sound);
+        container1.setTransform(true); // enables scaling and rotation
+        container1.setSize(300,100);
+        container1.setOrigin(container.getWidth() / 2 , container.getHeight() / 2);
+        container1.setScale(1);
+
 
         backButton = new TextButton("BACK",textStyle);
         Table table = new Table();
         table.setFillParent(true);
         table.center();
 
-        table.add(music).center().expandX();
+        table.add(container).center().expandX();
         table.row();
-        table.add(sound).center().expandX();
+        table.add(container1).center().expandX();
         table.row();
         table.add(backButton).center().expandX();
         table.row();
@@ -82,16 +123,6 @@ public class Settings implements Screen {
             }
         });
 
-       /* music.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (!music.isDragging()) {
-                    NinjaRun.setVolume(music.getValue());
-                    manager.get("audio/sounds/coin.wav", Sound.class).play(NinjaRun.getVolume());
-                    NinjaRun.music.setVolume(NinjaRun.getVolume());
-                }
-            }
-        });*/
 
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
