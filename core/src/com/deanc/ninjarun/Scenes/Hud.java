@@ -1,6 +1,10 @@
 package com.deanc.ninjarun.Scenes;
 
 import com.badlogic.gdx.Gdx;
+<<<<<<< Updated upstream
+=======
+import com.badlogic.gdx.Input;
+>>>>>>> Stashed changes
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -77,7 +81,11 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
+<<<<<<< Updated upstream
         coinpouchLabel = new Label(String.format("%03d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
+=======
+        coinpouchLabel = new Label(String.format("%04d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
+>>>>>>> Stashed changes
         timeLabel = new Label("TIME:", new Label.LabelStyle(new BitmapFont(), Color.RED));
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         coinLabel = new Label("COINS:", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
@@ -95,12 +103,24 @@ public class Hud implements Disposable {
 
 
 
+<<<<<<< Updated upstream
         pause.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameplay.setScreen(new PauseScreen(gameplay));
             }
        });
+=======
+            pause.addListener(new ClickListener() {
+                    @Override
+                    public void clicked
+                    (InputEvent event,float x, float y){
+                    gameplay.setScreen(new PauseScreen(gameplay));
+                }
+
+            });
+
+>>>>>>> Stashed changes
 
         // health bar initialisation
         border = new ShapeRenderer();
@@ -113,7 +133,12 @@ public class Hud implements Disposable {
     }
 
     public void update(float dt) {
+<<<<<<< Updated upstream
         coinpouchLabel = new Label(String.format("%03d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
+=======
+        coinPouch = playScreen.getCoins();
+        coinpouchLabel.setText(String.format("%04d",coinPouch));
+>>>>>>> Stashed changes
     }
 
 

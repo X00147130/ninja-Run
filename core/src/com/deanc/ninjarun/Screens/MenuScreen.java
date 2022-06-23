@@ -6,6 +6,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -27,6 +28,7 @@ import com.deanc.ninjarun.NinjaRun;
 
 public class MenuScreen implements Screen  {
 
+    private AssetManager manager;
     private SpriteBatch batch;
     private Viewport viewport;
     private Stage stage;
@@ -45,6 +47,7 @@ public class MenuScreen implements Screen  {
 
     public MenuScreen(final Game game) {
         this.GAME = game;
+        this.manager = NinjaRun.getManager();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();

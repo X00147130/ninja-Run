@@ -1,25 +1,30 @@
 package com.deanc.ninjarun;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<<<<<<< Updated upstream
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.deanc.ninjarun.Screens.LogoScreen;
 import com.deanc.ninjarun.Screens.MenuScreen;
 import com.deanc.ninjarun.Screens.PlayScreen;
+=======
+import com.deanc.ninjarun.Screens.LogoScreen;
+>>>>>>> Stashed changes
 
 public class NinjaRun extends Game {
 	//constants
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
 	public static final float PPM = 150;
+<<<<<<< Updated upstream
 	public static final float MAX_VOL = 100;
 	public static final float MIN_VOL = 0;
+=======
+>>>>>>> Stashed changes
 
 	//Filter initializations
 	public static final short GROUND_BIT = 1;
@@ -40,6 +45,10 @@ public class NinjaRun extends Game {
 	public float volume = 0.5f;
 	public float soundVolume = 0.5f;
 	public Music music;
+<<<<<<< Updated upstream
+=======
+	private int coins = 0;
+>>>>>>> Stashed changes
 
 	/* WARING Using AssetManager in a static way can cause issues, especially on Android.
 	Instead you may want to pass around AssetManager to those classes that need it.
@@ -73,6 +82,13 @@ public class NinjaRun extends Game {
 		setScreen(new LogoScreen(this));
 	}
 
+<<<<<<< Updated upstream
+=======
+	public static AssetManager getManager() {
+		return manager;
+	}
+
+>>>>>>> Stashed changes
 	public float getVolume() {
 		return volume;
 	}
@@ -87,6 +103,17 @@ public class NinjaRun extends Game {
 
 	public void setSoundVolume(float soundVolume) {
 		this.soundVolume = soundVolume;
+<<<<<<< Updated upstream
+=======
+	}
+
+	public int getCoins() {
+		return coins;
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
+>>>>>>> Stashed changes
 	}
 
 	@Override

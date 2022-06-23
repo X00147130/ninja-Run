@@ -6,6 +6,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,6 +27,9 @@ public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
     private final Game GAME;
+    private AssetManager manager;
+
+    private int map = 1;
 
     private int map = 1;
 
@@ -37,6 +41,10 @@ public class GameOverScreen implements Screen {
     private BitmapFont buttonFont;
 
     public GameOverScreen(Game game, int level){
+<<<<<<< Updated upstream
+=======
+        this.manager = NinjaRun.getManager();
+>>>>>>> Stashed changes
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);

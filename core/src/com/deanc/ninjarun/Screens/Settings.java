@@ -8,6 +8,10 @@ import static com.deanc.ninjarun.NinjaRun.manager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+<<<<<<< Updated upstream
+=======
+import com.badlogic.gdx.audio.Music;
+>>>>>>> Stashed changes
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -50,6 +54,11 @@ public class Settings implements Screen {
     TextButton.TextButtonStyle textStyle;
     BitmapFont buttonFont;
 
+<<<<<<< Updated upstream
+=======
+    private Texture background;
+
+>>>>>>> Stashed changes
     float startX;
 
     public Settings(final Game game){
@@ -57,6 +66,10 @@ public class Settings implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();
+<<<<<<< Updated upstream
+=======
+        /*background = new Texture("settings.jpg");*/
+>>>>>>> Stashed changes
 
         textStyle = new TextButton.TextButtonStyle();
         buttonFont = new BitmapFont();
@@ -76,7 +89,11 @@ public class Settings implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(!music.isDragging()){
                     ((NinjaRun) GAME).setVolume(music.getValue());
+<<<<<<< Updated upstream
                     ((NinjaRun) GAME).music.setVolume(((NinjaRun) GAME).getVolume());
+=======
+                    manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play(((NinjaRun) GAME).getVolume());
+>>>>>>> Stashed changes
                 }
             }
         });
@@ -86,7 +103,11 @@ public class Settings implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(!sound.isDragging()){
                     ((NinjaRun) GAME).setSoundVolume(sound.getValue());
+<<<<<<< Updated upstream
                     manager.get("audio/sounds/coin.wav", Sound.class).play(((NinjaRun) GAME).getSoundVolume());
+=======
+                    manager.get("audio/sounds/coin.mp3", Sound.class).play(((NinjaRun) GAME).getSoundVolume());
+>>>>>>> Stashed changes
                 }
             }
         });
@@ -96,12 +117,20 @@ public class Settings implements Screen {
         container.setSize(300,100);
         container.setOrigin(container.getWidth() / 2 , container.getHeight() / 2);
         container.setScale(1);
+<<<<<<< Updated upstream
+=======
+        container.setColor(RED);
+>>>>>>> Stashed changes
 
         Container<Slider> container1 = new Container<Slider>(sound);
         container1.setTransform(true); // enables scaling and rotation
         container1.setSize(300,100);
         container1.setOrigin(container.getWidth() / 2 , container.getHeight() / 2);
         container1.setScale(1);
+<<<<<<< Updated upstream
+=======
+        container1.setColor(RED);
+>>>>>>> Stashed changes
 
 
         backButton = new TextButton("BACK",textStyle);
@@ -140,6 +169,12 @@ public class Settings implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+<<<<<<< Updated upstream
+=======
+        /*batch.begin();
+        batch.draw(background,0,0);
+        batch.end();*/
+>>>>>>> Stashed changes
         stage.draw();
 
     }

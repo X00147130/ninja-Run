@@ -45,7 +45,11 @@ public class Coins extends Item {
     @Override
     public void useItem(Ryu ryu) {
         destroy();
+<<<<<<< Updated upstream
         count++;
+=======
+        count += 100;
+>>>>>>> Stashed changes
         screen.setCoins(count);
         Gdx.app.log("Coin", "destroyed");
         NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class).play();

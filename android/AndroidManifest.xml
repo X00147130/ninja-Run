@@ -4,12 +4,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:isGame="true"
         android:appCategory="game"
         android:label="@string/app_name"
+<<<<<<< Updated upstream
         android:theme="@style/GdxTheme"
         android:roundIcon="@drawable/ic_launcher_foreground">
+=======
+        android:theme="@style/GdxTheme">
+>>>>>>> Stashed changes
         <activity
             android:name="com.deanc.ninjarun.AndroidLauncher"
             android:label="@string/app_name" 

@@ -4,10 +4,12 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -35,11 +37,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class PlayScreen implements Screen {
     private NinjaRun game;
     private TextureAtlas atlas;
+    public AssetManager manager;
 
     //basic variables
     private Hud hud;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
+    private SpriteBatch batch;
 
     //tiled map variables
     private TmxMapLoader mapLoader;
@@ -76,10 +80,20 @@ public class PlayScreen implements Screen {
 
         this.game = g;
         this.level = level;
+<<<<<<< Updated upstream
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen(),this);
         controller = new Controller();
+=======
+        this.manager = NinjaRun.getManager();
+        gamecam = new OrthographicCamera();
+        gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
+        hud = new Hud(game.batch, game,game.getScreen(),this);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            controller = new Controller();
+        }
+>>>>>>> Stashed changes
 
 
         mapLoader = new TmxMapLoader();
@@ -99,11 +113,21 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).play();
+
+        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).play();
+        /*manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
+        game.music.play();
+        game.music.setVolume(game.getVolume());
+        game.setSoundVolume(game.getSoundVolume());*/
+
 
         items = new Array<Item>();
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
         coins = 0;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     }
 
     public void spawnItem(ItemDef idef) {
@@ -172,13 +196,24 @@ public class PlayScreen implements Screen {
                 if (controller.isDownPressed() == true) {
                     player.attack();
                 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
+                if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
+
+<<<<<<< Updated upstream
+                }
+
+=======
                 if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
 
                 }
 
+>>>>>>> Stashed changes
                 if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2) {
                     player.b2body.applyLinearImpulse(new Vector2(-0.25f, 0), player.b2body.getWorldCenter(), true);
                 }
@@ -203,6 +238,8 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
+        hud.update(dt);
+
         player.update(dt);
         for (Enemy enemy : creator.getNinjas()) {
             enemy.update(dt);
@@ -217,7 +254,11 @@ public class PlayScreen implements Screen {
             item.update(dt);
 
 
+<<<<<<< Updated upstream
         hud.update(dt);
+=======
+
+>>>>>>> Stashed changes
 
         if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
@@ -225,6 +266,7 @@ public class PlayScreen implements Screen {
 
         gamecam.update();
         renderer.setView(gamecam);
+        game.setCoins(coins);
     }
 
     @Override
@@ -264,14 +306,27 @@ public class PlayScreen implements Screen {
 
         game.batch.end();
 
+<<<<<<< Updated upstream
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             controller.draw();
         }
 
+=======
+>>>>>>> Stashed changes
         hud.stage.draw();
         hud.draw(game.batch, delta);
+
+
+        //Set to draw what hud sees
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            controller.draw();
+        }
+
+
 
         if (gameOver()) {
             game.setScreen(new GameOverScreen(game, level));
@@ -289,7 +344,13 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
+<<<<<<< Updated upstream
         controller.resize(width, height);
+=======
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            controller.resize(width, height);
+        }
+>>>>>>> Stashed changes
     }
 
     public boolean gameOver() {
@@ -312,8 +373,13 @@ public class PlayScreen implements Screen {
     public void pause() {
     }
 
+
     @Override
     public void resume() {
+<<<<<<< Updated upstream
+=======
+        hud.draw(batch,1);
+>>>>>>> Stashed changes
     }
 
     @Override

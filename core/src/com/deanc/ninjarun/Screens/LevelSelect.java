@@ -69,7 +69,11 @@ public class LevelSelect implements Screen {
         NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).play();
 
         //Texture
+<<<<<<< Updated upstream
         //background = new Texture("Texture1.jpg");
+=======
+       /* background = new Texture("levelselect.jpg");*/
+>>>>>>> Stashed changes
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
@@ -212,11 +216,15 @@ public class LevelSelect implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        /*batch.begin();
+        batch.draw(background,0,0);
+        batch.end();*/
         screen.draw();
     }
 
     @Override
     public void resize(int width, int height) {
+        screen.getViewport().update(width,height,true);
 
     }
 

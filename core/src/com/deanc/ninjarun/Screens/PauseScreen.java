@@ -8,6 +8,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+<<<<<<< Updated upstream
+=======
+import com.badlogic.gdx.graphics.Texture;
+>>>>>>> Stashed changes
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -22,12 +26,20 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
+<<<<<<< Updated upstream
+=======
+import com.deanc.ninjarun.Scenes.Hud;
+>>>>>>> Stashed changes
 
 public class PauseScreen implements Screen {
 
     //Display tools
     private Table table;
     private Stage stage;
+<<<<<<< Updated upstream
+=======
+    private SpriteBatch batch;
+>>>>>>> Stashed changes
 
     //Labels and Buttons
     private Label titleLabel;
@@ -42,6 +54,11 @@ public class PauseScreen implements Screen {
     private NinjaRun game;
     private Screen screen;
     private Viewport viewport;
+<<<<<<< Updated upstream
+=======
+    private Hud hud;
+    private Texture background;
+>>>>>>> Stashed changes
 
 
 
@@ -51,7 +68,13 @@ public class PauseScreen implements Screen {
         screen = gameplay.getScreen();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
         stage = new Stage(viewport);
+<<<<<<< Updated upstream
 
+=======
+        batch = new SpriteBatch();
+        /*background = new Texture("settings.jpg");
+*/
+>>>>>>> Stashed changes
         //Label set up
         style = new Label.LabelStyle(new BitmapFont(), RED);
         titleLabel = new Label("PAUSED",style);
@@ -85,7 +108,11 @@ public class PauseScreen implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 game.setScreen(screen);
+<<<<<<< Updated upstream
                 screen.resume();
+=======
+
+>>>>>>> Stashed changes
             }
         });
 
@@ -107,11 +134,21 @@ public class PauseScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+<<<<<<< Updated upstream
+=======
+        /*batch.begin();
+        batch.draw(background,0,0);
+        batch.end();*/
+>>>>>>> Stashed changes
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
+<<<<<<< Updated upstream
+=======
+        stage.getViewport().update(width,height,true);
+>>>>>>> Stashed changes
     }
 
     @Override
