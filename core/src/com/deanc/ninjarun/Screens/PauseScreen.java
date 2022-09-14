@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Scenes.Hud;
 
 public class PauseScreen implements Screen {
 
@@ -43,7 +42,8 @@ public class PauseScreen implements Screen {
     private NinjaRun game;
     private Screen screen;
     private Viewport viewport;
-    private Texture background;
+    //private Texture background;
+
 
 
 
@@ -87,7 +87,7 @@ public class PauseScreen implements Screen {
 
         resume.addListener(new ClickListener(){
             @Override
-            public void clicked(InputEvent event,float x,float y){
+            public void clicked(InputEvent event, float x, float y){
                 game.setScreen(screen);
             }
         });

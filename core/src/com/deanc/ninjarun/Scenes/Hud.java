@@ -29,7 +29,7 @@ public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
 
-    private int coinPouch = 0;
+    private int coinPouch;
 
     Label coinpouchLabel;
 
@@ -50,7 +50,6 @@ public class Hud implements Disposable {
     private Drawable draw;
     private NinjaRun gameplay;
     public final Screen play;
-    private boolean isPaused = false;
     private PlayScreen playScreen;
 
 
@@ -96,7 +95,6 @@ public class Hud implements Disposable {
                     public void clicked
                     (InputEvent event,float x, float y){
                         gameplay.setScreen(new PauseScreen(gameplay));
-                        isPaused = true;
                 }
 
             });
@@ -115,10 +113,15 @@ public class Hud implements Disposable {
     public void update(float dt) {
         coinPouch = playScreen.getCoins();
         coinpouchLabel.setText(String.format("%04d",coinPouch));
-        if(isPaused = false){
-            stage.dispose();
-            stage.draw();
-        }
+
+        pause.addListener(new ClickListener() {
+            @Override
+            public void clicked
+                    (InputEvent event,float x, float y){
+                gameplay.setScreen(new PauseScreen(gameplay));
+            }
+
+        });
     }
 
 
@@ -161,10 +164,6 @@ public class Hud implements Disposable {
     }
     public Screen getPlayScreen(){
         return play;
-    }
-
-    public void setIsPaused(boolean paused){
-        isPaused = paused;
     }
 
 

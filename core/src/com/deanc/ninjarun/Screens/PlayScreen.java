@@ -72,6 +72,9 @@ public class PlayScreen implements Screen {
     //controller creation
     Controller controller;
 
+    //Pause Button fix attempt
+    public boolean isPaused = false;
+
     public PlayScreen(NinjaRun g, int level) {
 
         //admin
@@ -152,6 +155,12 @@ public class PlayScreen implements Screen {
 
     }
 
+    public void pauseButtonReset(){
+        if(isPaused = true){
+
+        }
+    }
+
     public void handleInput(float dt) {
        // int count = 0;  //for jump limiter but not ready yet
         if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
@@ -223,7 +232,6 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
-        hud.update(dt);
 
         player.update(dt);
         for (Enemy enemy : creator.getNinjas()) {
@@ -326,9 +334,6 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public Ryu getPlayer(){
-        return player;
-    }
 
     public void setLevelComplete(boolean level) {
         complete = level;
@@ -336,14 +341,6 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-    }
-
-    public Hud getHud() {
-        return hud;
-    }
-
-    public void setHud(Hud hud) {
-        this.hud = hud;
     }
 
     @Override
