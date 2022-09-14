@@ -31,8 +31,6 @@ public class GameOverScreen implements Screen {
 
     private int map = 1;
 
-    private int map = 1;
-
 
     //buttons
     private Button playAgainButton;
@@ -41,10 +39,7 @@ public class GameOverScreen implements Screen {
     private BitmapFont buttonFont;
 
     public GameOverScreen(Game game, int level){
-<<<<<<< Updated upstream
-=======
         this.manager = NinjaRun.getManager();
->>>>>>> Stashed changes
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);

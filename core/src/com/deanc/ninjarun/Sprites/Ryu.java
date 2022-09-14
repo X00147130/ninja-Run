@@ -22,8 +22,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.Sprites.Items.Item;
-import com.deanc.ninjarun.Sprites.Items.ItemDef;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes

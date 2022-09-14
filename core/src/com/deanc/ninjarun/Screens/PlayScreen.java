@@ -23,7 +23,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Sprites.Enemies.Enemy;
-import com.deanc.ninjarun.Sprites.Items.Coins;
 import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
@@ -80,12 +79,10 @@ public class PlayScreen implements Screen {
 
         this.game = g;
         this.level = level;
-<<<<<<< Updated upstream
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen(),this);
         controller = new Controller();
-=======
         this.manager = NinjaRun.getManager();
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
@@ -93,7 +90,6 @@ public class PlayScreen implements Screen {
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             controller = new Controller();
         }
->>>>>>> Stashed changes
 
 
         mapLoader = new TmxMapLoader();
@@ -124,10 +120,6 @@ public class PlayScreen implements Screen {
         items = new Array<Item>();
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
         coins = 0;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     }
 
     public void spawnItem(ItemDef idef) {
@@ -196,24 +188,17 @@ public class PlayScreen implements Screen {
                 if (controller.isDownPressed() == true) {
                     player.attack();
                 }
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-
-                if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
-                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
-
-<<<<<<< Updated upstream
-                }
-
-=======
                 if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
 
                 }
 
->>>>>>> Stashed changes
+                if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
+
+                }
+
                 if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2) {
                     player.b2body.applyLinearImpulse(new Vector2(-0.25f, 0), player.b2body.getWorldCenter(), true);
                 }
@@ -253,12 +238,7 @@ public class PlayScreen implements Screen {
         for (Item item : creator.getVials())
             item.update(dt);
 
-
-<<<<<<< Updated upstream
         hud.update(dt);
-=======
-
->>>>>>> Stashed changes
 
         if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
@@ -306,15 +286,12 @@ public class PlayScreen implements Screen {
 
         game.batch.end();
 
-<<<<<<< Updated upstream
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             controller.draw();
         }
 
-=======
->>>>>>> Stashed changes
         hud.stage.draw();
         hud.draw(game.batch, delta);
 
@@ -344,13 +321,10 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
-<<<<<<< Updated upstream
         controller.resize(width, height);
-=======
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             controller.resize(width, height);
         }
->>>>>>> Stashed changes
     }
 
     public boolean gameOver() {
@@ -376,10 +350,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resume() {
-<<<<<<< Updated upstream
-=======
         hud.draw(batch,1);
->>>>>>> Stashed changes
     }
 
     @Override

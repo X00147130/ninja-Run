@@ -69,11 +69,8 @@ public class LevelSelect implements Screen {
         NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).play();
 
         //Texture
-<<<<<<< Updated upstream
-        //background = new Texture("Texture1.jpg");
-=======
        /* background = new Texture("levelselect.jpg");*/
->>>>>>> Stashed changes
+
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();

@@ -1,9 +1,5 @@
 package com.deanc.ninjarun.Tools;
 
-<<<<<<< Updated upstream
-import com.badlogic.gdx.Game;
-=======
->>>>>>> Stashed changes
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,41 +7,27 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-<<<<<<< Updated upstream
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-=======
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
->>>>>>> Stashed changes
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 
-<<<<<<< Updated upstream
 import javax.swing.OverlayLayout;
 
-=======
->>>>>>> Stashed changes
 public class Controller {
     private Viewport view;
     private boolean upPressed,downPressed,leftPressed,rightPressed;
     private Stage stage;
     private OrthographicCamera cam;
 
-<<<<<<< Updated upstream
     private ImageButton image;
 
-    public Controller(){
-        cam = new OrthographicCamera();
-=======
+
     public Controller(){
         cam = new OrthographicCamera(480,320);
         cam.position.set(480/2f, 320/2f,0);
->>>>>>> Stashed changes
         view = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, cam);
         stage = new Stage(view);
         Gdx.input.setInputProcessor(stage);

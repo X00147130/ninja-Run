@@ -38,10 +38,6 @@ public class LevelComplete implements Screen {
     private int map;
 
 
-    //Next level button variables
-    private int map;
-
-
     //Buttons
     private Button menuButton;
     private Button nextLevelButton;
@@ -53,24 +49,16 @@ public class LevelComplete implements Screen {
     Label Coins;
     private Texture background;
 
-<<<<<<< Updated upstream
-    public LevelComplete(Game game, int level){
-=======
     public LevelComplete(NinjaRun game, int level){
->>>>>>> Stashed changes
         super();
         //admin setup
         this.run = game;
         screen = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(screen,((NinjaRun) game).batch);
         map = level + 1;
-<<<<<<< Updated upstream
-
-=======
         batch =  new SpriteBatch();
 
          score = run.getCoins();
->>>>>>> Stashed changes
 
         /*background = new Texture("levelcomplete.png");
 */
@@ -101,15 +89,6 @@ public class LevelComplete implements Screen {
         table.add(Coins).center().padBottom(10);
         table.row();
 
-<<<<<<< Updated upstream
-        if(map != 11) {
-            table.add(nextLevelButton).expandX().padLeft(150).padTop(20);
-            table.row();
-        }
-        table.add(levelSelectButton).expandX().left().padLeft(50);
-        table.add(menuButton).expandX().right().padRight(50);
-=======
-
         if(map != 11) {
             table.add(nextLevelButton).expandX().padTop(20);
             table.row();
@@ -117,7 +96,6 @@ public class LevelComplete implements Screen {
         table.add(levelSelectButton).expandX().center();
         table.row();
         table.add(menuButton).expandX().center();
->>>>>>> Stashed changes
         table.row();
 
         //Setting up the stage
@@ -129,11 +107,7 @@ public class LevelComplete implements Screen {
           nextLevelButton.addListener(new ClickListener() {
               @Override
               public void clicked(InputEvent event, float x, float y) {
-<<<<<<< Updated upstream
-                  GAME.setScreen(new PlayScreen((NinjaRun) GAME, map));
-=======
                   run.setScreen(new PlayScreen((NinjaRun) run, map));
->>>>>>> Stashed changes
               }
           });
       }
