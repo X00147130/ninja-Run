@@ -43,7 +43,6 @@ public class PauseScreen implements Screen {
     private NinjaRun game;
     private Screen screen;
     private Viewport viewport;
-    private Hud hud;
     private Texture background;
 
 
@@ -90,7 +89,6 @@ public class PauseScreen implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 game.setScreen(screen);
-                screen.resume();
             }
         });
 

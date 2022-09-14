@@ -296,15 +296,6 @@ public class PlayScreen implements Screen {
         hud.draw(game.batch, delta);
 
 
-        //Set to draw what hud sees
-
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        if(Gdx.app.getType() == Application.ApplicationType.Android) {
-            controller.draw();
-        }
-
-
-
         if (gameOver()) {
             game.setScreen(new GameOverScreen(game, level));
             dispose();
@@ -347,10 +338,17 @@ public class PlayScreen implements Screen {
     public void pause() {
     }
 
+    public Hud getHud() {
+        return hud;
+    }
+
+    public void setHud(Hud hud) {
+        this.hud = hud;
+    }
 
     @Override
     public void resume() {
-        hud.draw(batch,1);
+
     }
 
     @Override

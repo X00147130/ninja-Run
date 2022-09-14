@@ -22,16 +22,14 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PauseScreen;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.Sprites.Items.Coins;
-import com.deanc.ninjarun.Sprites.Items.Item;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Hud implements Disposable {
+
     public Stage stage;
     private Viewport viewport;
 
     private int coinPouch = 0;
-    private Coins coin;
 
     Label coinpouchLabel;
 
@@ -56,7 +54,7 @@ public class Hud implements Disposable {
     private PlayScreen playScreen;
 
 
-    public Hud(SpriteBatch sb, final NinjaRun game, final Screen paused, PlayScreen playScreen){
+    public Hud(SpriteBatch sb, final NinjaRun game, final Screen paused, final PlayScreen playScreen){
         gameplay = game;
         play = paused;
 
@@ -98,6 +96,7 @@ public class Hud implements Disposable {
                     public void clicked
                     (InputEvent event,float x, float y){
                         gameplay.setScreen(new PauseScreen(gameplay));
+                        isPaused = true;
                 }
 
             });
@@ -116,6 +115,10 @@ public class Hud implements Disposable {
     public void update(float dt) {
         coinPouch = playScreen.getCoins();
         coinpouchLabel.setText(String.format("%04d",coinPouch));
+        if(isPaused = false){
+            stage.dispose();
+            stage.draw();
+        }
     }
 
 
@@ -158,6 +161,10 @@ public class Hud implements Disposable {
     }
     public Screen getPlayScreen(){
         return play;
+    }
+
+    public void setIsPaused(boolean paused){
+        isPaused = paused;
     }
 
 
