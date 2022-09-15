@@ -14,13 +14,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Scenes.Hud;
 
 public class PauseScreen implements Screen {
 
@@ -42,18 +45,22 @@ public class PauseScreen implements Screen {
     private NinjaRun game;
     private Screen screen;
     private Viewport viewport;
+    private Hud hud;
     //private Texture background;
 
 
 
 
-    public PauseScreen(NinjaRun gameplay){
+    public PauseScreen(final NinjaRun gameplay){
 
         game = gameplay;
         screen = gameplay.getScreen();
+        batch = new SpriteBatch();
+        hud = gameplay.getHud();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
         stage = new Stage(viewport);
-        batch = new SpriteBatch();
+
+
         /*background = new Texture("settings.jpg");*/
 
         //Label set up
@@ -88,6 +95,7 @@ public class PauseScreen implements Screen {
         resume.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                hud.resume();
                 game.setScreen(screen);
             }
         });
@@ -101,6 +109,7 @@ public class PauseScreen implements Screen {
         });
 
     }
+
     @Override
     public void show() {
 

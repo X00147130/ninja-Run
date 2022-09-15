@@ -48,6 +48,7 @@ public class Hud implements Disposable {
     private ImageButton pause;
     private Texture image;
     private Drawable draw;
+
     private NinjaRun gameplay;
     public final Screen play;
     private PlayScreen playScreen;
@@ -89,17 +90,6 @@ public class Hud implements Disposable {
         stage.addActor(table);
         stage.addActor(pause);
 
-
-        pause.addListener(new ClickListener() {
-                    @Override
-                    public void clicked
-                    (InputEvent event,float x, float y){
-                        gameplay.setScreen(new PauseScreen(gameplay));
-                }
-
-            });
-
-
         // health bar initialisation
         border = new ShapeRenderer();
         background = new ShapeRenderer();
@@ -108,22 +98,31 @@ public class Hud implements Disposable {
 
 
         Gdx.input.setInputProcessor(stage);
-    }
-
-    public void update(float dt) {
-        coinPouch = playScreen.getCoins();
-        coinpouchLabel.setText(String.format("%04d",coinPouch));
 
         pause.addListener(new ClickListener() {
             @Override
-            public void clicked
-                    (InputEvent event,float x, float y){
+            public void clicked(InputEvent event,float x, float y){
                 gameplay.setScreen(new PauseScreen(gameplay));
             }
 
         });
     }
 
+    public void update(float dt) {
+        coinPouch = playScreen.getCoins();
+        coinpouchLabel.setText(String.format("%04d",coinPouch));
+    }
+
+    public void resume(){
+        pause.clearListeners();
+        stage.addActor(pause);
+        pause.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                gameplay.setScreen(new PauseScreen(gameplay));
+            }
+        });
+    }
 
     public void draw(SpriteBatch batch, float alpha){
         if(!projectionMatrixSet){

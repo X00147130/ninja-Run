@@ -5,7 +5,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.LogoScreen;
+import com.deanc.ninjarun.Screens.PlayScreen;
 
 public class NinjaRun extends Game {
 	//constants
@@ -35,6 +37,18 @@ public class NinjaRun extends Game {
 	public float soundVolume = 0.5f;
 	public Music music;
 	private int coins = 0;
+	private Hud hud;
+
+	private PlayScreen play;
+
+
+	public Hud getHud() {
+		return hud;
+	}
+
+	public void setHud(Hud hud) {
+		this.hud = hud;
+	}
 
 	/* WARING Using AssetManager in a static way can cause issues, especially on Android.
 	Instead you may want to pass around AssetManager to those classes that need it.
@@ -100,5 +114,6 @@ public class NinjaRun extends Game {
 	public void render () {
 		super.render();
 	}
+
 
 }

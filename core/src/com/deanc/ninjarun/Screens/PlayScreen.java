@@ -72,8 +72,6 @@ public class PlayScreen implements Screen {
     //controller creation
     Controller controller;
 
-    //Pause Button fix attempt
-    public boolean isPaused = false;
 
     public PlayScreen(NinjaRun g, int level) {
 
@@ -150,15 +148,16 @@ public class PlayScreen implements Screen {
         return atlas;
     }
 
-    @Override
-    public void show() {
-
+    public Hud getHud() {
+        return hud;
     }
 
-    public void pauseButtonReset(){
-        if(isPaused = true){
+    public void setHud(Hud hud) {
+        this.hud = hud;
+    }
 
-        }
+    @Override
+    public void show() {
     }
 
     public void handleInput(float dt) {
@@ -247,6 +246,8 @@ public class PlayScreen implements Screen {
             item.update(dt);
 
         hud.update(dt);
+        game.setHud(hud);
+
 
         if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
