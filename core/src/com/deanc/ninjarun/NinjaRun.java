@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.LogoScreen;
@@ -38,8 +39,6 @@ public class NinjaRun extends Game {
 	public Music music;
 	private int coins = 0;
 	private Hud hud;
-
-	private PlayScreen play;
 
 
 	public Hud getHud() {

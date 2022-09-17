@@ -114,8 +114,8 @@ public class PlayScreen implements Screen {
         NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).play();
         /*manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
         game.music.play();
-        game.music.setVolume(game.getVolume());
-        game.setSoundVolume(game.getSoundVolume());*/
+        game.music.setVolume(game.getVolume());*/
+        game.setSoundVolume(game.getSoundVolume());
 
 
         items = new Array<Item>();
@@ -228,7 +228,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
-
+        Gdx.input.setInputProcessor(hud.stage);
         world.step(1 / 60f, 6, 2);
 
 
