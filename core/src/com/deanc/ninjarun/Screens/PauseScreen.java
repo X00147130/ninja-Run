@@ -33,9 +33,9 @@ public class PauseScreen implements Screen {
     private Label titleLabel;
     private Label.LabelStyle style;
     private Button resume;
+    private Label resumeLabel;
     private Button quit;
-    private BitmapFont font;
-    private TextButton.TextButtonStyle buttonStyle;
+    private Label quitLabel;
 
     //Skin setup
     private Skin skin;
@@ -62,28 +62,28 @@ public class PauseScreen implements Screen {
 
         /*background = new Texture("settings.jpg");*/
 
-        //Label set up
-        style = new Label.LabelStyle(new BitmapFont(), RED);
-        titleLabel = new Label("PAUSED",style);
-
 
         //skin setup
         skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
 
+        //Label set up
+        style = new Label.LabelStyle(new BitmapFont(), RED);
+        titleLabel = new Label("PAUSED",style);
 
-            //Button Set Up
-//        buttonStyle= new TextButton.TextButtonStyle();
-//        buttonStyle.font = font;
+        //UI Setup
+        resumeLabel = new Label("RESUME",skin);
+        resumeLabel.setFontScale(100,20);
+        quitLabel = new Label("QUIT",skin);
+        quitLabel.setFontScale(100,20);
+
 
         table = new Table ();
         table.center();
         table.setFillParent(true);
 
-
-        resume = new TextButton("RESUME",skin,"default");
-        quit = new TextButton("QUIT",skin,"default");
-
+        resume = new TextButton(resumeLabel.toString(),skin,"default");
+        quit = new TextButton(quitLabel.toString(), skin,"default");
 
         table.add(titleLabel).width(70).height(60).center().padLeft(10);
         table.row();
@@ -94,7 +94,6 @@ public class PauseScreen implements Screen {
 
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
-
 
         resume.addListener(new ClickListener(){
             @Override
