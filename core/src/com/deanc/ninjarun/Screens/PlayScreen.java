@@ -112,9 +112,10 @@ public class PlayScreen implements Screen {
 
 
         NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).play();
-        /*manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
-        game.music.play();
-        game.music.setVolume(game.getVolume());*/
+        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).setLooping(true);
+        //NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
+        //game.music.play();
+        //game.music.setVolume(game.getVolume());
         game.setSoundVolume(game.getSoundVolume());
 
 
@@ -188,7 +189,7 @@ public class PlayScreen implements Screen {
         }
         else if(Gdx.app.getType() == Application.ApplicationType.Android){
             if (player.currentState != Ryu.State.DEAD) {
-                if (controller.isUpPressed() == true) {
+                if (controller.isUpPressed()) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                     NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
                 }
@@ -197,17 +198,11 @@ public class PlayScreen implements Screen {
                     player.attack();
                 }
 
-                if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
+                if (controller.isRightPressed() == true && player.b2body.getLinearVelocity().x <= 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
-
                 }
 
-                if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
-                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
-
-                }
-
-                if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2) {
+                if (controller.isLeftPressed() == true && player.b2body.getLinearVelocity().x >= -2) {
                     player.b2body.applyLinearImpulse(new Vector2(-0.25f, 0), player.b2body.getWorldCenter(), true);
                 }
             } else {

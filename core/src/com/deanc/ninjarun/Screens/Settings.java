@@ -75,7 +75,7 @@ public class Settings implements Screen {
                 if(!music.isDragging()){
                     ((NinjaRun) GAME).setVolume(music.getValue());
                     ((NinjaRun) GAME).music.setVolume(((NinjaRun) GAME).getVolume());
-                    manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play(((NinjaRun) GAME).getVolume());
+                    manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class).play(((NinjaRun) GAME).getVolume());
                 }
             }
         });

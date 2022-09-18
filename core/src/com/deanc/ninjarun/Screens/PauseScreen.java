@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Screens;
 
+import static com.badlogic.gdx.graphics.Color.GOLD;
 import static com.badlogic.gdx.graphics.Color.RED;
 
 import com.badlogic.gdx.Gdx;
@@ -32,9 +33,9 @@ public class PauseScreen implements Screen {
     //Labels and Buttons
     private Label titleLabel;
     private Label.LabelStyle style;
-    private Button resume;
+    private TextButton resume;
     private Label resumeLabel;
-    private Button quit;
+    private TextButton quit;
     private Label quitLabel;
 
     //Skin setup
@@ -72,25 +73,27 @@ public class PauseScreen implements Screen {
         titleLabel = new Label("PAUSED",style);
 
         //UI Setup
-        resumeLabel = new Label("RESUME",skin);
-        resumeLabel.setFontScale(100,20);
-        quitLabel = new Label("QUIT",skin);
-        quitLabel.setFontScale(100,20);
-
+        resumeLabel = new Label("Resume",skin);
+        quitLabel = new Label(" QUIT ",skin);
 
         table = new Table ();
         table.center();
         table.setFillParent(true);
 
-        resume = new TextButton(resumeLabel.toString(),skin,"default");
-        quit = new TextButton(quitLabel.toString(), skin,"default");
+        resume = new TextButton("resume", skin,"default");
+        resume.getLabel().setFontScale(1);
+        resume.setColor(RED);
+        quit = new TextButton("quit", skin,"default");
+        quit.getLabel().setFontScale(1);
+        quit.setColor(RED);
+
 
         table.add(titleLabel).width(70).height(60).center().padLeft(10);
         table.row();
         table.row();
-        table.add(resume).width(100).height(50).center();
+        table.add(resume).width(110).height(50).center();
         table.row();
-        table.add(quit).width(100).height(50).center();
+        table.add(quit).width(110).height(50).center();
 
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);

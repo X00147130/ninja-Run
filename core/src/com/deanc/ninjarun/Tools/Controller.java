@@ -1,29 +1,25 @@
 package com.deanc.ninjarun.Tools;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 
-import javax.swing.OverlayLayout;
-
 public class Controller {
     private Viewport view;
-    private boolean upPressed,downPressed,leftPressed,rightPressed;
+    private boolean upPressed = false,downPressed = false,leftPressed = false,rightPressed = false;
     private Stage stage;
     private OrthographicCamera cam;
-
-    private ImageButton image;
-
 
     public Controller(){
         cam = new OrthographicCamera(480,320);
@@ -31,7 +27,6 @@ public class Controller {
         view = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, cam);
         stage = new Stage(view);
         Gdx.input.setInputProcessor(stage);
-
 
         Image upImg = new Image(new Texture("jumpArrow.png"));
         upImg.setSize(30,30);
@@ -146,7 +141,7 @@ public class Controller {
                         upPressed = false;
                         break;
                     case Input.Keys.DOWN:
-                        downPressed = false;
+                       downPressed = false;
                         break;
                     case Input.Keys.LEFT:
                         leftPressed = false;
@@ -160,6 +155,11 @@ public class Controller {
         });
     }
     public void draw(){
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            Gdx.input.setInputProcessor(stage);
+        }
+        else
+            Gdx.input.setInputProcessor(new InputAdapter());
         stage.draw();
     }
 
@@ -178,6 +178,22 @@ public class Controller {
     public boolean isRightPressed() {
         return rightPressed;
     }
+
+//    public void setUpPressed(boolean upPressed) {
+//        this.upPressed = upPressed;
+//    }
+//
+//    public void setDownPressed(boolean downPressed) {
+//        this.downPressed = downPressed;
+//    }
+//
+//    public void setLeftPressed(boolean leftPressed) {
+//        this.leftPressed = leftPressed;
+//    }
+//
+//    public void setRightPressed(boolean rightPressed) {
+//        this.rightPressed = rightPressed;
+//    }
 
     public void resize(int width, int height){
         view.update(width,height);

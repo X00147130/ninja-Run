@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.deanc.ninjarun" >
 
-    <application>
+    <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:isGame="true"
         android:appCategory="game"
         android:label="@string/app_name"
-        android:theme="@style/GdxTheme"
-        android:roundIcon="@drawable/ic_launcher_foreground">
         android:theme="@style/GdxTheme">
         <activity
             android:name="com.deanc.ninjarun.AndroidLauncher"
