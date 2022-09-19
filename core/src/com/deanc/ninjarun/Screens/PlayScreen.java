@@ -56,6 +56,7 @@ public class PlayScreen implements Screen {
 
     //Player variable
     private Ryu player;
+    private float jump = 0;
 
 
     //Sprite Variable
@@ -85,7 +86,7 @@ public class PlayScreen implements Screen {
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen(),this);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
-            controller = new Controller(hud.stage.getViewport());
+            controller = new Controller(game);
         }
 
 
@@ -133,6 +134,10 @@ public class PlayScreen implements Screen {
         }
     }
 
+    public Ryu getPlayer() {
+        return player;
+    }
+
     public TiledMap getMap() {
         return map;
     }
@@ -162,7 +167,7 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt) {
-       // int count = 0;  //for jump limiter but not ready yet
+
         if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
             if (player.currentState != Ryu.State.DEAD) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
@@ -226,7 +231,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
-        Gdx.input.setInputProcessor(hud.stage);
+        Gdx.input.setInputProcessor(controller.stage);
         world.step(1 / 60f, 6, 2);
 
 
@@ -305,7 +310,6 @@ public class PlayScreen implements Screen {
 
         if (gameOver()) {
             game.setScreen(new GameOverScreen(game, level));
-            game.setCoins(0);
             dispose();
         }
 
@@ -365,6 +369,8 @@ public class PlayScreen implements Screen {
         world.dispose();
         b2dr.dispose();
         hud.dispose();
-        controller.dispose();
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            controller.dispose();
+        }
     }
 }

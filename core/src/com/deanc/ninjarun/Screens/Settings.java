@@ -73,8 +73,8 @@ public class Settings implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(!music.isDragging()){
-                    ((NinjaRun) GAME).setVolume(music.getValue());
-                    ((NinjaRun) GAME).music.setVolume(((NinjaRun) GAME).getVolume());
+/*NULL pointer Exception*/((NinjaRun) GAME).setVolume(music.getValue());
+/*NULL pointer Exception*/((NinjaRun) GAME).music.setVolume(((NinjaRun) GAME).getVolume());
                     manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class).play(((NinjaRun) GAME).getVolume());
                 }
             }

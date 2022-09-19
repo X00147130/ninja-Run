@@ -1,6 +1,7 @@
 package com.deanc.ninjarun.Tools;
 
 import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -10,23 +11,36 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Screens.PauseScreen;
+import com.deanc.ninjarun.Sprites.Enemies.Ninja;
 
 public class Controller {
     private Viewport view;
     private boolean upPressed = false,downPressed = false,leftPressed = false,rightPressed = false;
-    private Stage stage;
+    public Stage stage;
     private OrthographicCamera cam;
+    private NinjaRun gameplay;
 
-    public Controller(Viewport viewport){
+    //Image Button Variable
+    private ImageButton pause;
+    private Texture image;
+    private Drawable draw;
+
+    public Controller(NinjaRun game){
         cam = new OrthographicCamera(480,320);
         cam.position.set(480/2f, 320/2f,0);
-        view = viewport;
+        view = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,cam);
         stage = new Stage(view);
         Gdx.input.setInputProcessor(stage);
+        gameplay = game;
 
         Image upImg = new Image(new Texture("jumpArrow.png"));
         upImg.setSize(30,30);
@@ -91,6 +105,22 @@ public class Controller {
                 leftPressed = false;
             }
         });
+        //Image button
+        image = new Texture("pause.png");
+        draw = new TextureRegionDrawable(image);
+        pause = new ImageButton(draw);
+        pause.setSize(70,70);
+        pause.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event,float x, float y){
+                gameplay.setScreen(new PauseScreen(gameplay));
+            }
+
+        });
+
+        Table paused = new Table();
+        paused.left();
+        paused.setFillParent(true);
 
         Table table = new Table();
         table.left().bottom();
@@ -99,6 +129,10 @@ public class Controller {
         Table action = new Table();
         action.right().bottom();
         action.setFillParent(true);
+
+        paused.add(pause).maxSize(70,70).left();
+
+        stage.addActor(paused);
 
         table.row().pad(5,5,5,5);
         table.add(leftImg).size(leftImg.getWidth(),leftImg.getHeight());
@@ -158,8 +192,8 @@ public class Controller {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             Gdx.input.setInputProcessor(stage);
         }
-        else
-            Gdx.input.setInputProcessor(new InputAdapter());
+//        else
+//            Gdx.input.setInputProcessor(new InputAdapter());
         stage.draw();
     }
 
