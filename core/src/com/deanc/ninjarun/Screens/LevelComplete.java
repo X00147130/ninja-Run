@@ -7,6 +7,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -109,6 +110,7 @@ public class LevelComplete implements Screen {
               public void clicked(InputEvent event, float x, float y) {
                   run.setScreen(new PlayScreen((NinjaRun) run, map));
                   run.setCoins(0);
+                  NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
               }
           });
       }
@@ -118,6 +120,7 @@ public class LevelComplete implements Screen {
             public void clicked(InputEvent event, float x, float y){
                 run.setScreen(new MenuScreen((NinjaRun)run));
                 NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+                NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }
         });
 
@@ -126,6 +129,7 @@ public class LevelComplete implements Screen {
             public void clicked(InputEvent event, float x, float y){
                 run.setScreen(new LevelSelect((NinjaRun)run));
                 NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+                NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }
         });
     }

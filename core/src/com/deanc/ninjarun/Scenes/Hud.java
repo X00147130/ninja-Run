@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Scenes;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -74,7 +75,7 @@ public class Hud implements Disposable {
         table.setFillParent(true);
         coinpouchLabel = new Label(String.format("%04d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
         timeLabel = new Label("TIME:", new Label.LabelStyle(new BitmapFont(), Color.RED));
-        healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthLabel = new Label("HEALTH:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         coinLabel = new Label("COINS:", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         //group for health label scaling
@@ -87,6 +88,15 @@ public class Hud implements Disposable {
         pause.setSize(50,50);
         stage.addActor(table);
         stage.addActor(pause);
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            pause.setPosition(175,165);
+            pause.setSize(50,50);
+            stage.addActor(table);
+            stage.addActor(pause);
+        }
+
+
 
         // health bar initialisation
         border = new ShapeRenderer();
@@ -104,6 +114,16 @@ public class Hud implements Disposable {
             }
 
         });
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            pause.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    gameplay.setScreen(new PauseScreen(gameplay));
+                }
+
+            });
+        }
     }
 
     public void update(float dt) {
