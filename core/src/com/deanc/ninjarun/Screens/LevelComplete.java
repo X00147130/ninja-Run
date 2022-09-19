@@ -108,6 +108,7 @@ public class LevelComplete implements Screen {
               @Override
               public void clicked(InputEvent event, float x, float y) {
                   run.setScreen(new PlayScreen((NinjaRun) run, map));
+                  run.setCoins(0);
               }
           });
       }
@@ -163,6 +164,5 @@ public class LevelComplete implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

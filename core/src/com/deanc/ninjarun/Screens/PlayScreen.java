@@ -80,16 +80,12 @@ public class PlayScreen implements Screen {
 
         this.game = g;
         this.level = level;
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
-        hud = new Hud(game.batch, game,game.getScreen(),this);
-        controller = new Controller();
         this.manager = NinjaRun.getManager();
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen(),this);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
-            controller = new Controller();
+            controller = new Controller(hud.stage.getViewport());
         }
 
 
@@ -143,6 +139,10 @@ public class PlayScreen implements Screen {
 
     public World getWorld() {
         return world;
+    }
+
+    public boolean isComplete() {
+        return complete;
     }
 
     public TextureAtlas getAtlas() {
@@ -211,6 +211,9 @@ public class PlayScreen implements Screen {
         }
     }
 
+    public NinjaRun getGame() {
+        return game;
+    }
 
     public int getCoins() {
         return coins;
@@ -302,6 +305,7 @@ public class PlayScreen implements Screen {
 
         if (gameOver()) {
             game.setScreen(new GameOverScreen(game, level));
+            game.setCoins(0);
             dispose();
         }
 
@@ -316,7 +320,6 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
-        controller.resize(width, height);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             controller.resize(width, height);
         }
@@ -362,5 +365,6 @@ public class PlayScreen implements Screen {
         world.dispose();
         b2dr.dispose();
         hud.dispose();
+        controller.dispose();
     }
 }

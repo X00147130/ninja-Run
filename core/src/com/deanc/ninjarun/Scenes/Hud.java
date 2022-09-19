@@ -66,8 +66,6 @@ public class Hud implements Disposable {
         image = new Texture("pause.png");
         draw = new TextureRegionDrawable(image);
         pause = new ImageButton(draw);
-
-
         viewport = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 

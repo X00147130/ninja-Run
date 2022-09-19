@@ -28,6 +28,7 @@ public class GameOverScreen implements Screen {
     private Stage stage;
     private final Game GAME;
     private AssetManager manager;
+    public boolean reset = false;
 
     private int map = 1;
 
@@ -89,6 +90,10 @@ public class GameOverScreen implements Screen {
             }
         });
 
+    }
+
+    public boolean isReset() {
+        return reset;
     }
 
     @Override

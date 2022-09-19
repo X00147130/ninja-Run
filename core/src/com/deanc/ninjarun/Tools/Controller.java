@@ -21,10 +21,10 @@ public class Controller {
     private Stage stage;
     private OrthographicCamera cam;
 
-    public Controller(){
+    public Controller(Viewport viewport){
         cam = new OrthographicCamera(480,320);
         cam.position.set(480/2f, 320/2f,0);
-        view = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, cam);
+        view = viewport;
         stage = new Stage(view);
         Gdx.input.setInputProcessor(stage);
 
@@ -198,4 +198,9 @@ public class Controller {
     public void resize(int width, int height){
         view.update(width,height);
     }
+
+    public void dispose(){
+        stage.dispose();
+    }
 }
+

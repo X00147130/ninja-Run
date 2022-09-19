@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.deanc.ninjarun.NinjaRun;
+import com.deanc.ninjarun.Screens.GameOverScreen;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
@@ -46,11 +47,15 @@ public class Coins extends Item {
         Gdx.app.log("Coin", "destroyed");
         NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class).play();
 
+
     }
     @Override
     public void update(float dt) {
         super.update(dt);
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() /2);
+        if(screen.isComplete()){
+            count = 0;
+        }
 
     }
 
@@ -59,4 +64,7 @@ public class Coins extends Item {
         super.draw(batch);
     }
 
+    public void dispose(){
+        screen.dispose();
+    }
 }
