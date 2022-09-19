@@ -2,7 +2,6 @@ package com.deanc.ninjarun.Sprites.Items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.deanc.ninjarun.NinjaRun;
@@ -24,6 +23,7 @@ public abstract class Item extends Sprite {
         defineItem();
         todestroy= false;
         destroyed= false;
+
     }
 
     public abstract void defineItem();
@@ -43,6 +43,10 @@ public abstract class Item extends Sprite {
 
     public void destroy(){
         todestroy = true;
+    }
+
+    public boolean getDestroyed(){
+        return destroyed;
     }
 
 }

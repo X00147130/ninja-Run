@@ -62,10 +62,15 @@ public class Ryu extends Sprite {
     private boolean attacking;
     private Fixture fix;
 
+    //movement variables
+    private Vector2 limit;
+
 
     public Ryu(PlayScreen screen){
         this.world = screen.getWorld();
         defineRyu();
+
+        limit = new Vector2(0,0);
 
         this.screen = screen;
         attacking = false;
@@ -148,7 +153,12 @@ public class Ryu extends Sprite {
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
         setRegion(getFrame(dt));
-
+        if(getY() < 0){
+            ryuIsDead = true;
+            b2body.applyLinearImpulse(new Vector2(0, 3f), b2body.getWorldCenter(), true);
+            NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+            NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).play();
+        }
     }
 
 
@@ -241,9 +251,13 @@ public class Ryu extends Sprite {
                 NinjaRun.PLATFORM_BIT |
                 NinjaRun.ENEMY_BIT|
                 NinjaRun.MONEY_BIT|
+                NinjaRun.SKY_BIT|
                 NinjaRun.ITEM_BIT;
 
         fdef.shape = shape;
+        fdef.restitution = 0f;
+        fdef.friction = 2f;
+        b2body.setGravityScale(1.5f);
         b2body.createFixture(fdef).setUserData(this);
 
 
@@ -274,10 +288,10 @@ public class Ryu extends Sprite {
 
         EdgeShape head = new EdgeShape();
         if(!isFlipX()){
-            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(9/NinjaRun.PPM, 0 / NinjaRun.PPM));
+            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(12/NinjaRun.PPM, 0 / NinjaRun.PPM));
         }
         else{
-            head.set(new Vector2(-9/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
+            head.set(new Vector2(-12/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
         }
         attackdef = new FixtureDef();
         attackdef.shape = head;
@@ -322,7 +336,7 @@ public class Ryu extends Sprite {
                         }
                         attacking = false;
                     }
-                },0.5f);
+                },0.2f);
             }
 
         }
@@ -336,7 +350,7 @@ public class Ryu extends Sprite {
         Music music = NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class);
         music.setLooping(true);
 
-        if(hitCounter < 1){    //ryu is pushed back and says ow
+        if(hitCounter < 2){    //ryu is pushed back and says ow
             b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
             NinjaRun.manager.get("audio/sounds/getting-hit.wav", Sound.class).play();
 
@@ -348,11 +362,11 @@ public class Ryu extends Sprite {
             NinjaRun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play();
             ryuIsDead = true;
             Filter filter = new Filter();
-            filter.maskBits = NinjaRun.GROUND_BIT;
+            filter.maskBits = NinjaRun.GROUND_BIT|NinjaRun.PLATFORM_BIT;
             for (Fixture fixture : b2body.getFixtureList())
                 fixture.setFilterData(filter);
             b2body.applyLinearImpulse(new Vector2(-1f,2f), b2body.getWorldCenter(), true);
-            hitCounter = 2;
+            hitCounter = 3;
         }
     }
 
@@ -372,5 +386,12 @@ public class Ryu extends Sprite {
         hitCounter = resetHits;
     }
 
-
+    public void reverseVelocity(boolean x, boolean y){
+        if(x){
+            limit.x = -limit.x;
+        }
+        if(y) {
+            limit.y = -limit.y;
+        }
+    }
 }

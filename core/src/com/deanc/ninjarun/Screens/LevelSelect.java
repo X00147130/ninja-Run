@@ -54,6 +54,7 @@ public class LevelSelect implements Screen {
     private Stage screen;
     private SpriteBatch batch;
     private Ryu player;
+    private int level = 1;
 
 
     public LevelSelect(final Game game) {
@@ -65,11 +66,11 @@ public class LevelSelect implements Screen {
         screen = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();
 
-
         NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).play();
 
         //Texture
-        background = new Texture("Texture1.jpg");
+       /* background = new Texture("levelselect.jpg");*/
+
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
@@ -130,7 +131,79 @@ public class LevelSelect implements Screen {
         level1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,2));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level3.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,3));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level4.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,4));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level5.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,5));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level6.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,6));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level7.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,7));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level8.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,8));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level9.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,9));
+                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+            }
+        });
+
+        level10.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,10));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -140,11 +213,15 @@ public class LevelSelect implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        /*batch.begin();
+        batch.draw(background,0,0);
+        batch.end();*/
         screen.draw();
     }
 
     @Override
     public void resize(int width, int height) {
+        screen.getViewport().update(width,height,true);
 
     }
 

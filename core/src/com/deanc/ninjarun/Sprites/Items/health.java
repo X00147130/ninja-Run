@@ -1,7 +1,7 @@
 package com.deanc.ninjarun.Sprites.Items;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -10,12 +10,11 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class health extends Item{
-    public TextureAtlas atlas;
 
     public health(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        atlas = new TextureAtlas("items.pack");
-        setRegion(atlas.findRegion("health"));
+        setRegion(new Texture("health_vial1.png"));// clipart used
+
     }
 
     @Override
@@ -43,7 +42,7 @@ public class health extends Item{
     public void useItem(Ryu ryu) {
         destroy();
         Ryu.setHitCounter(0);
-        NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class).play();
+        NinjaRun.manager.get("audio/sounds/healthDrink.wav", Sound.class).play();
     }
 
     @Override

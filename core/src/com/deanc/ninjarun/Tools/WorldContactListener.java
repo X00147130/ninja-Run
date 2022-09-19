@@ -22,30 +22,31 @@ public class WorldContactListener implements ContactListener {
 
         switch (cDef) {
             case NinjaRun.RYU_BIT | NinjaRun.FINISH_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
-                ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
-            else
-                ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
+                if (fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
+                    ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
+                else
+                    ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
                 break;
 
             case NinjaRun.ENEMY_BIT | NinjaRun.ATTACK_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.ATTACK_BIT)
-                    ((Ninja)fixB.getUserData()).attacked();
+                if (fixA.getFilterData().categoryBits == NinjaRun.ATTACK_BIT)
+                    ((Ninja) fixB.getUserData()).attacked();
                 else
-                    ((Ninja)fixA.getUserData()).attacked();
+                    ((Ninja) fixA.getUserData()).attacked();
                 break;
 
             case NinjaRun.ENEMY_BIT | NinjaRun.BARRIER_BIT:
                 if (fixA.getFilterData().categoryBits == NinjaRun.ENEMY_BIT)
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 else
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
+
             case NinjaRun.RYU_BIT | NinjaRun.ENEMY_BIT:
-                if(fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
-                    ((Ryu)fixA.getUserData()).hit();
+                if (fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
+                    ((Ryu) fixA.getUserData()).hit();
                 else
-                    ((Ryu)fixB.getUserData()).hit();
+                    ((Ryu) fixB.getUserData()).hit();
                 break;
 
             case NinjaRun.ENEMY_BIT | NinjaRun.ENEMY_BIT:
@@ -66,6 +67,14 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Item) fixB.getUserData()).useItem((Ryu) fixA.getUserData());
                 break;
+
+            case NinjaRun.SKY_BIT | NinjaRun.RYU_BIT:
+                if (fixA.getFilterData().categoryBits == NinjaRun.SKY_BIT)
+                    ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
+                else
+                    ((InteractiveTileObject) fixB.getUserData()).onHit((Ryu) fixA.getUserData());
+                break;
+
         }
     }
 

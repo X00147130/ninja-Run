@@ -6,6 +6,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,6 +27,10 @@ public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
     private final Game GAME;
+    private AssetManager manager;
+    public boolean reset = false;
+
+    private int map = 1;
 
 
     //buttons
@@ -34,10 +39,13 @@ public class GameOverScreen implements Screen {
     private TextButton.TextButtonStyle buttonStyle;
     private BitmapFont buttonFont;
 
-    public GameOverScreen(Game game){
+    public GameOverScreen(Game game, int level){
+        this.manager = NinjaRun.getManager();
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);
+        this.map = level;
+
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
 
@@ -67,7 +75,7 @@ public class GameOverScreen implements Screen {
         playAgainButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,map));
                 NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).stop();
             }
         });
@@ -82,6 +90,10 @@ public class GameOverScreen implements Screen {
             }
         });
 
+    }
+
+    public boolean isReset() {
+        return reset;
     }
 
     @Override

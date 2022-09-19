@@ -18,12 +18,12 @@ import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.TileObjects.Barrier;
 import com.deanc.ninjarun.Sprites.TileObjects.Platforms;
 import com.deanc.ninjarun.Sprites.TileObjects.Finish;
+import com.deanc.ninjarun.Sprites.TileObjects.Sky;
 
 public class B2WorldCreator {
     private Array<Ninja> ninjas;
     private Array<Coins> coins;
     private Array<health> vials;
-
 
 
     public B2WorldCreator(PlayScreen screen) {
@@ -100,11 +100,17 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             // creation of coin objects
             coins.add(new Coins(screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+
         }
 
         //Create barriers
         for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             new Barrier(screen,object);
+        }
+
+        //Sky limit
+        for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
+            new Sky(screen,object);
         }
 
     }

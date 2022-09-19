@@ -6,6 +6,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -27,6 +28,7 @@ import com.deanc.ninjarun.NinjaRun;
 
 public class MenuScreen implements Screen  {
 
+    private AssetManager manager;
     private SpriteBatch batch;
     private Viewport viewport;
     private Stage stage;
@@ -36,21 +38,25 @@ public class MenuScreen implements Screen  {
 
     //Buttons
     Button playButton;
-    Button quitButton;
     Button levelButton;
+    Button settingsButton;
+    Button quitButton;
     TextButton.TextButtonStyle buttonStyle;
     BitmapFont buttonFont;
 
 
     public MenuScreen(final Game game) {
         this.GAME = game;
+        this.manager = NinjaRun.getManager();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();
 
         //make sure to credit Sebatian Schulz for the art
-        background = new Texture("logo.jpg");
+        background = new Texture("backgroundimg.jpg");
         mainBackground = new TextureRegion(background);
+        mainBackground.setRegionHeight(viewport.getScreenHeight());
+        mainBackground.setRegionWidth(viewport.getScreenWidth());
 
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
@@ -64,16 +70,20 @@ public class MenuScreen implements Screen  {
         buttonFont = new BitmapFont();
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
-        playButton  = new TextButton("Play",buttonStyle );
+        playButton  = new TextButton("Start",buttonStyle );
         levelButton  = new TextButton("Level Select",buttonStyle );
+        settingsButton  = new TextButton("Settings",buttonStyle );
         quitButton = new TextButton("Quit",buttonStyle);
 
         Label titleLabel = new Label(" Ninja Run", font);
-        table.add(titleLabel).expandX();
+        titleLabel.setSize(90,110);
+        table.add(titleLabel).expandX().setActorHeight(110);
         table.row();
         table.add(playButton).expandX().padTop(10);
         table.row();
         table.add(levelButton).expandX().padTop(10);
+        table.row();
+        table.add(settingsButton).expandX().padTop(10);
         table.row();
         table.add(quitButton).expandX().padTop(10);
         table.row();
@@ -83,7 +93,7 @@ public class MenuScreen implements Screen  {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME));
+                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
                 NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
             }
         });
@@ -92,6 +102,13 @@ public class MenuScreen implements Screen  {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GAME.setScreen(new LevelSelect((NinjaRun)GAME));
+            }
+        });
+
+        settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GAME.setScreen(new Settings((NinjaRun)GAME));
             }
         });
 

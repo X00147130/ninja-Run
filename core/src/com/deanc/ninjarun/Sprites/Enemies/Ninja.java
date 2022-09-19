@@ -1,11 +1,9 @@
 package com.deanc.ninjarun.Sprites.Enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -118,7 +116,7 @@ public class Ninja extends Enemy {
 
         } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);
-            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight() /2 );
             setRegion(getFrame(dt));
         }
     }
@@ -132,7 +130,7 @@ public class Ninja extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / NinjaRun.PPM);
+        shape.setRadius(3 / NinjaRun.PPM);
         fdef.filter.categoryBits = NinjaRun.ENEMY_BIT;
         fdef.filter.maskBits = NinjaRun.GROUND_BIT |
                 NinjaRun.FINISH_BIT |

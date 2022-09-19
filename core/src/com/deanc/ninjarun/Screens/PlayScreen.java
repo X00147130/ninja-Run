@@ -1,12 +1,15 @@
 package com.deanc.ninjarun.Screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -25,6 +28,7 @@ import com.deanc.ninjarun.Sprites.Items.ItemDef;
 import com.deanc.ninjarun.Sprites.Items.health;
 import com.deanc.ninjarun.Sprites.Ryu;
 import com.deanc.ninjarun.Tools.B2WorldCreator;
+import com.deanc.ninjarun.Tools.Controller;
 import com.deanc.ninjarun.Tools.WorldContactListener;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -32,11 +36,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class PlayScreen implements Screen {
     private NinjaRun game;
     private TextureAtlas atlas;
+    public AssetManager manager;
 
     //basic variables
     private Hud hud;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
+    private SpriteBatch batch;
 
     //tiled map variables
     private TmxMapLoader mapLoader;
@@ -54,21 +60,37 @@ public class PlayScreen implements Screen {
 
     //Sprite Variable
     private Array<Item> items;
-    private LinkedBlockingQueue<ItemDef> itemToSpawn;
+    public LinkedBlockingQueue<ItemDef> itemToSpawn;
+    private int coins;
 
     //finish level variable
     public boolean complete = false;
 
-    public PlayScreen(NinjaRun game) {
+    //level variable
+    private int level = 1;
+
+    //controller creation
+    Controller controller;
+
+
+    public PlayScreen(NinjaRun g, int level) {
+
+        //admin
         atlas = new TextureAtlas("ryu_and_enemies.pack");
 
-        this.game = game;
+        this.game = g;
+        this.level = level;
+        this.manager = NinjaRun.getManager();
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
-        hud = new Hud(game.batch);
+        hud = new Hud(game.batch, game,game.getScreen(),this);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            controller = new Controller(hud.stage.getViewport());
+        }
+
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("levels/level1.tmx");
+        map = mapLoader.load("levels/Level"+level+".tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / NinjaRun.PPM);
 
         //initiating game cam
@@ -84,10 +106,18 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).play();
+
+        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).play();
+        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).setLooping(true);
+        //NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
+        //game.music.play();
+        //game.music.setVolume(game.getVolume());
+        game.setSoundVolume(game.getSoundVolume());
+
 
         items = new Array<Item>();
         itemToSpawn = new LinkedBlockingQueue<ItemDef>();
+        coins = 0;
     }
 
     public void spawnItem(ItemDef idef) {
@@ -111,41 +141,94 @@ public class PlayScreen implements Screen {
         return world;
     }
 
+    public boolean isComplete() {
+        return complete;
+    }
+
     public TextureAtlas getAtlas() {
         return atlas;
     }
 
+    public Hud getHud() {
+        return hud;
+    }
+
+    public void setHud(Hud hud) {
+        this.hud = hud;
+    }
+
     @Override
     public void show() {
-
     }
 
     public void handleInput(float dt) {
-        if (player.currentState != Ryu.State.DEAD) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
-                NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+       // int count = 0;  //for jump limiter but not ready yet
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            if (player.currentState != Ryu.State.DEAD) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+                    NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                }
+
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                    player.attack();
+                }
+
+
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
+
+                }
+
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+                    player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
+                }
+            } else {
+                player.b2body.setLinearVelocity(new Vector2(0, 0));
             }
-
-
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                player.attack();
-            }
-
-
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
-                player.b2body.applyLinearImpulse(new Vector2(0.5f, 0), player.b2body.getWorldCenter(), true);
-
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
-                player.b2body.applyLinearImpulse(new Vector2(-0.5f, 0), player.b2body.getWorldCenter(), true);
         }
+        else if(Gdx.app.getType() == Application.ApplicationType.Android){
+            if (player.currentState != Ryu.State.DEAD) {
+                if (controller.isUpPressed()) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+                    NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                }
+
+                if (controller.isDownPressed() == true) {
+                    player.attack();
+                }
+
+                if (controller.isRightPressed() == true && player.b2body.getLinearVelocity().x <= 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
+                }
+
+                if (controller.isLeftPressed() == true && player.b2body.getLinearVelocity().x >= -2) {
+                    player.b2body.applyLinearImpulse(new Vector2(-0.25f, 0), player.b2body.getWorldCenter(), true);
+                }
+            } else {
+                player.b2body.setLinearVelocity(new Vector2(0, 0));
+            }
+        }
+    }
+
+    public NinjaRun getGame() {
+        return game;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 
     public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
-
+        Gdx.input.setInputProcessor(hud.stage);
         world.step(1 / 60f, 6, 2);
+
 
         player.update(dt);
         for (Enemy enemy : creator.getNinjas()) {
@@ -161,12 +244,16 @@ public class PlayScreen implements Screen {
             item.update(dt);
 
         hud.update(dt);
+        game.setHud(hud);
+
+
         if (player.currentState != Ryu.State.DEAD) {
             gamecam.position.x = player.b2body.getPosition().x;
         }
 
         gamecam.update();
         renderer.setView(gamecam);
+        game.setCoins(coins);
     }
 
     @Override
@@ -192,21 +279,39 @@ public class PlayScreen implements Screen {
         for (Item item : items)
             item.draw(game.batch);
 
+        if (creator.getCoins().notEmpty()) {
+            for (Item item : creator.getCoins()) {
+                item.draw(game.batch);
+            }
+        }
+
+        if (creator.getVials().notEmpty()) {
+            for (Item item : creator.getVials()) {
+                item.draw(game.batch);
+            }
+        }
+
         game.batch.end();
 
         //Set to draw what hud sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            controller.draw();
+        }
+
         hud.stage.draw();
         hud.draw(game.batch, delta);
 
+
         if (gameOver()) {
-            game.setScreen(new GameOverScreen(game));
+            game.setScreen(new GameOverScreen(game, level));
+            game.setCoins(0);
             dispose();
         }
 
         if (complete == true) {
             if (player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
-                game.setScreen(new LevelComplete(game));
+                game.setScreen(new LevelComplete(game, level));
                 dispose();
             }
         }
@@ -215,8 +320,10 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            controller.resize(width, height);
+        }
     }
-
 
     public boolean gameOver() {
         if (player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3) {
@@ -226,13 +333,13 @@ public class PlayScreen implements Screen {
         }
     }
 
+
     public void setLevelComplete(boolean level) {
         complete = level;
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
@@ -245,6 +352,12 @@ public class PlayScreen implements Screen {
 
     }
 
+
+    public void coins (){
+        if(creator.getCoins().size > 0){
+            coins = creator.getCoins().size;
+        }
+    }
     @Override
     public void dispose() {
         map.dispose();
@@ -252,5 +365,6 @@ public class PlayScreen implements Screen {
         world.dispose();
         b2dr.dispose();
         hud.dispose();
+        controller.dispose();
     }
 }
