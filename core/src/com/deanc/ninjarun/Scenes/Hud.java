@@ -45,10 +45,10 @@ public class Hud implements Disposable {
     static private boolean projectionMatrixSet;
 
 
-    //Image Button Variable
-    private ImageButton pause;
-    private Texture image;
-    private Drawable draw;
+//    //Image Button Variable
+//    private ImageButton pause;
+//    private Texture image;
+//    private Drawable draw;
 
     private NinjaRun gameplay;
     public final Screen play;
@@ -63,10 +63,10 @@ public class Hud implements Disposable {
 
         coinPouch = playScreen.getCoins();
 
-        //Image button
-        image = new Texture("pause.png");
-        draw = new TextureRegionDrawable(image);
-        pause = new ImageButton(draw);
+//        //Image button
+//        image = new Texture("pause.png");
+//        draw = new TextureRegionDrawable(image);
+//        pause = new ImageButton(draw);
         viewport = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
@@ -84,17 +84,11 @@ public class Hud implements Disposable {
         table.add(coinLabel).padRight(10).right().top();
         table.add(coinpouchLabel).padRight(10).right().top().spaceRight(11);
 
-        pause.setPosition(175,165);
-        pause.setSize(50,50);
-        stage.addActor(table);
-        stage.addActor(pause);
-
-        if(Gdx.app.getType() == Application.ApplicationType.Android){
-            pause.setPosition(175,165);
-            pause.setSize(50,50);
-            stage.addActor(table);
-            stage.addActor(pause);
-        }
+//            pause.setPosition(175,165);
+//            pause.setSize(50,50);
+              stage.addActor(table);
+//            stage.addActor(pause);
+//
 
 
 
@@ -105,25 +99,14 @@ public class Hud implements Disposable {
         projectionMatrixSet = false;
 
 
-        Gdx.input.setInputProcessor(stage);
+//        pause.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event,float x, float y){
+//                gameplay.setScreen(new PauseScreen(gameplay));
+//            }
+//
+//        });
 
-        pause.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event,float x, float y){
-                gameplay.setScreen(new PauseScreen(gameplay));
-            }
-
-        });
-
-        if(Gdx.app.getType() == Application.ApplicationType.Android) {
-            pause.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    gameplay.setScreen(new PauseScreen(gameplay));
-                }
-
-            });
-        }
     }
 
     public void update(float dt) {
@@ -132,14 +115,14 @@ public class Hud implements Disposable {
     }
 
     public void resume(){
-        pause.clearListeners();
-        stage.addActor(pause);
-        pause.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                gameplay.setScreen(new PauseScreen(gameplay));
-            }
-        });
+//        pause.clearListeners();
+//        stage.addActor(pause);
+//        pause.addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y){
+//                gameplay.setScreen(new PauseScreen(gameplay));
+//            }
+//        });
     }
 
     public void draw(SpriteBatch batch, float alpha){

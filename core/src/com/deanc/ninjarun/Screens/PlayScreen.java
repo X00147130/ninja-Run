@@ -86,7 +86,7 @@ public class PlayScreen implements Screen {
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen(),this);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
-            controller = new Controller(hud.stage.getViewport());
+            controller = new Controller(game);
         }
 
 
@@ -231,7 +231,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
-        Gdx.input.setInputProcessor(hud.stage);
+        Gdx.input.setInputProcessor(controller.stage);
         world.step(1 / 60f, 6, 2);
 
 
