@@ -86,7 +86,7 @@ public class GameOverScreen implements Screen {
             public void clicked(InputEvent event, float x, float y){
                 GAME.setScreen(new MenuScreen((NinjaRun)GAME));
                 NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).stop();
-                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+                NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
             }
         });
 

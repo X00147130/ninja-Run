@@ -55,7 +55,6 @@ public class Coins extends Item {
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() /2);
         if(screen.isComplete() || (screen.getPlayer().currentState == Ryu.State.DEAD && screen.getPlayer().getStateTimer() > 3)){
             count = 0;
-            Gdx.app.log("Coin Counter: ","IT RESET !!!!!!!!!");
         }
 
     }

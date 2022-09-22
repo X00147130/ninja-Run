@@ -21,7 +21,7 @@ public class Finish extends InteractiveTileObject {
         Gdx.app.log("Finish", "Collision");
         screen.setLevelComplete(true);
         NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).play();
-        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
         }
 
 
