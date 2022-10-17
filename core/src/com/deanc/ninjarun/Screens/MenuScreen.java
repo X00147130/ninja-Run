@@ -30,6 +30,7 @@ public class MenuScreen implements Screen  {
 
     private AssetManager manager;
     private SpriteBatch batch;
+    private NinjaRun ninjarun;
     private Viewport viewport;
     private Stage stage;
     private final Game GAME ;
@@ -49,8 +50,8 @@ public class MenuScreen implements Screen  {
         this.GAME = game;
         this.manager = NinjaRun.getManager();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport, ((NinjaRun) game).batch);
         batch = new SpriteBatch();
+        stage = new Stage(viewport, ninjarun.getBatch());
 
         //make sure to credit Sebatian Schulz for the art
         background = new Texture("backgroundimg.jpg");

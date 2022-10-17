@@ -85,6 +85,10 @@ public class NinjaRun extends Game {
 		return manager;
 	}
 
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+
 	public float getVolume() {
 		return volume;
 	}
