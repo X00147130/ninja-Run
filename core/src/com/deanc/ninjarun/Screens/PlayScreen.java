@@ -108,8 +108,8 @@ public class PlayScreen implements Screen {
         world.setContactListener(new WorldContactListener());
 
 
-        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).play();
-        NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).setLooping(true);
+        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
+        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);
         //NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class);
         //game.music.play();
         //game.music.setVolume(game.getVolume());
@@ -179,10 +179,12 @@ public class PlayScreen implements Screen {
                     player.attack();
                 }
 
+                if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                    game.setScreen(new PauseScreen(game));
+                }
 
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
-
                 }
 
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
@@ -231,7 +233,10 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
-        Gdx.input.setInputProcessor(controller.stage);
+        if( Gdx.app.getType() == Application.ApplicationType.Android) {
+            Gdx.input.setInputProcessor(controller.stage);
+        }
+
         world.step(1 / 60f, 6, 2);
 
 
@@ -315,7 +320,11 @@ public class PlayScreen implements Screen {
 
         if (complete == true) {
             if (player.currentState == Ryu.State.COMPLETE && player.getStateTimer() > 1.5) {
-                game.setScreen(new LevelComplete(game, level));
+                if(level < 10){
+                    game.setScreen(new LevelComplete(game, level));
+                }else{
+                    game.setScreen(new Credits((NinjaRun)game));
+                }
                 dispose();
             }
         }

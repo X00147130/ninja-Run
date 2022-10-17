@@ -62,16 +62,14 @@ public class NinjaRun extends Game {
 
 		//Audio Loading
 		manager = new AssetManager();
-		manager.load("audio/music/yoitrax-warrior.mp3", Music.class);
-		manager.load("audio/music/yoitrax-ronin.mp3", Music.class);
+		manager.load("audio/music/yoitrax - Warrior.mp3", Music.class);
+		manager.load("audio/music/yoitrax - Ronin.mp3", Music.class);
+		manager.load("audio/music/yoitrax - Fuji.mp3", Music.class);
+		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
 		manager.load("audio/music/mixkit-piano-horror-671.mp3", Music.class);
 		manager.load("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class);
 		manager.load("audio/sounds/coin.mp3", Sound.class);
-		manager.load("audio/sounds/fireworks.mp3", Sound.class);
-		manager.load("audio/sounds/block.mp3", Sound.class);
-		manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
 		manager.load("audio/sounds/stomp.wav", Sound.class);
-		manager.load("audio/sounds/mariodie.wav",Sound.class);
 		manager.load("audio/sounds/sexynakedbunny-ouch.mp3",Sound.class);
 		manager.load("audio/sounds/soundnimja-jump.wav",Sound.class);
 		manager.load("audio/sounds/getting-hit.wav",Sound.class);
