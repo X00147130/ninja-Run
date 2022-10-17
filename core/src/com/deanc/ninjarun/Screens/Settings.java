@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 
 public class Settings implements Screen {
-    private final Game GAME;
+    private final NinjaRun GAME;
     private Viewport viewport;
     private SpriteBatch batch;
 
@@ -49,7 +49,7 @@ public class Settings implements Screen {
     private Texture background;
     float startX;
 
-    public Settings(final Game game){
+    public Settings(final NinjaRun game){
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((NinjaRun) game).batch);

@@ -26,7 +26,7 @@ import com.deanc.ninjarun.NinjaRun;
 public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
-    private final Game GAME;
+    private final NinjaRun GAME;
     private AssetManager manager;
     public boolean reset = false;
 
@@ -39,11 +39,11 @@ public class GameOverScreen implements Screen {
     private TextButton.TextButtonStyle buttonStyle;
     private BitmapFont buttonFont;
 
-    public GameOverScreen(Game game, int level){
+    public GameOverScreen(NinjaRun game, int level){
         this.manager = NinjaRun.getManager();
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport, ((NinjaRun) game).batch);
+        stage = new Stage(viewport, GAME.batch);
         this.map = level;
 
 
@@ -75,7 +75,7 @@ public class GameOverScreen implements Screen {
         playAgainButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,map));
+                GAME.setScreen(new PlayScreen(GAME,map));
                 NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).stop();
             }
         });

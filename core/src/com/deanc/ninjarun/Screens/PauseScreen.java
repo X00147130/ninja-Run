@@ -28,7 +28,6 @@ public class PauseScreen implements Screen {
     //Display tools
     private Table table;
     private Stage stage;
-    private SpriteBatch batch;
 
     //Labels and Buttons
     private Label titleLabel;
@@ -56,10 +55,9 @@ public class PauseScreen implements Screen {
 
         game = gameplay;
         screen = gameplay.getScreen();
-        batch = new SpriteBatch();
         hud = gameplay.getHud();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
-        stage = new Stage(viewport);
+        stage = new Stage(viewport, game.batch);
 
         /*background = new Texture("settings.jpg");*/
 

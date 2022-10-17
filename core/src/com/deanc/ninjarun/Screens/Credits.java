@@ -19,8 +19,7 @@ import com.deanc.ninjarun.NinjaRun;
 
 public class Credits implements Screen {
 
-        private final Game GAME;
-        private SpriteBatch batch;
+        private final NinjaRun GAME;
         private Viewport viewport;
 //    private Texture background;
 //    private Image backgroundIMG;
@@ -64,14 +63,13 @@ public class Credits implements Screen {
         private float timeSeconds = 0f;
         private float period = 20f;
 
-        public Credits(Game game) {
+        public Credits(NinjaRun game) {
             this.GAME = game;
             viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-            batch = new SpriteBatch();
-            stage = new Stage(viewport);
-            stage2 = new Stage(viewport);
-            stage3 = new Stage(viewport);
-            stage4 = new Stage(viewport);
+            stage = new Stage(viewport, GAME.batch);
+            stage2 = new Stage(viewport, GAME.batch);
+            stage3 = new Stage(viewport, GAME.batch);
+            stage4 = new Stage(viewport, GAME.batch);
 
             /*Label Style*/
             titleStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);

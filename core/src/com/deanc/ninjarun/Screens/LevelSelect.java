@@ -27,7 +27,7 @@ import com.deanc.ninjarun.Sprites.Ryu;
 public class LevelSelect implements Screen {
 
     //Game
-    private Game GAME ;
+    private NinjaRun GAME ;
 
     //buttons
     Button level1;
@@ -52,19 +52,17 @@ public class LevelSelect implements Screen {
     //admin
     private Viewport viewport;
     private Stage screen;
-    private SpriteBatch batch;
     private Ryu player;
     private int level = 1;
 
 
-    public LevelSelect(final Game game) {
+    public LevelSelect(final NinjaRun game) {
         super();
 
         //Admin
         GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        screen = new Stage(viewport, ((NinjaRun) game).batch);
-        batch = new SpriteBatch();
+        screen = new Stage(viewport, GAME.batch);
 
         NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).play();
 
@@ -247,7 +245,6 @@ public class LevelSelect implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         screen.dispose();
         GAME.dispose();
         background.dispose();

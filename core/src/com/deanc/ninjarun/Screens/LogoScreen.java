@@ -7,7 +7,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -17,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 
 public class LogoScreen implements Screen {
-    private final Game GAME;
+    private final NinjaRun GAME;
     private SpriteBatch batch;
     private Viewport viewport;
     private Texture background;
@@ -26,13 +25,13 @@ public class LogoScreen implements Screen {
     private float timeSeconds = 0f;
     private float period = 5f;
 
-    public LogoScreen(Game game) {
+    public LogoScreen(NinjaRun game) {
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         batch = new SpriteBatch();
         stage = new Stage(viewport);
 
-        background = new Texture("logos/logo_white_background.jpg");
+        background = new Texture("logos/conway studios.jpg");
         backgroundIMG = new Image(background);
 
         NinjaRun.manager.get("audio/music/yoitrax - Jade Dragon.mp3", Music.class).play();
@@ -68,7 +67,7 @@ public class LogoScreen implements Screen {
         stage.draw();
     }
     public void handleEvent(){
-        GAME.setScreen(new MenuScreen(GAME));
+        GAME.setScreen(new MenuScreen (GAME));
         NinjaRun.manager.get("audio/music/yoitrax - Jade Dragon.mp3",Music.class).stop();
     }
 

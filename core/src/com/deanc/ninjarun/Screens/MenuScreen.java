@@ -29,11 +29,9 @@ import com.deanc.ninjarun.NinjaRun;
 public class MenuScreen implements Screen  {
 
     private AssetManager manager;
-    private SpriteBatch batch;
-    private NinjaRun ninjarun;
     private Viewport viewport;
     private Stage stage;
-    private final Game GAME ;
+    private final NinjaRun GAME ;
     private Texture background;
     private TextureRegion mainBackground;
 
@@ -46,12 +44,12 @@ public class MenuScreen implements Screen  {
     BitmapFont buttonFont;
 
 
-    public MenuScreen(final Game game) {
+    public MenuScreen(final NinjaRun game) {
         this.GAME = game;
         this.manager = NinjaRun.getManager();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        batch = new SpriteBatch();
-        stage = new Stage(viewport, ninjarun.getBatch());
+        //stage = new Stage(viewport,batch);
+        stage = new Stage(viewport, GAME.batch);
 
         //make sure to credit Sebatian Schulz for the art
         background = new Texture("backgroundimg.jpg");
@@ -129,9 +127,9 @@ public class MenuScreen implements Screen  {
         NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3", Music.class).play();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(mainBackground,0,0);
-        batch.end();
+        GAME.batch.begin();
+        GAME.batch.draw(mainBackground,0,0);
+        GAME.batch.end();
         stage.draw();
     }
 

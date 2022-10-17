@@ -42,7 +42,6 @@ public class PlayScreen implements Screen {
     private Hud hud;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
-    private SpriteBatch batch;
 
     //tiled map variables
     private TmxMapLoader mapLoader;

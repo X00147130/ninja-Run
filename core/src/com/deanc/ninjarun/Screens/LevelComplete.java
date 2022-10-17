@@ -32,7 +32,6 @@ public class LevelComplete implements Screen {
     private Viewport screen;
     private Stage stage;
     private int score = 0;
-    private SpriteBatch batch;
 
 
     //Next level button variables
@@ -55,9 +54,8 @@ public class LevelComplete implements Screen {
         //admin setup
         this.run = game;
         screen = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,new OrthographicCamera());
-        stage = new Stage(screen,((NinjaRun) game).batch);
+        stage = new Stage(screen,run.batch);
         map = level + 1;
-        batch =  new SpriteBatch();
 
          score = run.getCoins();
 
@@ -127,7 +125,7 @@ public class LevelComplete implements Screen {
         levelSelectButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                run.setScreen(new LevelSelect((NinjaRun)run));
+                run.setScreen(new LevelSelect(run));
                 NinjaRun.manager.get("audio/music/yoitrax - Fuji", Music.class).stop();
                 NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }

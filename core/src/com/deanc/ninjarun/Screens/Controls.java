@@ -18,8 +18,7 @@ import com.deanc.ninjarun.NinjaRun;
 
 public class Controls implements Screen {
 
-    private final Game GAME;
-    private SpriteBatch batch;
+    private final NinjaRun GAME;
     private Viewport viewport;
 //    private Texture background;
 //    private Image backgroundIMG;
@@ -40,11 +39,10 @@ public class Controls implements Screen {
     private float timeSeconds = 0f;
     private float period = 8f;
 
-    public Controls(Game game) {
+    public Controls(NinjaRun game) {
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        batch = new SpriteBatch();
-        stage = new Stage(viewport);
+        stage = new Stage(viewport,GAME.batch);
 
         /*Label Style*/
         titleStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
