@@ -156,7 +156,7 @@ public class Ryu extends Sprite {
         if(getY() < 0){
             ryuIsDead = true;
             b2body.applyLinearImpulse(new Vector2(0, 3f), b2body.getWorldCenter(), true);
-            NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+            NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
             NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).play();
         }
     }
@@ -357,7 +357,7 @@ public class Ryu extends Sprite {
             hitCounter++;
         }
         else{   //Ryus death
-            NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+            NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
             music.play();
             NinjaRun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play();
             ryuIsDead = true;

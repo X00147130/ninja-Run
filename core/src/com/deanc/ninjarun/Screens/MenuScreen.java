@@ -94,8 +94,8 @@ public class MenuScreen implements Screen  {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
-                NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3",Music.class).stop();
+                GAME.setScreen(new Controls((NinjaRun)GAME));
+                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
 
@@ -126,7 +126,7 @@ public class MenuScreen implements Screen  {
     }
     @Override
     public void render(float delta){
-        NinjaRun.manager.get("audio/music/yoitrax-ronin.mp3", Music.class).play();
+        NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3", Music.class).play();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();

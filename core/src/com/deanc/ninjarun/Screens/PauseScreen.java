@@ -112,7 +112,7 @@ public class PauseScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 game.setScreen(new MenuScreen (game));
-                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3",Music.class).stop();
+                NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).stop();
             }
         });
 

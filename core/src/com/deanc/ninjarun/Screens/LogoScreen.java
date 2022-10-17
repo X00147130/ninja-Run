@@ -3,6 +3,7 @@ package com.deanc.ninjarun.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,7 +24,7 @@ public class LogoScreen implements Screen {
     private Image backgroundIMG;
     private Stage stage;
     private float timeSeconds = 0f;
-    private float period = 4f;
+    private float period = 5f;
 
     public LogoScreen(Game game) {
         this.GAME = game;
@@ -33,6 +34,8 @@ public class LogoScreen implements Screen {
 
         background = new Texture("logos/logo_white_background.jpg");
         backgroundIMG = new Image(background);
+
+        NinjaRun.manager.get("audio/music/yoitrax - Jade Dragon.mp3", Music.class).play();
 
         Table table = new Table();
         table.setFillParent(true);
@@ -66,6 +69,7 @@ public class LogoScreen implements Screen {
     }
     public void handleEvent(){
         GAME.setScreen(new MenuScreen(GAME));
+        NinjaRun.manager.get("audio/music/yoitrax - Jade Dragon.mp3",Music.class).stop();
     }
 
     @Override

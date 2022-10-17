@@ -104,7 +104,7 @@ public class LevelComplete implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //Setting up ClickListners for buttons
-      if(map != 11) {
+      if(map != 10) {
           nextLevelButton.addListener(new ClickListener() {
               @Override
               public void clicked(InputEvent event, float x, float y) {
@@ -119,7 +119,7 @@ public class LevelComplete implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 run.setScreen(new MenuScreen((NinjaRun)run));
-                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+                NinjaRun.manager.get("audio/music/yoitrax - Fuji", Music.class).stop();
                 NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }
         });
@@ -128,7 +128,7 @@ public class LevelComplete implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 run.setScreen(new LevelSelect((NinjaRun)run));
-                NinjaRun.manager.get("audio/music/yoitrax-warrior.mp3", Music.class).stop();
+                NinjaRun.manager.get("audio/music/yoitrax - Fuji", Music.class).stop();
                 NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }
         });
