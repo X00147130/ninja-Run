@@ -48,7 +48,6 @@ public class MenuScreen implements Screen  {
         this.GAME = game;
         this.manager = NinjaRun.getManager();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        //stage = new Stage(viewport,batch);
         stage = new Stage(viewport, GAME.batch);
 
         //make sure to credit Sebatian Schulz for the art

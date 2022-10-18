@@ -32,7 +32,6 @@ import com.deanc.ninjarun.NinjaRun;
 public class Settings implements Screen {
     private final NinjaRun GAME;
     private Viewport viewport;
-    private SpriteBatch batch;
 
     private Button backButton;
     public Button mute;
@@ -52,8 +51,7 @@ public class Settings implements Screen {
     public Settings(final NinjaRun game){
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport, ((NinjaRun) game).batch);
-        batch = new SpriteBatch();
+        stage = new Stage(viewport, game.batch);
         /*background = new Texture("settings.jpg");*/
 
         textStyle = new TextButton.TextButtonStyle();
@@ -64,18 +62,18 @@ public class Settings implements Screen {
         draw = new TextureRegionDrawable(image);
 
         music = new Slider(0f,1f,0.01f,false,skin);
-        music.setValue(((NinjaRun) GAME).getVolume());
+        music.setValue(GAME.getVolume());
 
         sound = new Slider(0f,1f,0.01f,false,skin);
-        sound.setValue(((NinjaRun) GAME).getVolume());
+        sound.setValue(GAME.getSoundVolume());
 
         music.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(!music.isDragging()){
-/*NULL pointer Exception*/((NinjaRun) GAME).setVolume(music.getValue());
-/*NULL pointer Exception*/((NinjaRun) GAME).music.setVolume(((NinjaRun) GAME).getVolume());
-                    manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class).play(((NinjaRun) GAME).getVolume());
+                    GAME.setVolume(music.getValue());
+/*NULL pointer Exception*//*GAME.music.setVolume(GAME.getVolume());*/
+                    manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class).play(GAME.getVolume());
                 }
             }
         });
@@ -84,8 +82,8 @@ public class Settings implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(!sound.isDragging()){
-                    ((NinjaRun) GAME).setSoundVolume(sound.getValue());
-                    manager.get("audio/sounds/coin.mp3", Sound.class).play(((NinjaRun) GAME).getSoundVolume());
+                    GAME.setSoundVolume(sound.getValue());
+                    manager.get("audio/sounds/coin.mp3", Sound.class).play(GAME.getSoundVolume());
                 }
             }
         });
