@@ -45,28 +45,19 @@ public class Controls implements Screen {
         stage = new Stage(viewport,GAME.batch);
 
         /*Label Style*/
-        titleStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-        style = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
+        titleStyle = new Label.LabelStyle(new BitmapFont(), Color.RED);
+        style = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
         /*Labels*/
         title = new Label("Controls",titleStyle);
 
         /*Desktop*/
-        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
             pause = new Label("Pause: esc ", style);
             forward = new Label("Forward: Right Arrow Key", style);
             backward = new Label("Backward: Left Arrow Key", style);
             attack = new Label("Attack: Space Bar ", style);
             jump = new Label("Jump: Up Arrow Key", style);
-        }
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            pause = new Label("Pause: Pause Button ", style);
-            forward = new Label("Forward: Right Arrow ", style);
-            backward = new Label("Backward: Left Arrow ", style);
-            attack = new Label("Attack: Attack Button ", style);
-            jump = new Label("Jump: Up Arrow ", style);
-        }
 
 //        background = new Texture("logos/logo_white_background.jpg");
 //        backgroundIMG = new Image(background);

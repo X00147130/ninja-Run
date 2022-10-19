@@ -55,7 +55,6 @@ public class PlayScreen implements Screen {
 
     //Player variable
     private Ryu player;
-    private float jump = 0;
 
 
     //Sprite Variable
@@ -102,18 +101,18 @@ public class PlayScreen implements Screen {
         creator = new B2WorldCreator(this);
 
         //Player creation
-        player = new Ryu(this);
+        player = new Ryu(this,game);
 
         world.setContactListener(new WorldContactListener());
 
 
-        /*NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
-        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);*/
-        game.manager.get("audio/music/yoitrax - Warrior.mp3", Music.class);
+        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
+        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);
+        /*game.manager.get("audio/music/yoitrax - Warrior.mp3", Music.class);
         if(game.getVolume() != 0) {
             game.music.play();
             game.music.setVolume(game.getVolume());
-        }
+        }*/
         game.setSoundVolume(game.getSoundVolume());
 
 
@@ -171,11 +170,17 @@ public class PlayScreen implements Screen {
 
         if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
             if (player.currentState != Ryu.State.DEAD) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+                    game.jumpCounter++;
                     NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                    if(game.jumpCounter == 2){
+                        game.doubleJumped = true;
+                    }
+                }else if ((Gdx.input.isKeyJustPressed(Input.Keys.UP) && (player.currentState == Ryu.State.JUMPING)) && game.doubleJumped == true) {
+                    player.b2body.applyLinearImpulse(new Vector2(0f,0f),player.b2body.getWorldCenter(), false);
+                    Gdx.app.log("double"," jumped");
                 }
-
                 if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                     player.attack();
                 }
@@ -197,11 +202,17 @@ public class PlayScreen implements Screen {
         }
         else if(Gdx.app.getType() == Application.ApplicationType.Android){
             if (player.currentState != Ryu.State.DEAD) {
-                if (controller.isUpPressed()) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+                if (controller.isUpPressed() == true && game.jumpCounter < 2) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
+                    game.jumpCounter++;
                     NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                    if(game.jumpCounter == 2){
+                        game.doubleJumped = true;
+                    }
+                }else if ((controller.isUpPressed() == true && (player.currentState == Ryu.State.JUMPING)) && game.doubleJumped == true) {
+                    player.b2body.applyLinearImpulse(new Vector2(0f,0f),player.b2body.getWorldCenter(), false);
+                    Gdx.app.log("double"," jumped");
                 }
-
                 if (controller.isDownPressed() == true) {
                     player.attack();
                 }

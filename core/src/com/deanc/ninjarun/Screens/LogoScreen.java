@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -29,10 +30,10 @@ public class LogoScreen implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,GAME.batch);
 
-        background = new Texture("logos/conway studios.jpg");
+        background = new Texture("logos/CONWAY STUDIOS.png");
         backgroundIMG = new Image(background);
 
-        NinjaRun.manager.get("audio/music/yoitrax - Jade Dragon.mp3", Music.class).play();
+        GAME.manager.get("audio/music/yoitrax - Jade Dragon.mp3", Music.class).play();
 
         Table table = new Table();
         table.setFillParent(true);

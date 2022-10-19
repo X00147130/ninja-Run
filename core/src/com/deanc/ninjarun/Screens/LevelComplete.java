@@ -106,9 +106,9 @@ public class LevelComplete implements Screen {
           nextLevelButton.addListener(new ClickListener() {
               @Override
               public void clicked(InputEvent event, float x, float y) {
-                  run.setScreen(new PlayScreen((NinjaRun) run, map));
+                  run.setScreen(new PlayScreen(run, map));
                   run.setCoins(0);
-                  NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
+                  run.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
               }
           });
       }
@@ -116,9 +116,9 @@ public class LevelComplete implements Screen {
         menuButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                run.setScreen(new MenuScreen((NinjaRun)run));
-                NinjaRun.manager.get("audio/music/yoitrax - Fuji", Music.class).stop();
-                NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
+                run.setScreen(new MenuScreen(run));
+                run.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
+                run.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }
         });
 
@@ -126,8 +126,8 @@ public class LevelComplete implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 run.setScreen(new LevelSelect(run));
-                NinjaRun.manager.get("audio/music/yoitrax - Fuji", Music.class).stop();
-                NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
+                run.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
+                run.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
             }
         });
     }

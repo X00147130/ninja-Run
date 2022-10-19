@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.LogoScreen;
-import com.deanc.ninjarun.Screens.PlayScreen;
 
 public class NinjaRun extends Game {
 	//constants
@@ -39,7 +38,8 @@ public class NinjaRun extends Game {
 	public Music music;
 	private int coins = 0;
 	private Hud hud;
-
+	public int jumpCounter = 0;
+	public boolean doubleJumped = false;
 
 	public Hud getHud() {
 		return hud;

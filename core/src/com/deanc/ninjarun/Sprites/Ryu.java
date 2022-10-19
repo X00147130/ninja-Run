@@ -33,6 +33,7 @@ public class Ryu extends Sprite {
     //Basic variables
     public World world;
     private PlayScreen screen;
+    private NinjaRun ninjarun;
     public Body b2body;
     public TextureRegion ryuStand;
 
@@ -56,6 +57,8 @@ public class Ryu extends Sprite {
     private int damage;
     private static int hitCounter;
 
+    /*Jump Variables*/
+    private int jumpCounter = 0;
 
     //Attack Variables
     public FixtureDef attackdef;
@@ -66,9 +69,10 @@ public class Ryu extends Sprite {
     private Vector2 limit;
 
 
-    public Ryu(PlayScreen screen){
+    public Ryu(PlayScreen screen,NinjaRun ninjarun){
         this.world = screen.getWorld();
         defineRyu();
+        this.ninjarun = ninjarun;
 
         limit = new Vector2(0,0);
 
@@ -272,7 +276,15 @@ public class Ryu extends Sprite {
 
     }
 
-    //An Attack System Attempt
+    /*Jump Counter System*/
+    public void jumpReset(){
+            ninjarun.jumpCounter = 0;
+            ninjarun.doubleJumped = false;
+            Gdx.app.log("Jumps", "Reset");
+        }
+
+
+    /*An Attack System Attempt*/
 
     public Fixture createAttack(){
         if(!isFlipX()){

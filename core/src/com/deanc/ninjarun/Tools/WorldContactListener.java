@@ -28,6 +28,20 @@ public class WorldContactListener implements ContactListener {
                     ((InteractiveTileObject) fixA.getUserData()).onHit((Ryu) fixB.getUserData());
                 break;
 
+            case NinjaRun.RYU_BIT | NinjaRun.GROUND_BIT:
+                if (fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
+                    ((Ryu) fixA.getUserData()).jumpReset();
+                else
+                    ((Ryu) fixB.getUserData()).jumpReset();
+                break;
+
+            case NinjaRun.RYU_BIT | NinjaRun.PLATFORM_BIT:
+                if (fixA.getFilterData().categoryBits == NinjaRun.RYU_BIT)
+                    ((Ryu) fixA.getUserData()).jumpReset();
+                else
+                    ((Ryu) fixB.getUserData()).jumpReset();
+                break;
+
             case NinjaRun.ENEMY_BIT | NinjaRun.ATTACK_BIT:
                 if (fixA.getFilterData().categoryBits == NinjaRun.ATTACK_BIT)
                     ((Ninja) fixB.getUserData()).attacked();

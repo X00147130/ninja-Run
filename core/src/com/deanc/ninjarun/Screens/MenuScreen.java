@@ -3,6 +3,7 @@ package com.deanc.ninjarun.Screens;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -91,7 +92,11 @@ public class MenuScreen implements Screen  {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new Controls((NinjaRun)GAME));
+               if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                   GAME.setScreen(new Controls(GAME));
+               }else if (Gdx.app.getType() == Application.ApplicationType.Android){
+                   GAME.setScreen(new PlayScreen(GAME,1));
+               }
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -99,14 +104,14 @@ public class MenuScreen implements Screen  {
         levelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new LevelSelect((NinjaRun)GAME));
+                GAME.setScreen(new LevelSelect(GAME));
             }
         });
 
         settingsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new Settings((NinjaRun)GAME));
+                GAME.setScreen(new Settings(GAME));
             }
         });
 
