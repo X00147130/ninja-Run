@@ -300,10 +300,10 @@ public class Ryu extends Sprite {
 
         EdgeShape head = new EdgeShape();
         if(!isFlipX()){
-            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(12/NinjaRun.PPM, 0 / NinjaRun.PPM));
+            head.set(new Vector2(-3/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(12/NinjaRun.PPM,  -2 / NinjaRun.PPM));
         }
         else{
-            head.set(new Vector2(-12/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0 / NinjaRun.PPM));
+            head.set(new Vector2(-12/ NinjaRun.PPM,0/NinjaRun.PPM),new Vector2(-3/NinjaRun.PPM, 0  / NinjaRun.PPM));
         }
         attackdef = new FixtureDef();
         attackdef.shape = head;

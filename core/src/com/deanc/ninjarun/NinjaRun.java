@@ -40,6 +40,7 @@ public class NinjaRun extends Game {
 	private Hud hud;
 	public int jumpCounter = 0;
 	public boolean doubleJumped = false;
+	public float statetimer = 0;
 
 	public Hud getHud() {
 		return hud;
@@ -105,6 +106,10 @@ public class NinjaRun extends Game {
 
 	public void setCoins(int coins) {
 		this.coins = coins;
+	}
+
+	public void setStatetimer(float statetimer) {
+		this.statetimer = statetimer;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.deanc.ninjarun.Sprites.Enemies;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -23,7 +25,7 @@ public abstract class Enemy extends Sprite {
         this.screen = screen;
         setPosition(x,y);
         defineEnemy();
-        velocity = new Vector2(-1.5f, -2);
+        velocity = new Vector2(-1.3f, -2);
         b2body.setActive(false);
     }
     protected abstract void defineEnemy();

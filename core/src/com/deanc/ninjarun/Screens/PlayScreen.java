@@ -55,6 +55,7 @@ public class PlayScreen implements Screen {
 
     //Player variable
     private Ryu player;
+    private float statetimer;
 
 
     //Sprite Variable
@@ -203,7 +204,7 @@ public class PlayScreen implements Screen {
         else if(Gdx.app.getType() == Application.ApplicationType.Android){
             if (player.currentState != Ryu.State.DEAD) {
                 if (controller.isUpPressed() == true && game.jumpCounter < 2) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
+                    player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
                     NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
                     if(game.jumpCounter == 2){
@@ -217,12 +218,12 @@ public class PlayScreen implements Screen {
                     player.attack();
                 }
 
-                if (controller.isRightPressed() == true && player.b2body.getLinearVelocity().x <= 2) {
-                    player.b2body.applyLinearImpulse(new Vector2(0.25f, 0), player.b2body.getWorldCenter(), true);
+                if (controller.isRightPressed() == true && player.b2body.getLinearVelocity().x <= 1.3) {
+                    player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
                 }
 
-                if (controller.isLeftPressed() == true && player.b2body.getLinearVelocity().x >= -2) {
-                    player.b2body.applyLinearImpulse(new Vector2(-0.25f, 0), player.b2body.getWorldCenter(), true);
+                if (controller.isLeftPressed() == true && player.b2body.getLinearVelocity().x >= -1.3) {
+                    player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
                 }
             } else {
                 player.b2body.setLinearVelocity(new Vector2(0, 0));
@@ -276,6 +277,7 @@ public class PlayScreen implements Screen {
         gamecam.update();
         renderer.setView(gamecam);
         game.setCoins(coins);
+        game.setStatetimer(player.getStateTimer());
     }
 
     @Override
@@ -340,6 +342,10 @@ public class PlayScreen implements Screen {
                 dispose();
             }
         }
+    }
+
+    public float getStatetimer() {
+        return statetimer;
     }
 
     @Override

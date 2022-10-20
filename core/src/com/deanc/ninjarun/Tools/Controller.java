@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PauseScreen;
 import com.deanc.ninjarun.Sprites.Enemies.Ninja;
+import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Controller {
     private Viewport view;
@@ -34,7 +35,7 @@ public class Controller {
     private Texture image;
     private Drawable draw;
 
-    public Controller(NinjaRun game){
+    public Controller(final NinjaRun game){
         cam = new OrthographicCamera(480,320);
         cam.position.set(480/2f, 320/2f,0);
         view = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,cam);
@@ -48,7 +49,10 @@ public class Controller {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                upPressed = true;
+                if(Gdx.input.isTouched()) {
+                    upPressed = true;
+                    Gdx.app.log("Jumped", "worked");
+                }
                 return true;
             }
 
@@ -154,7 +158,7 @@ public class Controller {
             public boolean keyDown(InputEvent event, int keycode){
                 switch(keycode){
                     case Input.Keys.UP:
-                        upPressed = true;
+                       upPressed = true;
                         break;
                     case Input.Keys.DOWN:
                         downPressed = true;
@@ -192,8 +196,6 @@ public class Controller {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             Gdx.input.setInputProcessor(stage);
         }
-//        else
-//            Gdx.input.setInputProcessor(new InputAdapter());
         stage.draw();
     }
 
@@ -212,22 +214,6 @@ public class Controller {
     public boolean isRightPressed() {
         return rightPressed;
     }
-
-//    public void setUpPressed(boolean upPressed) {
-//        this.upPressed = upPressed;
-//    }
-//
-//    public void setDownPressed(boolean downPressed) {
-//        this.downPressed = downPressed;
-//    }
-//
-//    public void setLeftPressed(boolean leftPressed) {
-//        this.leftPressed = leftPressed;
-//    }
-//
-//    public void setRightPressed(boolean rightPressed) {
-//        this.rightPressed = rightPressed;
-//    }
 
     public void resize(int width, int height){
         view.update(width,height);
