@@ -57,7 +57,7 @@ public class Ninja extends Enemy {
         frames.clear();
 
         stateTime = 0;
-        setBounds(getX(), getY(), 16 / NinjaRun.PPM , 16 / NinjaRun.PPM);
+        setBounds(getX(), getY(), 26 / NinjaRun.PPM , 26 / NinjaRun.PPM);
         setToDestroy = false;
         destroyed =false;
         enemyHitCounter = 0;
@@ -116,7 +116,7 @@ public class Ninja extends Enemy {
 
         } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);
-            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight() /2 );
+            setPosition(b2body.getPosition().x - getWidth() /2 , b2body.getPosition().y - getHeight() /3 );
             setRegion(getFrame(dt));
         }
     }

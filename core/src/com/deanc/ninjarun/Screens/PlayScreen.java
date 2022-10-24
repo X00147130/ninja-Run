@@ -70,7 +70,7 @@ public class PlayScreen implements Screen {
     private int level = 1;
 
     //controller creation
-    Controller controller;
+    public Controller controller;
 
 
     public PlayScreen(NinjaRun g, int level) {
@@ -292,7 +292,8 @@ public class PlayScreen implements Screen {
         renderer.render();
 
         //box2d debug lines
-        b2dr.render(world, gamecam.combined);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop)
+            b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();

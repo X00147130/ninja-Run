@@ -2,6 +2,7 @@ package com.deanc.ninjarun.Sprites;
 
 import static com.deanc.ninjarun.NinjaRun.PPM;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
+import com.deanc.ninjarun.Tools.Controller;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes
@@ -93,8 +95,14 @@ public class Ryu extends Sprite {
 
         //Animation initialization for Mario Standing
         ryuStand = new TextureRegion(screen.getAtlas().findRegion("attack1"));
-         setBounds(0,0,16 / NinjaRun.PPM, 16 / NinjaRun.PPM);
-       setRegion(ryuStand);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            setBounds(0, 0, 16 / NinjaRun.PPM, 18 / NinjaRun.PPM);
+            setRegion(ryuStand);
+        }
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            setBounds(0, 0, 18 / NinjaRun.PPM, 20 / NinjaRun.PPM);
+            setRegion(ryuStand);
+        }
 
         //Creating Animation loop for Ryu running
         Array<TextureRegion> frames = new Array<TextureRegion>();
@@ -108,6 +116,9 @@ public class Ryu extends Sprite {
         frames.add(screen.getAtlas().findRegion("running6"));
 
         ryuRun = new Animation <TextureRegion>(0.1f, frames);
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            setBounds(0, 0, 18 / NinjaRun.PPM, 20 / NinjaRun.PPM);
+        }
         frames.clear();
 
         //Creating Jump Animation loop
@@ -120,6 +131,9 @@ public class Ryu extends Sprite {
         frames.add(screen.getAtlas().findRegion("jumpup7"));
 
         ryuJump = new Animation <TextureRegion>(0.1f, frames);
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            setBounds(0, 0, 18 / NinjaRun.PPM, 20 / NinjaRun.PPM);
+        }
         frames.clear();
 
 
@@ -134,6 +148,8 @@ public class Ryu extends Sprite {
         frames.add(screen.getAtlas().findRegion("die10"));
 
         ryuDead = new Animation <TextureRegion>(0.1f, frames);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            setBounds(0, 0, 18 / NinjaRun.PPM, 20 / NinjaRun.PPM);}
         frames.clear();
 
         //Attack Texture
@@ -142,20 +158,32 @@ public class Ryu extends Sprite {
         frames.add(screen.getAtlas().findRegion("attack3"));
         frames.add(screen.getAtlas().findRegion("attack4"));
         frames.add(screen.getAtlas().findRegion("attack5"));
-        frames.add(screen.getAtlas().findRegion("attacka6"));
-        frames.add(screen.getAtlas().findRegion("attacka7"));
+        frames.add(screen.getAtlas().findRegion("attack4"));
+        frames.add(screen.getAtlas().findRegion("attack3"));
+        frames.add(screen.getAtlas().findRegion("attack2"));
+        frames.add(screen.getAtlas().findRegion("attack1"));
+
+
         ryuAttack = new Animation <TextureRegion>(0.08f, frames);
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            setBounds(0, 0, 18 / NinjaRun.PPM, 20 / NinjaRun.PPM);
+        }
         frames.clear();
 
         //Level Complete
         frames.add(screen.getAtlas().findRegion("attack2"));
         frames.add(screen.getAtlas().findRegion("attack3"));
         ryuComplete = new Animation<TextureRegion>(0.2f,frames);
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            setBounds(0, 0, 18 / NinjaRun.PPM, 20 / NinjaRun.PPM);
+        }
         frames.clear();
     }
 
     public void update(float dt){
-        setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
+        if(Gdx.app.getType() == Application.ApplicationType.Android)
+            setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /2);
+        setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() /3);
         setRegion(getFrame(dt));
         if(getY() < 0){
             ryuIsDead = true;
@@ -223,11 +251,12 @@ public class Ryu extends Sprite {
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
 
-        else if (b2body.getLinearVelocity().x != 0)
+        else if (b2body.getLinearVelocity().x != 0 && currentState != State.ATTACK)
             return State.RUNNING;
 
-        else if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+        else if (attacking == true) {
             return State.ATTACK;
+        }
 
         else if(screen.complete == true) {
             return State.COMPLETE;
@@ -242,7 +271,7 @@ public class Ryu extends Sprite {
 
     public void defineRyu(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / PPM,32 / PPM);
+        bdef.position.set(32 / PPM,31 / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

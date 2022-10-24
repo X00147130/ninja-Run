@@ -33,6 +33,7 @@ public class LogoScreen implements Screen {
         background = new Texture("logos/CONWAY STUDIOS.png");
         backgroundIMG = new Image(background);
 
+
         GAME.manager.get("audio/music/yoitrax - Jade Dragon.mp3", Music.class).play();
 
         Table table = new Table();

@@ -25,7 +25,7 @@ import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Controller {
     private Viewport view;
-    private boolean upPressed = false,downPressed = false,leftPressed = false,rightPressed = false;
+    private boolean upPressed = false,attackPressed = false,leftPressed = false,rightPressed = false;
     public Stage stage;
     private OrthographicCamera cam;
     private NinjaRun gameplay;
@@ -62,19 +62,19 @@ public class Controller {
             }
         });
 
-        Image downImg = new Image(new Texture("attack button.png"));
-        downImg.setSize(50,30);
-        downImg.addListener(new InputListener(){
+        Image attackImg = new Image(new Texture("attack button.png"));
+        attackImg.setSize(50,30);
+        attackImg.addListener(new InputListener(){
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                downPressed = true;
+                attackPressed = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                downPressed = false;
+                attackPressed = false;
             }
         });
 
@@ -148,7 +148,7 @@ public class Controller {
 
         action.add(upImg).size(upImg.getWidth(),upImg.getHeight()).padRight(10);
         action.add();
-        action.add(downImg).size(downImg.getWidth(),downImg.getHeight()).padLeft(10);
+        action.add(attackImg).size(attackImg.getWidth(),attackImg.getHeight()).padLeft(10);
 
         stage.addActor(action);
 
@@ -161,7 +161,7 @@ public class Controller {
                        upPressed = true;
                         break;
                     case Input.Keys.DOWN:
-                        downPressed = true;
+                        attackPressed = true;
                         break;
                     case Input.Keys.LEFT:
                         leftPressed = true;
@@ -179,7 +179,7 @@ public class Controller {
                         upPressed = false;
                         break;
                     case Input.Keys.DOWN:
-                       downPressed = false;
+                        attackPressed = false;
                         break;
                     case Input.Keys.LEFT:
                         leftPressed = false;
@@ -204,7 +204,7 @@ public class Controller {
     }
 
     public boolean isDownPressed() {
-        return downPressed;
+        return attackPressed;
     }
 
     public boolean isLeftPressed() {
