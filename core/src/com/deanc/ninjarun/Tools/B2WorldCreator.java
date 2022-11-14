@@ -91,7 +91,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             // creation of health vials objects
-            vials.add(new health( screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            vials.add(new health(screen.getGame(), screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
         }
 
         //create Coins fixtures
@@ -99,7 +99,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             // creation of coin objects
-            coins.add(new Coins(screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            coins.add(new Coins(screen.getGame(),screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
 
         }
 

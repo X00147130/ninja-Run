@@ -10,11 +10,11 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class health extends Item{
-
-    public health(PlayScreen screen, float x, float y) {
+    public NinjaRun ninjarun;
+    public health(NinjaRun ninjarun, PlayScreen screen, float x, float y) {
         super(screen, x, y);
         setRegion(new Texture("health_vial1.png"));// clipart used
-
+        this.ninjarun = ninjarun;
     }
 
     @Override
@@ -42,7 +42,13 @@ public class health extends Item{
     public void useItem(Ryu ryu) {
         destroy();
         Ryu.setHitCounter(0);
-        NinjaRun.manager.get("audio/sounds/healthDrink.wav", Sound.class).play();
+        ninjarun.loadSound("audio/sounds/healthDrink.wav");
+        long id = ninjarun.sound.play();
+        if(ninjarun.getSoundVolume() != 0)
+            ninjarun.sound.setVolume(id, 1f);
+        else{
+            ninjarun.sound.setVolume(id,0);
+        }
     }
 
     @Override

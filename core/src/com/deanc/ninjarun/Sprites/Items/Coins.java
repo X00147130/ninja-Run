@@ -14,9 +14,11 @@ import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Coins extends Item {
     private static int count = 0;
-    public Coins(PlayScreen screen,float  x, float y) {
+    public NinjaRun ninjarun;
+    public Coins(NinjaRun ninjarun,PlayScreen screen,float  x, float y) {
         super(screen, x, y);
         setRegion(new Texture("coin.png"));// clipart used
+        this.ninjarun = ninjarun;
     }
 
     @Override
@@ -45,8 +47,13 @@ public class Coins extends Item {
         count += 100;
         screen.setCoins(count);
         Gdx.app.log("Coin", "destroyed");
-        NinjaRun.manager.get("audio/sounds/coin.mp3", Sound.class).play();
-
+        ninjarun.loadSound("audio/sounds/coin.mp3");
+        long id = ninjarun.sound.play();
+        if(ninjarun.getSoundVolume() != 0)
+            ninjarun.sound.setVolume(id, 1f);
+        else{
+            ninjarun.sound.setVolume(id,0);
+        }
 
     }
     @Override

@@ -342,7 +342,13 @@ public class Ryu extends Sprite {
 
         Fixture fix1 = b2body.createFixture(attackdef);
         fix1.setUserData("attack");
-        NinjaRun.manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class).play();
+        ninjarun.loadSound("audio/sounds/mixkit-fast-sword-whoosh-2792.wav");
+        long id = ninjarun.sound.play();
+        if(ninjarun.getSoundVolume() != 0)
+            ninjarun.sound.setVolume(id, 1f);
+        else{
+            ninjarun.sound.setVolume(id,0);
+        }
         head.dispose();
         return fix1;
     }
@@ -393,7 +399,13 @@ public class Ryu extends Sprite {
 
         if(hitCounter < 2){    //ryu is pushed back and says ow
             b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
-            NinjaRun.manager.get("audio/sounds/getting-hit.wav", Sound.class).play();
+            ninjarun.loadSound("audio/sounds/getting-hit.wav");
+            long id = ninjarun.sound.play();
+            if(ninjarun.getSoundVolume() != 0)
+                ninjarun.sound.setVolume(id, 1f);
+            else{
+                ninjarun.sound.setVolume(id,0);
+            }
 
             hitCounter++;
         }

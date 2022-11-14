@@ -80,7 +80,7 @@ public class PlayScreen implements Screen {
 
         this.game = g;
         this.level = level;
-        this.manager = NinjaRun.getManager();
+        this.manager = game.getManager();
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(NinjaRun.V_WIDTH / NinjaRun.PPM, NinjaRun.V_HEIGHT / NinjaRun.PPM, gamecam);
         hud = new Hud(game.batch, game,game.getScreen(),this);
@@ -109,7 +109,7 @@ public class PlayScreen implements Screen {
 
         /*NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
         NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);*/
-        game.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class);
+        game.loadMusic("audio/music/yoitrax - Fuji.mp3");
         if(game.getVolume() != 0) {
             game.music.play();
             game.music.setVolume(game.getVolume());
@@ -130,7 +130,7 @@ public class PlayScreen implements Screen {
         if (!itemToSpawn.isEmpty()) {
             ItemDef idef = itemToSpawn.poll();
             if (idef.type == health.class) {
-                items.add(new health(this, idef.position.x, idef.position.y));
+                items.add(new health(game,this, idef.position.x, idef.position.y));
             }
         }
     }
@@ -174,7 +174,13 @@ public class PlayScreen implements Screen {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
-                    NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                    game.loadSound("audio/sounds/soundnimja-jump.wav");
+                    long id = game.sound.play();
+                    if(game.getSoundVolume() != 0)
+                    game.sound.setVolume(id, 1f);
+                    else{
+                        game.sound.setVolume(id,0);
+                    }
                     if(game.jumpCounter == 2){
                         game.doubleJumped = true;
                     }
@@ -206,7 +212,13 @@ public class PlayScreen implements Screen {
                 if (controller.isUpPressed() == true && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
-                    NinjaRun.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play();
+                    game.loadSound("audio/sounds/soundnimja-jump.wav");
+                    long id = game.sound.play();
+                    if(game.getSoundVolume() != 0)
+                        game.sound.setVolume(id, 1f);
+                    else{
+                        game.sound.setVolume(id,0);
+                    }
                     if(game.jumpCounter == 2){
                         game.doubleJumped = true;
                     }
@@ -330,6 +342,7 @@ public class PlayScreen implements Screen {
 
         if (gameOver()) {
             game.setScreen(new GameOverScreen(game, level));
+            game.music.stop();
             dispose();
         }
 

@@ -164,7 +164,7 @@ public class Settings implements Screen {
         muteSound.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                GAME.setVolume(0);
+                GAME.setSoundVolume(0);
             }
         });
 

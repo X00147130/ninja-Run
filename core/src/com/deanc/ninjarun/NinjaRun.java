@@ -1,6 +1,7 @@
 package com.deanc.ninjarun;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -36,6 +37,7 @@ public class NinjaRun extends Game {
 	public float volume = 0.5f;
 	public float soundVolume = 0.5f;
 	public Music music;
+	public Sound sound;
 	private int coins = 0;
 	private Hud hud;
 	public int jumpCounter = 0;
@@ -82,6 +84,14 @@ public class NinjaRun extends Game {
 
 	public static AssetManager getManager() {
 		return manager;
+	}
+
+	public void loadMusic(String path) {
+		music = Gdx.audio.newMusic(Gdx.files.internal(path));
+	}
+
+	public void loadSound(String path) {
+		sound = Gdx.audio.newSound(Gdx.files.internal(path));
 	}
 
 	public float getVolume() {
