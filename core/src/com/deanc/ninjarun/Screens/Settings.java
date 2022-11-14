@@ -1,9 +1,8 @@
 package com.deanc.ninjarun.Screens;
 
+import static com.badlogic.gdx.graphics.Color.GOLD;
 import static com.badlogic.gdx.graphics.Color.RED;
-import static com.deanc.ninjarun.NinjaRun.manager;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -17,7 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -34,12 +36,17 @@ public class Settings implements Screen {
     private Viewport viewport;
 
     private Button backButton;
-    public Button mute;
-    private Texture image;
-    private TextureRegionDrawable draw;
-    Slider music;
+    private Label page;
+    private Label music;
+    private Label sound;
+    private CheckBox muteMusic;
+    private CheckBox muteSound;
+    private Skin skin;
+
+
+    /*Slider music;
     Slider sound;
-    Skin skin=new Skin(Gdx.files.internal("skins/comic-ui.json"));
+    Skin skin=new Skin(Gdx.files.internal("skins/comic-ui.json"));*/
 
     Stage stage;
     TextButton.TextButtonStyle textStyle;
@@ -58,10 +65,32 @@ public class Settings implements Screen {
         buttonFont = new BitmapFont();
         textStyle.font = buttonFont;
         textStyle.fontColor = RED;
-        image = new Texture("mute.jpg");
-        draw = new TextureRegionDrawable(image);
 
-        music = new Slider(0f,1f,0.01f,false,skin);
+        Label.LabelStyle label = new Label.LabelStyle();
+        label.font = buttonFont;
+        label.fontColor = RED;
+
+        Label.LabelStyle title = new Label.LabelStyle();
+        title.font = buttonFont;
+        title.fontColor = GOLD;
+
+        page = new Label("SETTINGS",title);
+        music = new Label("Mute Music?",label);
+        sound = new Label("Mute Sound?", label);
+
+        //skin setup
+        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
+
+        //CheckBox setup
+        muteMusic = new CheckBox("Mute",skin);
+        muteMusic.setWidth(30);
+        muteMusic.setHeight(25);
+
+        muteSound = new CheckBox("Mute",skin);
+        muteSound.setWidth(30);
+        muteSound.setHeight(25);
+
+        /*music = new Slider(0f,1f,0.01f,false,skin);
         music.setValue(GAME.getVolume());
 
         sound = new Slider(0f,1f,0.01f,false,skin);
@@ -72,7 +101,7 @@ public class Settings implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(!music.isDragging()){
                     GAME.setVolume(music.getValue());
-/*NULL pointer Exception*//*GAME.music.setVolume(GAME.getVolume());*/
+*//*NULL pointer Exception*//**//*GAME.music.setVolume(GAME.getVolume());*//*
                     manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class).play(GAME.getVolume());
                 }
             }
@@ -100,7 +129,7 @@ public class Settings implements Screen {
         container1.setSize(300,100);
         container1.setOrigin(container.getWidth() / 2 , container.getHeight() / 2);
         container1.setScale(1);
-        container1.setColor(RED);
+        container1.setColor(RED);*/
 
 
         backButton = new TextButton("BACK",textStyle);
@@ -108,12 +137,36 @@ public class Settings implements Screen {
         table.setFillParent(true);
         table.center();
 
-        table.add(container).center().expandX();
+        /*table.add(container).center().expandX();
         table.row();
         table.add(container1).center().expandX();
+        table.row();*/
+        table.add(page).center().expandX().padLeft(125).padBottom(25);
         table.row();
-        table.add(backButton).center().expandX();
+        table.add(music).left().padLeft(105);
+        table.add(muteMusic).center();
         table.row();
+        table.add(sound).left().padLeft(105);
+        table.add(muteSound).center();
+        table.row();
+        table.row();
+        table.add(backButton).center().expandX().padLeft(125);
+        table.row();
+
+
+        muteMusic.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                GAME.setVolume(0);
+            }
+        });
+
+        muteSound.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                GAME.setVolume(0);
+            }
+        });
 
         backButton.addListener(new ClickListener(){
             @Override

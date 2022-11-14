@@ -15,10 +15,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
@@ -48,6 +50,8 @@ public class LevelSelect implements Screen {
 
     //Background
     Texture background;
+    Image backgroundIMG;
+
 
     //admin
     private Viewport viewport;
@@ -67,8 +71,7 @@ public class LevelSelect implements Screen {
         NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).play();
 
         //Texture
-       /* background = new Texture("levelselect.jpg");*/
-
+        background = new Texture("Texture3.jpg");
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
@@ -97,6 +100,7 @@ public class LevelSelect implements Screen {
         grid.center();
         grid.setFillParent(true);
 
+
         //filling table
         grid.add(pageLabel).expandX().padLeft(150);
         grid.row();
@@ -122,14 +126,14 @@ public class LevelSelect implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.setScreen(new MenuScreen((NinjaRun) GAME));
+                GAME.setScreen(new MenuScreen(GAME));
             }
         });
 
         level1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,1));
+                GAME.setScreen(new PlayScreen(GAME,1));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -137,7 +141,7 @@ public class LevelSelect implements Screen {
         level2.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,2));
+                GAME.setScreen(new PlayScreen(GAME,2));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -145,7 +149,7 @@ public class LevelSelect implements Screen {
         level3.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,3));
+                GAME.setScreen(new PlayScreen(GAME,3));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -153,7 +157,7 @@ public class LevelSelect implements Screen {
         level4.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,4));
+                GAME.setScreen(new PlayScreen(GAME,4));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -161,7 +165,7 @@ public class LevelSelect implements Screen {
         level5.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,5));
+                GAME.setScreen(new PlayScreen(GAME,5));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -169,7 +173,7 @@ public class LevelSelect implements Screen {
         level6.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,6));
+                GAME.setScreen(new PlayScreen(GAME,6));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -177,7 +181,7 @@ public class LevelSelect implements Screen {
         level7.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,7));
+                GAME.setScreen(new PlayScreen(GAME,7));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -185,7 +189,7 @@ public class LevelSelect implements Screen {
         level8.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,8));
+                GAME.setScreen(new PlayScreen(GAME,8));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -193,7 +197,7 @@ public class LevelSelect implements Screen {
         level9.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,9));
+                GAME.setScreen(new PlayScreen(GAME,9));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -201,7 +205,7 @@ public class LevelSelect implements Screen {
         level10.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.setScreen(new PlayScreen((NinjaRun)GAME,10));
+                GAME.setScreen(new PlayScreen(GAME,10));
                 NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
@@ -211,9 +215,9 @@ public class LevelSelect implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        /*batch.begin();
-        batch.draw(background,0,0);
-        batch.end();*/
+        GAME.batch.begin();
+        GAME.batch.draw(background,0,0);
+        GAME.batch.end();
         screen.draw();
     }
 

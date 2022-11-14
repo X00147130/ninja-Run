@@ -107,13 +107,13 @@ public class PlayScreen implements Screen {
         world.setContactListener(new WorldContactListener());
 
 
-        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
-        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);
-        /*game.manager.get("audio/music/yoitrax - Warrior.mp3", Music.class);
+        /*NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
+        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);*/
+        game.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class);
         if(game.getVolume() != 0) {
             game.music.play();
             game.music.setVolume(game.getVolume());
-        }*/
+        }
         game.setSoundVolume(game.getSoundVolume());
 
 
