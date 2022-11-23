@@ -62,7 +62,7 @@ public class Settings implements Screen {
         /*background = new Texture("settings.jpg");*/
 
         textStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont();
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt"));
         textStyle.font = buttonFont;
         textStyle.fontColor = RED;
 
@@ -172,6 +172,7 @@ public class Settings implements Screen {
         backButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                GAME.music.stop();
                 GAME.setScreen(new MenuScreen(GAME));
             }
         });

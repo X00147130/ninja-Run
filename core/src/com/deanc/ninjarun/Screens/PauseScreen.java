@@ -2,12 +2,14 @@ package com.deanc.ninjarun.Screens;
 
 import static com.badlogic.gdx.graphics.Color.GOLD;
 import static com.badlogic.gdx.graphics.Color.RED;
+import static com.badlogic.gdx.graphics.Color.WHITE;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -28,17 +30,16 @@ public class PauseScreen implements Screen {
     //Display tools
     private Table table;
     private Stage stage;
+    private SpriteBatch batch;
 
     //Labels and Buttons
     private Label titleLabel;
     private Label.LabelStyle style;
+    private TextButton.TextButtonStyle buttonStyle;
     private TextButton resume;
     private Label resumeLabel;
     private TextButton quit;
     private Label quitLabel;
-
-    //Skin setup
-    private Skin skin;
 
 
     //Admin
@@ -46,7 +47,7 @@ public class PauseScreen implements Screen {
     private Screen screen;
     private Viewport viewport;
     private Hud hud;
-    //private Texture background;
+    private Texture background;
 
 
 
@@ -58,35 +59,31 @@ public class PauseScreen implements Screen {
         hud = gameplay.getHud();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
+        batch = new SpriteBatch();
 
-        /*background = new Texture("settings.jpg");*/
-
-
-        //skin setup
-        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
+        background = game.manager.get("background.png",Texture.class);
 
 
         //Label set up
-        style = new Label.LabelStyle(new BitmapFont(), RED);
+        style = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-button-export.fnt")), RED);
         titleLabel = new Label("PAUSED",style);
 
-        //UI Setup
-        resumeLabel = new Label("Resume",skin);
-        quitLabel = new Label(" QUIT ",skin);
 
         table = new Table ();
         table.center();
         table.setFillParent(true);
 
-        resume = new TextButton("resume", skin,"default");
-        resume.getLabel().setFontScale(1);
-        resume.setColor(RED);
-        quit = new TextButton("quit", skin,"default");
-        quit.getLabel().setFontScale(1);
-        quit.setColor(RED);
+        buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-button-export.fnt"));
 
 
-        table.add(titleLabel).width(70).height(60).center().padLeft(10);
+        resume = new TextButton("resume", buttonStyle);
+        resume.setColor(WHITE);
+        quit = new TextButton("quit", buttonStyle);
+        quit.setColor(WHITE);
+
+
+        table.add(titleLabel).width(70).height(60).center().padRight(38);
         table.row();
         table.row();
         table.add(resume).width(110).height(50).center();
@@ -125,9 +122,9 @@ public class PauseScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        /*batch.begin();
+        batch.begin();
         batch.draw(background,0,0);
-        batch.end();*/
+        batch.end();
         stage.draw();
     }
 

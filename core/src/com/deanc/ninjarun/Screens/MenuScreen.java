@@ -56,14 +56,11 @@ public class MenuScreen implements Screen  {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, GAME.batch);
 
+
         //make sure to credit cobaltplasma_davlugw for red_moon_shinobi
         background = manager.get("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
         mainBackground = new TextureRegion(background);
 
-
-
-
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
 
         Table table = new Table();
         table.center();
@@ -72,16 +69,20 @@ public class MenuScreen implements Screen  {
 
         //Buttons
         buttonStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont();
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt"));
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
-        playButton  = new TextButton("Start",buttonStyle );
+        playButton  = new TextButton("Start",buttonStyle);
         levelButton  = new TextButton("Level Select",buttonStyle );
         settingsButton  = new TextButton("Settings",buttonStyle );
         quitButton = new TextButton("Quit",buttonStyle);
 
+
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-title-export.fnt")), RED);
         Label titleLabel = new Label(" Ninja Run", font);
-        titleLabel.setSize(90,110);
+        titleLabel.setSize(110,90);
+
+
         table.add(titleLabel).expandX().setActorHeight(110);
         table.row();
         table.add(playButton).expandX().padTop(10);
@@ -146,7 +147,7 @@ public class MenuScreen implements Screen  {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
             batch.begin();
-            batch.draw(mainBackground, 270, 275);
+            batch.draw(mainBackground, 50, 275);
             batch.draw(mainBackground, 2870, 275);
             batch.end();
         }

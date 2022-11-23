@@ -86,6 +86,7 @@ public class GameOverScreen implements Screen {
             }
         });
 
+
     }
 
     public boolean isReset() {
@@ -116,6 +117,9 @@ public class GameOverScreen implements Screen {
             GAME.music.stop();
         }
     }
+
+
+
 
     @Override
     public void resize(int width, int height) {

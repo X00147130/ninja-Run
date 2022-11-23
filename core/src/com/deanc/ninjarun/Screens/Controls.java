@@ -45,8 +45,8 @@ public class Controls implements Screen {
         stage = new Stage(viewport,GAME.batch);
 
         /*Label Style*/
-        titleStyle = new Label.LabelStyle(new BitmapFont(), Color.RED);
-        style = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        titleStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt")), Color.RED);
+        style = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt")), Color.WHITE);
 
         /*Labels*/
         title = new Label("Controls",titleStyle);
@@ -105,7 +105,7 @@ public class Controls implements Screen {
         stage.draw();
     }
     public void handleEvent(){
-        GAME.setScreen(new PlayScreen ((NinjaRun)GAME,1));
+        GAME.setScreen(new PlayScreen (GAME,1));
         dispose();
     }
 
