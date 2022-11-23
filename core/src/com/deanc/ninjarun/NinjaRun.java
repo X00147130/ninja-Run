@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.deanc.ninjarun.Scenes.Hud;
 import com.deanc.ninjarun.Screens.LogoScreen;
@@ -60,7 +60,7 @@ public class NinjaRun extends Game {
 
 
 	@Override
-	public void create () {
+	public void create() {
 		batch = new SpriteBatch();
 
 		//Audio Loading
@@ -73,11 +73,15 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class);
 		manager.load("audio/sounds/coin.mp3", Sound.class);
 		manager.load("audio/sounds/stomp.wav", Sound.class);
-		manager.load("audio/sounds/sexynakedbunny-ouch.mp3",Sound.class);
-		manager.load("audio/sounds/soundnimja-jump.wav",Sound.class);
-		manager.load("audio/sounds/getting-hit.wav",Sound.class);
-		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav",Sound.class);
+		manager.load("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class);
+		manager.load("audio/sounds/soundnimja-jump.wav", Sound.class);
+		manager.load("audio/sounds/getting-hit.wav", Sound.class);
+		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class);
 		manager.load("audio/sounds/healthDrink.wav", Sound.class);
+		manager.load("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
+		manager.load("background.png", Texture.class);
+		manager.load("Texture3.jpg", Texture.class);
+		manager.load("Texture4.jpg", Texture.class);
 		manager.finishLoading();
 		setScreen(new LogoScreen(this));
 	}
@@ -98,7 +102,7 @@ public class NinjaRun extends Game {
 		return volume;
 	}
 
-	public void setVolume(float volume){
+	public void setVolume(float volume) {
 		this.volume = volume;
 	}
 
@@ -121,11 +125,5 @@ public class NinjaRun extends Game {
 	public void setStatetimer(float statetimer) {
 		this.statetimer = statetimer;
 	}
-
-	@Override
-	public void render () {
-		super.render();
-	}
-
 
 }

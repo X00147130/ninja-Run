@@ -50,13 +50,11 @@ public class LevelSelect implements Screen {
 
     //Background
     Texture background;
-    Image backgroundIMG;
 
 
     //admin
     private Viewport viewport;
     private Stage screen;
-    private Ryu player;
     private int level = 1;
 
 
@@ -68,7 +66,6 @@ public class LevelSelect implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         screen = new Stage(viewport, GAME.batch);
 
-        NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).play();
 
         //Texture
         background = new Texture("Texture3.jpg");
@@ -134,7 +131,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,1));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -142,7 +139,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,2));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -150,7 +147,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,3));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -158,7 +155,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,4));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -166,7 +163,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,5));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -174,7 +171,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,6));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -182,7 +179,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,7));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -190,7 +187,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,8));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -198,7 +195,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,9));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
 
@@ -206,7 +203,7 @@ public class LevelSelect implements Screen {
             @Override
             public void clicked(InputEvent event,float x,float y){
                 GAME.setScreen(new PlayScreen(GAME,10));
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
+                GAME.music.stop();
             }
         });
     }

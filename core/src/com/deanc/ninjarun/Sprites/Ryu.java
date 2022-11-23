@@ -36,6 +36,7 @@ public class Ryu extends Sprite {
     public World world;
     private PlayScreen screen;
     private NinjaRun ninjarun;
+    public Sound playerSounds;
     public Body b2body;
     public TextureRegion ryuStand;
 
@@ -188,8 +189,7 @@ public class Ryu extends Sprite {
         if(getY() < 0){
             ryuIsDead = true;
             b2body.applyLinearImpulse(new Vector2(0, 3f), b2body.getWorldCenter(), true);
-            NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
-            NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class).play();
+            /*ninjarun.music.stop();*/
         }
     }
 
@@ -393,16 +393,14 @@ public class Ryu extends Sprite {
 
     //getting hit method
     public void hit(){
-        //loading gameover music in to set it to loop in case player leaves it for a while.
-        Music music = NinjaRun.manager.get("audio/music/mixkit-piano-horror-671.mp3", Music.class);
-        music.setLooping(true);
 
         if(hitCounter < 2){    //ryu is pushed back and says ow
             b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
             ninjarun.loadSound("audio/sounds/getting-hit.wav");
             long id = ninjarun.sound.play();
-            if(ninjarun.getSoundVolume() != 0)
+            if(ninjarun.getSoundVolume() != 0) {
                 ninjarun.sound.setVolume(id, 1f);
+            }
             else{
                 ninjarun.sound.setVolume(id,0);
             }
@@ -410,9 +408,16 @@ public class Ryu extends Sprite {
             hitCounter++;
         }
         else{   //Ryus death
-            NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
-            music.play();
-            NinjaRun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play();
+            ninjarun.music.stop();
+            ninjarun.loadSound("audio/sounds/sexynakedbunny-ouch.mp3");
+            long id = ninjarun.sound.play();
+            if(ninjarun.getSoundVolume() != 0) {
+                ninjarun.sound.setVolume(id, 1f);
+            }
+            else{
+                ninjarun.sound.setVolume(id,0);
+            }
+
             ryuIsDead = true;
             Filter filter = new Filter();
             filter.maskBits = NinjaRun.GROUND_BIT|NinjaRun.PLATFORM_BIT;

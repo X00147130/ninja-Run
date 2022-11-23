@@ -18,7 +18,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -35,6 +37,8 @@ public class MenuScreen implements Screen  {
     private final NinjaRun GAME ;
     private Texture background;
     private TextureRegion mainBackground;
+    private SpriteBatch batch;
+
 
     //Buttons
     Button playButton;
@@ -48,14 +52,15 @@ public class MenuScreen implements Screen  {
     public MenuScreen(final NinjaRun game) {
         this.GAME = game;
         this.manager = NinjaRun.getManager();
+        batch = new SpriteBatch();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, GAME.batch);
 
-        //make sure to credit Sebatian Schulz for the art
-        background = new Texture("backgroundimg.jpg");
+        //make sure to credit cobaltplasma_davlugw for red_moon_shinobi
+        background = manager.get("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
         mainBackground = new TextureRegion(background);
-        mainBackground.setRegionHeight(viewport.getScreenHeight());
-        mainBackground.setRegionWidth(viewport.getScreenWidth());
+
+
 
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
@@ -63,6 +68,7 @@ public class MenuScreen implements Screen  {
         Table table = new Table();
         table.center();
         table.setFillParent(true);
+
 
         //Buttons
         buttonStyle = new TextButton.TextButtonStyle();
@@ -86,6 +92,8 @@ public class MenuScreen implements Screen  {
         table.row();
         table.add(quitButton).expandX().padTop(10);
         table.row();
+
+
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
 
@@ -93,11 +101,12 @@ public class MenuScreen implements Screen  {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                   GAME.music.stop();
                    GAME.setScreen(new Controls(GAME));
-               }else if (Gdx.app.getType() == Application.ApplicationType.Android){
-                   GAME.setScreen(new PlayScreen(GAME,1));
+               }else if (Gdx.app.getType() == Application.ApplicationType.Android) {
+                   GAME.music.stop();
+                   GAME.setScreen(new PlayScreen(GAME, 1));
                }
-                NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3",Music.class).stop();
             }
         });
 
@@ -121,6 +130,11 @@ public class MenuScreen implements Screen  {
                 System.exit(0);
             }
         });
+        GAME.loadMusic("audio/music/yoitrax - Ronin.mp3");
+        if(GAME.getVolume() != 0) {
+            GAME.music.play();
+            GAME.music.setVolume(GAME.getVolume());
+        }
     }
     @Override
     public void show() {
@@ -128,12 +142,19 @@ public class MenuScreen implements Screen  {
     }
     @Override
     public void render(float delta){
-        NinjaRun.manager.get("audio/music/yoitrax - Ronin.mp3", Music.class).play();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        GAME.batch.begin();
-        GAME.batch.draw(mainBackground,0,0);
-        GAME.batch.end();
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            batch.begin();
+            batch.draw(mainBackground, 270, 275);
+            batch.draw(mainBackground, 2870, 275);
+            batch.end();
+        }
+        else if(Gdx.app.getType() == Application.ApplicationType.Android){
+            batch.begin();
+            batch.draw(mainBackground, 600, -250);
+            batch.end();
+        }
         stage.draw();
     }
 
@@ -162,7 +183,5 @@ public class MenuScreen implements Screen  {
     @Override
     public void dispose() {
     stage.dispose();
-    GAME.dispose();
-    background.dispose();
     }
 }

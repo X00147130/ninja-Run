@@ -34,6 +34,7 @@ public class Controller {
     private ImageButton pause;
     private Texture image;
     private Drawable draw;
+    private long jump = 0;
 
     public Controller(final NinjaRun game){
         cam = new OrthographicCamera(480,320);

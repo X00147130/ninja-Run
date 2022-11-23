@@ -106,9 +106,6 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-
-        /*NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).play();
-        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3",Music.class).setLooping(true);*/
         game.loadMusic("audio/music/yoitrax - Fuji.mp3");
         if(game.getVolume() != 0) {
             game.music.play();
@@ -351,7 +348,7 @@ public class PlayScreen implements Screen {
                 if(level < 10){
                     game.setScreen(new LevelComplete(game, level));
                 }else{
-                    game.setScreen(new Credits((NinjaRun)game));
+                    game.setScreen(new Credits(game));
                 }
                 dispose();
             }
