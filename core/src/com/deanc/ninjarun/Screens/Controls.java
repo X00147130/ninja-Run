@@ -45,8 +45,8 @@ public class Controls implements Screen {
         stage = new Stage(viewport,GAME.batch);
 
         /*Label Style*/
-        titleStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt")), Color.RED);
-        style = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt")), Color.WHITE);
+        titleStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/font-export.fnt")), Color.RED);
+        style = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt")), Color.WHITE);
 
         /*Labels*/
         title = new Label("Controls",titleStyle);

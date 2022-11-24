@@ -44,7 +44,7 @@ public class GameOverScreen implements Screen {
 
         background = GAME.manager.get("background.png", Texture.class);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), RED);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/font-export.fnt")), RED);
 
         table = new Table();
         table.center();
@@ -53,15 +53,16 @@ public class GameOverScreen implements Screen {
         BitmapFont buttonFont;
         TextButton.TextButtonStyle buttonStyle;
         buttonStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont();
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt"));
         buttonStyle.font= buttonFont;
         buttonStyle.fontColor = WHITE;
         playAgainButton = new TextButton(" Play Again? ", buttonStyle);
         mainMenuButton = new TextButton(" Main Menu ", buttonStyle);
 
 
-        Label gameOverLabel = new Label(" YOU DIED ", font);
+        Label gameOverLabel = new Label(" YOU DIED!!!!! ", font);
         table.add(gameOverLabel).expandX().center();
+        table.row();
         table.row();
         table.add(playAgainButton).expandX().padTop(10).center();
         table.row();

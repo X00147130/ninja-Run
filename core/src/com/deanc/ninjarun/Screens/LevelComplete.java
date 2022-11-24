@@ -57,7 +57,7 @@ public class LevelComplete implements Screen {
 */
         //TextButton Style Admin
         buttonstyle = new TextButton.TextButtonStyle();
-        font = new BitmapFont();
+        font = new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt"));
         buttonstyle.font = font;
         buttonstyle.font.setColor(Color.WHITE);
 
@@ -67,7 +67,7 @@ public class LevelComplete implements Screen {
         levelSelectButton = new TextButton("Level Select", buttonstyle);
 
         //Label Admin
-        Label.LabelStyle style = new Label.LabelStyle(new BitmapFont(), Color.RED);
+        Label.LabelStyle style = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/font-export.fnt")), Color.RED);
         title = new Label("Level Complete",style);
         Coins = new Label(String.format("Score: %4d" ,score),style);
 
@@ -83,12 +83,12 @@ public class LevelComplete implements Screen {
         table.row();
 
         if(map != 11) {
-            table.add(nextLevelButton).expandX().padTop(20);
+            table.add(nextLevelButton).expandX().padTop(20).padBottom(5);
             table.row();
         }
-        table.add(levelSelectButton).expandX().center();
+        table.add(levelSelectButton).expandX().center().padBottom(5);
         table.row();
-        table.add(menuButton).expandX().center();
+        table.add(menuButton).expandX().center().padBottom(5);
         table.row();
 
         //Setting up the stage

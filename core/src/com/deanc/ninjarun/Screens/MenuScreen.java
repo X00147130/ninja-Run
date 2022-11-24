@@ -69,16 +69,17 @@ public class MenuScreen implements Screen  {
 
         //Buttons
         buttonStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt"));
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt"));
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
         playButton  = new TextButton("Start",buttonStyle);
+        playButton.setSize(120,105);
         levelButton  = new TextButton("Level Select",buttonStyle );
         settingsButton  = new TextButton("Settings",buttonStyle );
         quitButton = new TextButton("Quit",buttonStyle);
 
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-title-export.fnt")), RED);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/title-export.fnt")), RED);
         Label titleLabel = new Label(" Ninja Run", font);
         titleLabel.setSize(110,90);
 

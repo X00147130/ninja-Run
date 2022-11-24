@@ -62,7 +62,7 @@ public class Settings implements Screen {
         /*background = new Texture("settings.jpg");*/
 
         textStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt"));
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt"));
         textStyle.font = buttonFont;
         textStyle.fontColor = RED;
 
@@ -79,7 +79,7 @@ public class Settings implements Screen {
         sound = new Label("Mute Sound?", label);
 
         //skin setup
-        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
+        skin = new Skin(Gdx.files.internal("skins/comic/comic-ui.json"));
 
         //CheckBox setup
         muteMusic = new CheckBox("Mute",skin);
@@ -150,7 +150,7 @@ public class Settings implements Screen {
         table.add(muteSound).center();
         table.row();
         table.row();
-        table.add(backButton).center().expandX().padLeft(125);
+        table.add(backButton).center().expandX().padLeft(125).padTop(10);
         table.row();
 
 

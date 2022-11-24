@@ -211,8 +211,9 @@ public class PlayScreen implements Screen {
                     game.jumpCounter++;
                     game.loadSound("audio/sounds/soundnimja-jump.wav");
                     long id = game.sound.play();
-                    if(game.getSoundVolume() != 0)
+                    if(game.getSoundVolume() != 0) {
                         game.sound.setVolume(id, 1f);
+                    }
                     else{
                         game.sound.setVolume(id,0);
                     }

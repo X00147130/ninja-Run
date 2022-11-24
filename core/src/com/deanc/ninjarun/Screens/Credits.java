@@ -72,11 +72,11 @@ public class Credits implements Screen {
             stage4 = new Stage(viewport, GAME.batch);
 
             /*Label Style*/
-            titleStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-            devStyle = new Label.LabelStyle(new BitmapFont(), Color.GOLD);
-            musicStyle = new Label.LabelStyle(new BitmapFont(), Color.RED);
-            graphicsStyle = new Label.LabelStyle(new BitmapFont(), Color.BLUE);
-            helpStyle = new Label.LabelStyle(new BitmapFont(), Color.GREEN);
+            titleStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.WHITE);
+            devStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.GOLD);
+            musicStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.RED);
+            graphicsStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.BLUE);
+            helpStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.GREEN);
 
             /*Labels*/
             title = new Label("Credits",titleStyle);

@@ -271,7 +271,7 @@ public class Ryu extends Sprite {
 
     public void defineRyu(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / PPM,31 / PPM);
+        bdef.position.set(282 / PPM,31 / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

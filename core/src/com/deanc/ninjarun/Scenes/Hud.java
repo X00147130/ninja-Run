@@ -77,11 +77,11 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
-        coinpouchLabel = new Label(String.format("%04d",coinPouch), new Label.LabelStyle(new BitmapFont(), Color.RED));
-        timeLabel = new Label("TIME:", new Label.LabelStyle(new BitmapFont(), Color.RED));
-        healthLabel = new Label("HEALTH:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        coinLabel = new Label("COINS:", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        skin = new Skin(Gdx.files.internal("skins/comic/comic-ui.json"));
+        coinpouchLabel = new Label(String.format("%04d",coinPouch), new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt")), Color.RED));
+        timeLabel = new Label("TIME:", new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt")), Color.RED));
+        healthLabel = new Label("HEALTH:", new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt")), Color.WHITE));
+        coinLabel = new Label("COINS:", new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt")), Color.GOLD));
 
         //group for health label scaling
 

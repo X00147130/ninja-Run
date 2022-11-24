@@ -66,7 +66,7 @@ public class LevelSelect implements Screen {
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt"));
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt"));
         textStyle.font = buttonFont;
         textStyle.fontColor = WHITE;
 
@@ -83,7 +83,7 @@ public class LevelSelect implements Screen {
         backButton = new TextButton("Back", textStyle);
 
         //Label
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic-ui_data/font-export.fnt")), RED);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), RED);
         Label pageLabel = new Label("Level Select", font);
         pageLabel.setFontScale(2);
 
