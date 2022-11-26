@@ -75,6 +75,7 @@ public class GameOverScreen implements Screen {
         playAgainButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                GAME.music.stop();
                 GAME.setScreen(new PlayScreen(GAME,map));
             }
         });
@@ -83,10 +84,15 @@ public class GameOverScreen implements Screen {
         mainMenuButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                GAME.music.stop();
                 GAME.setScreen(new MenuScreen(GAME));
             }
         });
-
+        GAME.loadMusic("audio/music/mixkit-piano-horror-671.mp3");
+        if(GAME.getVolume() != 0) {
+            GAME.music.setVolume(GAME.getVolume());
+            GAME.music.play();
+        }
 
     }
 
@@ -108,7 +114,7 @@ public class GameOverScreen implements Screen {
         GAME.batch.end();
         stage.draw();
 
-        GAME.loadMusic("audio/music/mixkit-piano-horror-671.mp3");
+       /* GAME.loadMusic("audio/music/mixkit-piano-horror-671.mp3");
         if(GAME.getVolume() != 0) {
             GAME.music.setVolume(GAME.getVolume());
             GAME.music.play();
@@ -116,7 +122,7 @@ public class GameOverScreen implements Screen {
 
         if(mainMenuButton.isPressed() || playAgainButton.isPressed()) {
             GAME.music.stop();
-        }
+        }*/
     }
 
 

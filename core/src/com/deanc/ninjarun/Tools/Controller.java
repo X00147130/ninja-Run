@@ -44,19 +44,18 @@ public class Controller {
         Gdx.input.setInputProcessor(stage);
         gameplay = game;
 
-        Image upImg = new Image(new Texture("jumpArrow.png"));
+        final Image upImg = new Image(new Texture("jumpArrow.png"));
         upImg.setSize(30,30);
         upImg.addListener(new InputListener(){
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(Gdx.input.isTouched()) {
+                if (Gdx.input.justTouched()) {
                     upPressed = true;
                     Gdx.app.log("Jumped", "worked");
                 }
                 return true;
             }
-
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 upPressed = false;

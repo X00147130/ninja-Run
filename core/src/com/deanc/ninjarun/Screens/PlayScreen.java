@@ -209,14 +209,7 @@ public class PlayScreen implements Screen {
                 if (controller.isUpPressed() == true && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
-                    game.loadSound("audio/sounds/soundnimja-jump.wav");
-                    long id = game.sound.play();
-                    if(game.getSoundVolume() != 0) {
-                        game.sound.setVolume(id, 1f);
-                    }
-                    else{
-                        game.sound.setVolume(id,0);
-                    }
+
                     if(game.jumpCounter == 2){
                         game.doubleJumped = true;
                     }
@@ -339,8 +332,8 @@ public class PlayScreen implements Screen {
 
 
         if (gameOver()) {
-            game.setScreen(new GameOverScreen(game, level));
             game.music.stop();
+            game.setScreen(new GameOverScreen(game, level));
             dispose();
         }
 
