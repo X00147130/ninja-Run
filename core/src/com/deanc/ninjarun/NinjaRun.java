@@ -36,6 +36,8 @@ public class NinjaRun extends Game {
 	public SpriteBatch batch;
 	public float volume = 0.5f;
 	public float soundVolume = 0.5f;
+	public boolean mutedM = false;
+	public boolean mutedS = false;
 	public Music music;
 	public Sound sound;
 	private int coins = 0;
@@ -121,6 +123,14 @@ public class NinjaRun extends Game {
 
 	public void setStatetimer(float statetimer) {
 		this.statetimer = statetimer;
+	}
+
+	public void setMutedM(boolean muted){
+		mutedM = muted;
+	}
+
+	public void setMutedS(boolean mute){
+		mutedS = mute;
 	}
 
 }

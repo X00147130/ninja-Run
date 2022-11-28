@@ -171,6 +171,7 @@ public class PlayScreen implements Screen {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
+
                     game.loadSound("audio/sounds/soundnimja-jump.wav");
                     long id = game.sound.play();
                     if(game.getSoundVolume() != 0)
@@ -178,6 +179,7 @@ public class PlayScreen implements Screen {
                     else{
                         game.sound.setVolume(id,0);
                     }
+
                     if(game.jumpCounter == 2){
                         game.doubleJumped = true;
                     }
@@ -193,11 +195,11 @@ public class PlayScreen implements Screen {
                     game.setScreen(new PauseScreen(game));
                 }
 
-                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 1.5) {
                     player.b2body.applyLinearImpulse(new Vector2(0.3f, 0), player.b2body.getWorldCenter(), true);
                 }
 
-                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -1.5) {
                     player.b2body.applyLinearImpulse(new Vector2(-0.3f, 0), player.b2body.getWorldCenter(), true);
                 }
             } else {
@@ -209,6 +211,14 @@ public class PlayScreen implements Screen {
                 if (controller.isUpPressed() == true && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
+
+                    game.loadSound("audio/sounds/soundnimja-jump.wav");
+                    long id = game.sound.play();
+                    if(game.getSoundVolume() != 0)
+                        game.sound.setVolume(id, 1f);
+                    else{
+                        game.sound.setVolume(id,0);
+                    }
 
                     if(game.jumpCounter == 2){
                         game.doubleJumped = true;
@@ -247,11 +257,12 @@ public class PlayScreen implements Screen {
     }
 
     public void update(float dt) {
-        handleInput(dt);
-        handleSpawningItems();
         if( Gdx.app.getType() == Application.ApplicationType.Android) {
             Gdx.input.setInputProcessor(controller.stage);
         }
+
+        handleInput(dt);
+        handleSpawningItems();
 
         world.step(1 / 60f, 6, 2);
 

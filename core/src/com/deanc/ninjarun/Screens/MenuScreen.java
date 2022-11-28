@@ -103,10 +103,14 @@ public class MenuScreen implements Screen  {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
-                   GAME.music.stop();
+                   if(GAME.music.isPlaying()){
+                       GAME.music.stop();
+                   }
                    GAME.setScreen(new Controls(GAME));
                }else if (Gdx.app.getType() == Application.ApplicationType.Android) {
-                   GAME.music.stop();
+                   if(GAME.music.isPlaying()){
+                       GAME.music.stop();
+                   }
                    GAME.setScreen(new PlayScreen(GAME, 1));
                }
             }
@@ -132,11 +136,12 @@ public class MenuScreen implements Screen  {
                 System.exit(0);
             }
         });
+
         GAME.loadMusic("audio/music/yoitrax - Ronin.mp3");
         if(GAME.getVolume() != 0) {
             GAME.music.play();
             GAME.music.setVolume(GAME.getVolume());
-        }
+            }
     }
     @Override
     public void show() {
@@ -148,8 +153,7 @@ public class MenuScreen implements Screen  {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
             batch.begin();
-            batch.draw(mainBackground, 50, 275);
-            batch.draw(mainBackground, 2870, 275);
+            batch.draw(mainBackground, 525, -275);
             batch.end();
         }
         else if(Gdx.app.getType() == Application.ApplicationType.Android){

@@ -50,7 +50,7 @@ public class Controller {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (Gdx.input.justTouched()) {
+                if (Gdx.input.isTouched(pointer)) {
                     upPressed = true;
                     Gdx.app.log("Jumped", "worked");
                 }

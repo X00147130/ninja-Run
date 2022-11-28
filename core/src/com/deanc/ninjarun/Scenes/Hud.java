@@ -89,11 +89,8 @@ public class Hud implements Disposable {
         table.add(coinLabel).padRight(10).right().top();
         table.add(coinpouchLabel).padRight(10).right().top().spaceRight(11);
 
-//            pause.setPosition(175,165);
-//            pause.setSize(50,50);
+
               stage.addActor(table);
-//            stage.addActor(pause);
-//
 
 
 

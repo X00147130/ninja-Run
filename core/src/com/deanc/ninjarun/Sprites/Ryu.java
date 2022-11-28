@@ -189,7 +189,6 @@ public class Ryu extends Sprite {
         if(getY() < 0){
             ryuIsDead = true;
             b2body.applyLinearImpulse(new Vector2(0, 3f), b2body.getWorldCenter(), true);
-            /*ninjarun.music.stop();*/
         }
     }
 

@@ -11,6 +11,7 @@ import com.deanc.ninjarun.Sprites.Ryu;
 
 public class health extends Item{
     public NinjaRun ninjarun;
+
     public health(NinjaRun ninjarun, PlayScreen screen, float x, float y) {
         super(screen, x, y);
         setRegion(new Texture("health_vial1.png"));// clipart used

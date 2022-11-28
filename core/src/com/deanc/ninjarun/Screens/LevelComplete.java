@@ -95,14 +95,17 @@ public class LevelComplete implements Screen {
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
 
+        if(run.music.getVolume() == 0)
+            run.setVolume(0);
+
         //Setting up ClickListners for buttons
       if(map != 10) {
           nextLevelButton.addListener(new ClickListener() {
               @Override
               public void clicked(InputEvent event, float x, float y) {
+                  run.sound.stop();
                   run.setScreen(new PlayScreen(run, map));
                   run.setCoins(0);
-                  run.sound.stop();
               }
           });
       }
@@ -110,18 +113,20 @@ public class LevelComplete implements Screen {
         menuButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                run.setScreen(new MenuScreen(run));
-                run.music.stop();
                 run.sound.stop();
+                run.music.stop();
+                run.setScreen(new MenuScreen(run));
             }
         });
 
         levelSelectButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                run.setScreen(new LevelSelect(run));
-                run.music.stop();
                 run.sound.stop();
+                run.music.stop();
+                run.setScreen(new LevelSelect(run));
+                run.loadMusic("audio/music/yoitrax - Ronin.mp3");
+                run.music.play();
             }
         });
     }
