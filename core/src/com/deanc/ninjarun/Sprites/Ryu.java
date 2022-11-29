@@ -344,7 +344,7 @@ public class Ryu extends Sprite {
         ninjarun.loadSound("audio/sounds/mixkit-fast-sword-whoosh-2792.wav");
         long id = ninjarun.sound.play();
         if(ninjarun.getSoundVolume() != 0)
-            ninjarun.sound.setVolume(id, 1f);
+            ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
         else{
             ninjarun.sound.setVolume(id,0);
         }
@@ -398,7 +398,7 @@ public class Ryu extends Sprite {
             ninjarun.loadSound("audio/sounds/getting-hit.wav");
             long id = ninjarun.sound.play();
             if(ninjarun.getSoundVolume() != 0) {
-                ninjarun.sound.setVolume(id, 1f);
+                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
             }
             else{
                 ninjarun.sound.setVolume(id,0);
@@ -411,7 +411,7 @@ public class Ryu extends Sprite {
             ninjarun.loadSound("audio/sounds/sexynakedbunny-ouch.mp3");
             long id = ninjarun.sound.play();
             if(ninjarun.getSoundVolume() != 0) {
-                ninjarun.sound.setVolume(id, 1f);
+                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
             }
             else{
                 ninjarun.sound.setVolume(id,0);

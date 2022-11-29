@@ -4,6 +4,7 @@ import static com.badlogic.gdx.graphics.Color.GOLD;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.deanc.ninjarun.NinjaRun.manager;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -36,12 +37,8 @@ public class Settings implements Screen {
 
     private Button backButton;
     private Label page;
-    /*private Label music;
-    private Label sound;
-    private CheckBox muteMusic;
-    private CheckBox muteSound;
-*//*
-    private Skin skin;*/
+    private Label musicLabel;
+    private Label soundLabel;
 
     private ShapeRenderer border;
     private ShapeRenderer border2;
@@ -80,8 +77,8 @@ public class Settings implements Screen {
         title.fontColor = GOLD;
 
         page = new Label("SETTINGS",title);
-       /* music = new Label("Mute Music?",label);
-        sound = new Label("Mute Sound?", label);*/
+        musicLabel = new Label("Music Volume",label);
+        soundLabel = new Label("Sound Volume", label);
 
         //skin setup
         skin = new Skin(Gdx.files.internal("skins/comic/comic-ui.json"));
@@ -145,19 +142,19 @@ public class Settings implements Screen {
         table.center();
 
         table.row();
-        table.add(page).center().expandX().padLeft(95).padBottom(25);
+        table.add(page).expandX().padBottom(25).padRight(35);
         table.row();
-        table.add(music).left().padLeft(105);
-        /*table.add(muteMusic).center();*/
+        table.add(musicLabel).expandX().padRight(35).padLeft(10);
+        table.add(music).left().padLeft(15);
         table.add(container).center().expandX().padBottom(70).padLeft(105);
         table.row();
         table.row();
-        table.add(sound).left().padLeft(105);
+        table.add(soundLabel).expandX().padRight(35).padLeft(10);
+        table.add(sound).left().padLeft(15);
         table.add(container1).center().expandX().padLeft(105);
         table.row();
-        /*table.add(muteSound).center();*/
         table.row();
-        table.add(backButton).center().expandX().padLeft(95).padTop(10);
+        table.add(backButton).expandX().padTop(10).padRight(35);
         table.row();
 
 
@@ -208,16 +205,33 @@ public class Settings implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        border.begin(ShapeRenderer.ShapeType.Filled);
-        border.setColor(Color.RED);
-        border.rect(400, 480,870,140);
-        border.end();
 
-        border2.begin(ShapeRenderer.ShapeType.Filled);
-        border2.setColor(Color.RED);
-        border2.rect(400, 230,870,140);
-        border2.end();
+       /*Desktop Edition*/
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
 
+            border.begin(ShapeRenderer.ShapeType.Filled);
+            border.setColor(Color.RED);
+            border.rect(700, 480, 870, 140);
+            border.end();
+
+            border2.begin(ShapeRenderer.ShapeType.Filled);
+            border2.setColor(Color.RED);
+            border2.rect(700, 230, 870, 140);
+            border2.end();
+        }
+
+        /*Phone Edition*/
+        else if(Gdx.app.getType() == Application.ApplicationType.Android){
+            border.begin(ShapeRenderer.ShapeType.Filled);
+            border.setColor(Color.RED);
+            border.rect(725, 515,1000,140);
+            border.end();
+
+            border2.begin(ShapeRenderer.ShapeType.Filled);
+            border2.setColor(Color.RED);
+            border2.rect(725, 245,1000,140);
+            border2.end();
+        }
         stage.draw();
 
 

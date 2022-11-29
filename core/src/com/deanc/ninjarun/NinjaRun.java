@@ -43,6 +43,7 @@ public class NinjaRun extends Game {
 	private int coins = 0;
 	private Hud hud;
 	public int jumpCounter = 0;
+	public int justTouched = 0;
 	public boolean doubleJumped = false;
 	public float statetimer = 0;
 

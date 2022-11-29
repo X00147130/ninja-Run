@@ -18,6 +18,8 @@ public class Ninja extends Enemy {
     public State previousState;
     private boolean ninjaDead;
 
+    private NinjaRun ninja;
+
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Animation<TextureRegion> dieAnimation;
@@ -28,8 +30,10 @@ public class Ninja extends Enemy {
 
     private int enemyHitCounter;
 
-    public Ninja(PlayScreen screen, float x, float y) {
+    public Ninja(NinjaRun ninja,PlayScreen screen, float x, float y) {
         super(screen, x, y);
+        this.ninja = ninja;
+
         //run animation
         frames = new Array<TextureRegion>();
         frames.add(screen.getAtlas().findRegion("enemyRun1"));
@@ -152,7 +156,14 @@ public class Ninja extends Enemy {
     @Override
     public void attacked() {
             setToDestroy = true;
-            NinjaRun.manager.get("audio/sounds/stomp.wav", Sound.class).play();
-    }
+            ninja.loadSound("audio/sounds/stomp.wav");
+            long id = ninja.sound.play();
+            if(ninja.getSoundVolume() != 0) {
+                ninja.sound.setVolume(id, ninja.getSoundVolume());
+            }
+            else{
+                ninja.sound.setVolume(id,0);
+            }
+        }
 }
 

@@ -46,7 +46,7 @@ public class health extends Item{
         ninjarun.loadSound("audio/sounds/healthDrink.wav");
         long id = ninjarun.sound.play();
         if(ninjarun.getSoundVolume() != 0)
-            ninjarun.sound.setVolume(id, 1f);
+            ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
         else{
             ninjarun.sound.setVolume(id,0);
         }

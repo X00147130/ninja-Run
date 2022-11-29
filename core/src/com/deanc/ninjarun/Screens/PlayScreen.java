@@ -99,7 +99,7 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        creator = new B2WorldCreator(this);
+        creator = new B2WorldCreator(game,this);
 
         //Player creation
         player = new Ryu(this,game);
@@ -175,7 +175,7 @@ public class PlayScreen implements Screen {
                     game.loadSound("audio/sounds/soundnimja-jump.wav");
                     long id = game.sound.play();
                     if(game.getSoundVolume() != 0)
-                    game.sound.setVolume(id, 1f);
+                    game.sound.setVolume(id, game.getSoundVolume());
                     else{
                         game.sound.setVolume(id,0);
                     }
@@ -208,14 +208,14 @@ public class PlayScreen implements Screen {
         }
         else if(Gdx.app.getType() == Application.ApplicationType.Android){
             if (player.currentState != Ryu.State.DEAD) {
-                if (controller.isUpPressed() == true && game.jumpCounter < 2) {
+                if (controller.isUpPressed() && game.jumpCounter < 2) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
 
                     game.loadSound("audio/sounds/soundnimja-jump.wav");
                     long id = game.sound.play();
                     if(game.getSoundVolume() != 0)
-                        game.sound.setVolume(id, 1f);
+                        game.sound.setVolume(id, game.getSoundVolume());
                     else{
                         game.sound.setVolume(id,0);
                     }

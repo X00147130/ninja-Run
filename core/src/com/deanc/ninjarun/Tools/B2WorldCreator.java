@@ -21,12 +21,14 @@ import com.deanc.ninjarun.Sprites.TileObjects.Finish;
 import com.deanc.ninjarun.Sprites.TileObjects.Sky;
 
 public class B2WorldCreator {
+    private NinjaRun ninja;
     private Array<Ninja> ninjas;
     private Array<Coins> coins;
     private Array<health> vials;
 
 
-    public B2WorldCreator(PlayScreen screen) {
+    public B2WorldCreator(NinjaRun ninja,PlayScreen screen) {
+        this.ninja = ninja;
 
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
@@ -83,7 +85,7 @@ public class B2WorldCreator {
         ninjas = new Array<Ninja>();
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            ninjas.add(new Ninja(screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            ninjas.add(new Ninja(ninja,screen, rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
         }
 
         //create health fixtures
@@ -91,7 +93,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             // creation of health vials objects
-            vials.add(new health(screen.getGame(), screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            vials.add(new health(ninja, screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
         }
 
         //create Coins fixtures
@@ -99,7 +101,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             // creation of coin objects
-            coins.add(new Coins(screen.getGame(),screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
+            coins.add(new Coins(ninja,screen,rect.x / NinjaRun.PPM, rect.y / NinjaRun.PPM));
 
         }
 
