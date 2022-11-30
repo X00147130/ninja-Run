@@ -4,9 +4,6 @@ import static com.deanc.ninjarun.NinjaRun.PPM;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -23,7 +20,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.deanc.ninjarun.NinjaRun;
 import com.deanc.ninjarun.Screens.PlayScreen;
-import com.deanc.ninjarun.Tools.Controller;
 
 public class Ryu extends Sprite {
     //State Variables for animation purposes
@@ -36,7 +32,6 @@ public class Ryu extends Sprite {
     public World world;
     private PlayScreen screen;
     private NinjaRun ninjarun;
-    public Sound playerSounds;
     public Body b2body;
     public TextureRegion ryuStand;
 

@@ -78,7 +78,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
 
             // creation of end tree object
-            new Finish(screen, object);
+            new Finish(ninja, screen, object);
         }
 
         // create all ninjas e.g. multiple enemies

@@ -9,9 +9,10 @@ import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
 public class Finish extends InteractiveTileObject {
-
-    public Finish(PlayScreen screen, MapObject object){
+    private NinjaRun ninja;
+    public Finish(NinjaRun ninja, PlayScreen screen, MapObject object){
         super(screen,object);
+        this.ninja = ninja;
         fixture.setUserData(this);
         setCategoryFilter(NinjaRun.FINISH_BIT);
     }
@@ -20,8 +21,14 @@ public class Finish extends InteractiveTileObject {
     public void onHit(Ryu ryu) {
         Gdx.app.log("Finish", "Collision");
         screen.setLevelComplete(true);
-        NinjaRun.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).play();
-        NinjaRun.manager.get("audio/music/yoitrax - Fuji.mp3", Music.class).stop();
+        ninja.loadSound("audio/sounds/Mission Accomplished Fanfare 1.mp3");
+        long id = ninja.sound.play();
+        if(ninja.getSoundVolume() != 0)
+            ninja.sound.setVolume(id, ninja.getSoundVolume());
+        else{
+            ninja.sound.setVolume(id,0);
+        }
+        ninja.music.stop();
         }
 
 

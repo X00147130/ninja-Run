@@ -9,12 +9,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -62,7 +60,6 @@ public class LevelSelect implements Screen {
         screen = new Stage(viewport, GAME.batch);
 
         //Texture
-        background = new Texture("Texture3.jpg");
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
@@ -118,6 +115,15 @@ public class LevelSelect implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.music.stop();
                 GAME.setScreen(new MenuScreen(GAME));
             }
@@ -126,6 +132,15 @@ public class LevelSelect implements Screen {
         level1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,1));
                 GAME.music.stop();
             }
@@ -134,6 +149,15 @@ public class LevelSelect implements Screen {
         level2.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,2));
                 GAME.music.stop();
             }
@@ -142,6 +166,15 @@ public class LevelSelect implements Screen {
         level3.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,3));
                 GAME.music.stop();
             }
@@ -150,6 +183,15 @@ public class LevelSelect implements Screen {
         level4.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,4));
                 GAME.music.stop();
             }
@@ -158,6 +200,15 @@ public class LevelSelect implements Screen {
         level5.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,5));
                 GAME.music.stop();
             }
@@ -166,6 +217,15 @@ public class LevelSelect implements Screen {
         level6.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,6));
                 GAME.music.stop();
             }
@@ -174,6 +234,15 @@ public class LevelSelect implements Screen {
         level7.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,7));
                 GAME.music.stop();
             }
@@ -182,6 +251,15 @@ public class LevelSelect implements Screen {
         level8.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,8));
                 GAME.music.stop();
             }
@@ -190,6 +268,15 @@ public class LevelSelect implements Screen {
         level9.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,9));
                 GAME.music.stop();
             }
@@ -198,6 +285,15 @@ public class LevelSelect implements Screen {
         level10.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.setScreen(new PlayScreen(GAME,10));
                 GAME.music.stop();
             }
@@ -208,9 +304,6 @@ public class LevelSelect implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        GAME.batch.begin();
-        GAME.batch.draw(background,0,0);
-        GAME.batch.end();
         screen.draw();
     }
 

@@ -104,6 +104,17 @@ public class LevelComplete implements Screen {
               @Override
               public void clicked(InputEvent event, float x, float y) {
                   run.sound.stop();
+
+                  run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                  long id = run.sound.play();
+                  if(run.getSoundVolume() != 0) {
+                      run.sound.setVolume(id, run.getSoundVolume());
+                  }
+                  else{
+                      run.sound.setVolume(id,0);
+                  }
+
+
                   run.setScreen(new PlayScreen(run, map));
                   run.setCoins(0);
               }
@@ -114,19 +125,41 @@ public class LevelComplete implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 run.sound.stop();
-                run.music.stop();
+
+                run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = run.sound.play();
+                if(run.getSoundVolume() != 0) {
+                    run.sound.setVolume(id, run.getSoundVolume());
+                }
+                else{
+                    run.sound.setVolume(id,0);
+                }
+
+
                 run.setScreen(new MenuScreen(run));
             }
         });
 
         levelSelectButton.addListener(new ClickListener(){
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 run.sound.stop();
-                run.music.stop();
+
+                run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = run.sound.play();
+                if (run.getSoundVolume() != 0) {
+                    run.sound.setVolume(id, run.getSoundVolume());
+                } else {
+                    run.sound.setVolume(id, 0);
+                }
+
+
                 run.setScreen(new LevelSelect(run));
                 run.loadMusic("audio/music/yoitrax - Ronin.mp3");
-                run.music.play();
+                if (run.getVolume() != 0) {
+                    run.music.play();
+                    run.setVolume(run.getVolume());
+                }
             }
         });
     }

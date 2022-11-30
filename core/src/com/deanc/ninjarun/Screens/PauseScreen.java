@@ -96,6 +96,15 @@ public class PauseScreen implements Screen {
         resume.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                game.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = game.sound.play();
+                if(game.getSoundVolume() != 0)
+                    game.sound.setVolume(id, game.getSoundVolume());
+                else{
+                    game.sound.setVolume(id,0);
+                }
+
+
                 game.setScreen(screen);
                 hud.resume();
                 dispose();
@@ -106,6 +115,15 @@ public class PauseScreen implements Screen {
         quit.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                game.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = game.sound.play();
+                if(game.getSoundVolume() != 0)
+                    game.sound.setVolume(id, game.getSoundVolume());
+                else{
+                    game.sound.setVolume(id,0);
+                }
+
+
                 game.music.stop();
                 game.setScreen(new MenuScreen (game));
             }

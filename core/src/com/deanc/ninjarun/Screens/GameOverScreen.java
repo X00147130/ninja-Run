@@ -75,6 +75,15 @@ public class GameOverScreen implements Screen {
         playAgainButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.music.stop();
                 GAME.setScreen(new PlayScreen(GAME,map));
             }
@@ -84,6 +93,15 @@ public class GameOverScreen implements Screen {
         mainMenuButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
+
                 GAME.music.stop();
                 GAME.setScreen(new MenuScreen(GAME));
             }
@@ -113,16 +131,6 @@ public class GameOverScreen implements Screen {
         GAME.batch.draw(background,0,0);
         GAME.batch.end();
         stage.draw();
-
-       /* GAME.loadMusic("audio/music/mixkit-piano-horror-671.mp3");
-        if(GAME.getVolume() != 0) {
-            GAME.music.setVolume(GAME.getVolume());
-            GAME.music.play();
-        }
-
-        if(mainMenuButton.isPressed() || playAgainButton.isPressed()) {
-            GAME.music.stop();
-        }*/
     }
 
 

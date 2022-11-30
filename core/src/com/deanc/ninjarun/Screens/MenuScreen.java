@@ -102,6 +102,13 @@ public class MenuScreen implements Screen  {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
                if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
                    if(GAME.music.isPlaying()){
                        GAME.music.stop();
@@ -119,6 +126,14 @@ public class MenuScreen implements Screen  {
         levelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
+
                 GAME.setScreen(new LevelSelect(GAME));
             }
         });
@@ -126,6 +141,13 @@ public class MenuScreen implements Screen  {
         settingsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
                 GAME.setScreen(new Settings(GAME));
             }
         });
@@ -133,6 +155,13 @@ public class MenuScreen implements Screen  {
         quitButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
+                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                long id = GAME.sound.play();
+                if(GAME.getSoundVolume() != 0)
+                    GAME.sound.setVolume(id, GAME.getSoundVolume());
+                else{
+                    GAME.sound.setVolume(id,0);
+                }
                 System.exit(0);
             }
         });
