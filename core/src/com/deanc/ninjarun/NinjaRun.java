@@ -68,6 +68,14 @@ public class NinjaRun extends Game {
 
 		//Audio Loading
 		manager = new AssetManager();
+		manager.load("audio/sounds/coin.mp3", Sound.class);
+		manager.load("audio/sounds/getting-hit.wav", Sound.class);
+		manager.load("audio/sounds/healthDrink.wav", Sound.class);
+		manager.load("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class);
+		manager.load("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class);
+		manager.load("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class);
+		manager.load("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class);
+		manager.load("audio/sounds/soundnimja-jump.wav", Sound.class);
 		manager.load("audio/music/yoitrax - Fuji.mp3", Music.class);
 		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
 		manager.load("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);

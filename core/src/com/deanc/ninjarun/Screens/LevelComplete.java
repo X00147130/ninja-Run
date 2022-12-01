@@ -146,6 +146,7 @@ public class LevelComplete implements Screen {
                 run.sound.stop();
 
                 run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+
                 long id = run.sound.play();
                 if (run.getSoundVolume() != 0) {
                     run.sound.setVolume(id, run.getSoundVolume());
