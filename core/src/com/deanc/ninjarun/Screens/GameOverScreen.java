@@ -42,7 +42,7 @@ public class GameOverScreen implements Screen {
         stage = new Stage(viewport, GAME.batch);
         this.map = level;
 
-        background = GAME.manager.get("background.png", Texture.class);
+        background = GAME.manager.get("samurai.png", Texture.class);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/arcade/raw/font-export.fnt")), RED);
 
@@ -128,7 +128,7 @@ public class GameOverScreen implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         GAME.batch.begin();
-        GAME.batch.draw(background,0,0);
+        GAME.batch.draw(background,0,0,150,150);
         GAME.batch.end();
         stage.draw();
     }

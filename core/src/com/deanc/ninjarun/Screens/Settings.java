@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -39,6 +40,12 @@ public class Settings implements Screen {
 
     private ShapeRenderer border;
     private ShapeRenderer border2;
+    private ShapeRenderer border3;
+    private ShapeRenderer border4;
+    private ShapeRenderer border5;
+    private ShapeRenderer border6;
+
+    private SpriteBatch batch;
 
     Slider music;
     Slider sound;
@@ -55,10 +62,15 @@ public class Settings implements Screen {
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
-        /*background = new Texture("settings.jpg");*/
+        batch = new SpriteBatch();
+        background = GAME.manager.get("wave-scaled.jpg", Texture.class);
 
         border = new ShapeRenderer();
         border2 = new ShapeRenderer();
+        border3 = new ShapeRenderer();
+        border4 = new ShapeRenderer();
+        border5 = new ShapeRenderer();
+        border6 = new ShapeRenderer();
 
         textStyle = new TextButton.TextButtonStyle();
         buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt"));
@@ -165,7 +177,6 @@ public class Settings implements Screen {
             }
         });
 
-
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
 
@@ -183,6 +194,10 @@ public class Settings implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        batch.begin();
+        batch.draw(background,0,0,2080,1080);
+        batch.end();
+
        /*Desktop Edition*/
         if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
 
@@ -195,6 +210,26 @@ public class Settings implements Screen {
             border2.setColor(Color.RED);
             border2.rect(635, 230, 870, 140);
             border2.end();
+
+            border3.begin(ShapeRenderer.ShapeType.Filled);
+            border3.setColor(Color.WHITE);
+            border3.rect(45, 510, 450, 70);
+            border3.end();
+
+            border4.begin(ShapeRenderer.ShapeType.Filled);
+            border4.setColor(Color.WHITE);
+            border4.rect(45, 260, 450, 70);
+            border4.end();
+
+            border5.begin(ShapeRenderer.ShapeType.Filled);
+            border5.setColor(Color.WHITE);
+            border5.rect(55, 835, 375, 70);
+            border5.end();
+
+            border6.begin(ShapeRenderer.ShapeType.Filled);
+            border6.setColor(Color.WHITE);
+            border6.rect(150, 110, 200, 70);
+            border6.end();
         }
 
         /*Phone Edition*/
@@ -208,7 +243,30 @@ public class Settings implements Screen {
             border2.setColor(Color.RED);
             border2.rect(725, 245,1000,140);
             border2.end();
+
+            border3.begin(ShapeRenderer.ShapeType.Filled);
+            border3.setColor(Color.WHITE);
+            border3.rect(45, 510, 450, 70);
+            border3.end();
+
+            border4.begin(ShapeRenderer.ShapeType.Filled);
+            border4.setColor(Color.WHITE);
+            border4.rect(45, 260, 450, 70);
+            border4.end();
+
+            border5.begin(ShapeRenderer.ShapeType.Filled);
+            border5.setColor(Color.WHITE);
+            border5.rect(55, 835, 375, 70);
+            border5.end();
+
+            border6.begin(ShapeRenderer.ShapeType.Filled);
+            border6.setColor(Color.WHITE);
+            border6.rect(150, 110, 200, 70);
+            border6.end();
         }
+
+
+
         stage.draw();
 
 
