@@ -4,6 +4,7 @@ import static com.deanc.ninjarun.NinjaRun.PPM;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -336,13 +337,19 @@ public class Ryu extends Sprite {
 
         Fixture fix1 = b2body.createFixture(attackdef);
         fix1.setUserData("attack");
-        ninjarun.loadSound("audio/sounds/mixkit-fast-sword-whoosh-2792.wav");
-        long id = ninjarun.sound.play();
-        if(ninjarun.getSoundVolume() != 0)
-            ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
-        else{
-            ninjarun.sound.setVolume(id,0);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            ninjarun.loadSound("audio/sounds/mixkit-fast-sword-whoosh-2792.wav");
+            long id = ninjarun.sound.play();
+            if (ninjarun.getSoundVolume() != 0)
+                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+            else {
+                ninjarun.sound.setVolume(id, 0);
+            }
         }
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            ninjarun.manager.get("audio/sounds/mixkit-fast-sword-whoosh-2792.wav", Sound.class).play(ninjarun.getSoundVolume());
+        }
+
         head.dispose();
         return fix1;
     }
@@ -390,26 +397,34 @@ public class Ryu extends Sprite {
 
         if(hitCounter < 2){    //ryu is pushed back and says ow
             b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
-            ninjarun.loadSound("audio/sounds/getting-hit.wav");
-            long id = ninjarun.sound.play();
-            if(ninjarun.getSoundVolume() != 0) {
-                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+            if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                ninjarun.loadSound("audio/sounds/getting-hit.wav");
+                long id = ninjarun.sound.play();
+                if (ninjarun.getSoundVolume() != 0) {
+                    ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+                } else {
+                    ninjarun.sound.setVolume(id, 0);
+                }
             }
-            else{
-                ninjarun.sound.setVolume(id,0);
+            if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                ninjarun.manager.get("audio/sounds/getting-hit.wav", Sound.class).play(ninjarun.getSoundVolume());
             }
 
             hitCounter++;
         }
         else{   //Ryus death
             ninjarun.music.stop();
-            ninjarun.loadSound("audio/sounds/sexynakedbunny-ouch.mp3");
-            long id = ninjarun.sound.play();
-            if(ninjarun.getSoundVolume() != 0) {
-                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+            if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                ninjarun.loadSound("audio/sounds/sexynakedbunny-ouch.mp3");
+                long id = ninjarun.sound.play();
+                if (ninjarun.getSoundVolume() != 0) {
+                    ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+                } else {
+                    ninjarun.sound.setVolume(id, 0);
+                }
             }
-            else{
-                ninjarun.sound.setVolume(id,0);
+            if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                ninjarun.manager.get("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class).play(ninjarun.getSoundVolume());
             }
 
             ryuIsDead = true;

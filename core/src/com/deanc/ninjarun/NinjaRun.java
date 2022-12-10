@@ -76,6 +76,7 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class);
 		manager.load("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class);
 		manager.load("audio/sounds/soundnimja-jump.wav", Sound.class);
+		manager.load("audio/sounds/stomp.wav", Sound.class);
 		manager.load("audio/music/yoitrax - Fuji.mp3", Music.class);
 		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
 		manager.load("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);

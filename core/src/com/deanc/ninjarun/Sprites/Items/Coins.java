@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Sprites.Items;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.deanc.ninjarun.NinjaRun;
-import com.deanc.ninjarun.Screens.GameOverScreen;
 import com.deanc.ninjarun.Screens.PlayScreen;
 import com.deanc.ninjarun.Sprites.Ryu;
 
@@ -47,12 +47,17 @@ public class Coins extends Item {
         count += 100;
         screen.setCoins(count);
         Gdx.app.log("Coin", "destroyed");
-        ninjarun.loadSound("audio/sounds/coin.mp3");
-        long id = ninjarun.sound.play();
-        if(ninjarun.getSoundVolume() != 0)
-            ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
-        else{
-            ninjarun.sound.setVolume(id,0);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            ninjarun.loadSound("audio/sounds/coin.mp3");
+            long id = ninjarun.sound.play();
+            if (ninjarun.getSoundVolume() != 0)
+                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+            else {
+                ninjarun.sound.setVolume(id, 0);
+            }
+        }
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            ninjarun.manager.get("audio/sounds/coin.mp3", Sound.class).play(ninjarun.getSoundVolume());
         }
 
     }

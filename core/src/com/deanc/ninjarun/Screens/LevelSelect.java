@@ -3,8 +3,10 @@ package com.deanc.ninjarun.Screens;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -115,12 +117,18 @@ public class LevelSelect implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -132,12 +140,18 @@ public class LevelSelect implements Screen {
         level1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -149,12 +163,18 @@ public class LevelSelect implements Screen {
         level2.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -166,12 +186,18 @@ public class LevelSelect implements Screen {
         level3.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -183,12 +209,18 @@ public class LevelSelect implements Screen {
         level4.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -200,14 +232,19 @@ public class LevelSelect implements Screen {
         level5.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
                 }
 
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
+                }
 
                 GAME.setScreen(new PlayScreen(GAME,5));
                 GAME.music.stop();
@@ -217,12 +254,18 @@ public class LevelSelect implements Screen {
         level6.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -234,12 +277,18 @@ public class LevelSelect implements Screen {
         level7.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -251,12 +300,18 @@ public class LevelSelect implements Screen {
         level8.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 
@@ -268,14 +323,19 @@ public class LevelSelect implements Screen {
         level9.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
                 }
 
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
+                }
 
                 GAME.setScreen(new PlayScreen(GAME,9));
                 GAME.music.stop();
@@ -285,12 +345,18 @@ public class LevelSelect implements Screen {
         level10.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = GAME.sound.play();
+                    if (GAME.getSoundVolume() != 0)
+                        GAME.sound.setVolume(id, GAME.getSoundVolume());
+                    else {
+                        GAME.sound.setVolume(id, 0);
+                    }
+                }
+
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
 

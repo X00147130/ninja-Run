@@ -1,5 +1,7 @@
 package com.deanc.ninjarun.Sprites.Items;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -43,12 +45,17 @@ public class health extends Item{
     public void useItem(Ryu ryu) {
         destroy();
         Ryu.setHitCounter(0);
-        ninjarun.loadSound("audio/sounds/healthDrink.wav");
-        long id = ninjarun.sound.play();
-        if(ninjarun.getSoundVolume() != 0)
-            ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
-        else{
-            ninjarun.sound.setVolume(id,0);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            ninjarun.loadSound("audio/sounds/healthDrink.wav");
+            long id = ninjarun.sound.play();
+            if (ninjarun.getSoundVolume() != 0)
+                ninjarun.sound.setVolume(id, ninjarun.getSoundVolume());
+            else {
+                ninjarun.sound.setVolume(id, 0);
+            }
+        }
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            ninjarun.manager.get("audio/sounds/healthDrink.wav", Sound.class).play(ninjarun.getSoundVolume());
         }
     }
 

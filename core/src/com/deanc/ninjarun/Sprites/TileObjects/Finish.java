@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Sprites.TileObjects;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -21,13 +22,20 @@ public class Finish extends InteractiveTileObject {
     public void onHit(Ryu ryu) {
         Gdx.app.log("Finish", "Collision");
         screen.setLevelComplete(true);
-        ninja.loadSound("audio/sounds/Mission Accomplished Fanfare 1.mp3");
-        long id = ninja.sound.play();
-        if(ninja.getSoundVolume() != 0)
-            ninja.sound.setVolume(id, ninja.getSoundVolume());
-        else{
-            ninja.sound.setVolume(id,0);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            ninja.loadSound("audio/sounds/Mission Accomplished Fanfare 1.mp3");
+            long id = ninja.sound.play();
+            if (ninja.getSoundVolume() != 0)
+                ninja.sound.setVolume(id, ninja.getSoundVolume());
+            else {
+                ninja.sound.setVolume(id, 0);
+            }
         }
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            ninja.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).play(ninja.getSoundVolume());
+        }
+
         ninja.music.stop();
         }
 

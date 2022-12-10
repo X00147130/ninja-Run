@@ -34,7 +34,6 @@ public class Controller {
     private ImageButton pause;
     private Texture image;
     private Drawable draw;
-    private long jump = 0;
 
     public Controller(final NinjaRun game){
         cam = new OrthographicCamera(480,320);
@@ -44,24 +43,24 @@ public class Controller {
         Gdx.input.setInputProcessor(stage);
         gameplay = game;
 
-        final Image upImg = new Image(new Texture("jumpArrow.png"));
+        Texture pic = new Texture("jumpArrow.png");
+        TextureRegionDrawable picDraw = new TextureRegionDrawable(pic);
+        final ImageButton upImg = new ImageButton(picDraw);
         upImg.setSize(30,30);
+        if (upImg.isPressed() == Gdx.input.justTouched()){
         upImg.addListener(new InputListener(){
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (Gdx.input.justTouched()) {
-                    upPressed = true;
-                    gameplay.justTouched ++;
-                    Gdx.app.log("Jumped", "worked");
-                }
+                upPressed = true;
+                gameplay.justTouched++;
                 return true;
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 upPressed = false;
             }
-        });
+        });}
 
         Image attackImg = new Image(new Texture("attack button.png"));
         attackImg.setSize(50,30);

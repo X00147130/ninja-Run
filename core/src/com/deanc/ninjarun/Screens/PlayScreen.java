@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -206,16 +207,11 @@ public class PlayScreen implements Screen {
         else if(Gdx.app.getType() == Application.ApplicationType.Android){
             if (player.currentState != Ryu.State.DEAD) {
                 if (controller.isUpPressed() && game.jumpCounter < 2) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 2.5f), player.b2body.getWorldCenter(), true);
+                    player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
 
-                    game.loadSound("audio/sounds/soundnimja-jump.wav");
-                    long id = game.sound.play();
-                    if(game.getSoundVolume() != 0)
-                        game.sound.setVolume(id, game.getSoundVolume());
-                    else{
-                        game.sound.setVolume(id,0);
-                    }
+                    game.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play(game.getSoundVolume());
+
 
                     if(game.jumpCounter == 2){
                         game.doubleJumped = true;

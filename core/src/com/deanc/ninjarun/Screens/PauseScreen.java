@@ -4,9 +4,11 @@ import static com.badlogic.gdx.graphics.Color.GOLD;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -96,12 +98,17 @@ public class PauseScreen implements Screen {
         resume.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                game.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = game.sound.play();
-                if(game.getSoundVolume() != 0)
-                    game.sound.setVolume(id, game.getSoundVolume());
-                else{
-                    game.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    game.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = game.sound.play();
+                    if (game.getSoundVolume() != 0)
+                        game.sound.setVolume(id, game.getSoundVolume());
+                    else {
+                        game.sound.setVolume(id, 0);
+                    }
+                }
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    game.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(game.getSoundVolume());
                 }
 
 
@@ -115,12 +122,17 @@ public class PauseScreen implements Screen {
         quit.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                game.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = game.sound.play();
-                if(game.getSoundVolume() != 0)
-                    game.sound.setVolume(id, game.getSoundVolume());
-                else{
-                    game.sound.setVolume(id,0);
+                if(Gdx.app.getType() ==Application.ApplicationType.Desktop){
+                    game.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = game.sound.play();
+                    if (game.getSoundVolume() != 0)
+                        game.sound.setVolume(id, game.getSoundVolume());
+                    else {
+                        game.sound.setVolume(id, 0);
+                    }
+                }
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    game.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(game.getSoundVolume());
                 }
 
 

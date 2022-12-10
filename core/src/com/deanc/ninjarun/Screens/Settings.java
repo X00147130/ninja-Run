@@ -6,6 +6,7 @@ import static com.badlogic.gdx.graphics.Color.RED;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -105,6 +106,10 @@ public class Settings implements Screen {
                 if(!music.isDragging()) {
                     GAME.setVolume(music.getValue());
                     GAME.music.setVolume(GAME.getVolume());
+
+                    if(!GAME.music.isPlaying()){
+                        GAME.music.play();
+                    }
                 }
             }
         });
@@ -114,12 +119,17 @@ public class Settings implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(!sound.isDragging()){
                     GAME.setSoundVolume(sound.getValue());
-                    GAME.loadSound("audio/sounds/coin.mp3");
-                    long id = GAME.sound.play();
-                    if(GAME.getSoundVolume() != 0)
-                        GAME.sound.setVolume(id, GAME.getSoundVolume());
-                    else{
-                        GAME.sound.setVolume(id,0);
+                    if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                        GAME.loadSound("audio/sounds/coin.mp3");
+                        long id = GAME.sound.play();
+                        if (GAME.getSoundVolume() != 0)
+                            GAME.sound.setVolume(id, GAME.getSoundVolume());
+                        else {
+                            GAME.sound.setVolume(id, 0);
+                        }
+                    }
+                    if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                        GAME.manager.get("audio/sounds/coin.mp3", Sound.class).play(GAME.getSoundVolume());
                     }
                 }
             }
@@ -164,12 +174,17 @@ public class Settings implements Screen {
         backButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = GAME.sound.play();
-                if(GAME.getSoundVolume() != 0)
-                    GAME.sound.setVolume(id, GAME.getSoundVolume());
-                else{
-                    GAME.sound.setVolume(id,0);
+               if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                   GAME.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                   long id = GAME.sound.play();
+                   if (GAME.getSoundVolume() != 0)
+                       GAME.sound.setVolume(id, GAME.getSoundVolume());
+                   else {
+                       GAME.sound.setVolume(id, 0);
+                   }
+               }
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
                 GAME.music.stop();
@@ -246,22 +261,22 @@ public class Settings implements Screen {
 
             border3.begin(ShapeRenderer.ShapeType.Filled);
             border3.setColor(Color.WHITE);
-            border3.rect(45, 510, 450, 70);
+            border3.rect(45, 550, 510, 70);
             border3.end();
 
             border4.begin(ShapeRenderer.ShapeType.Filled);
             border4.setColor(Color.WHITE);
-            border4.rect(45, 260, 450, 70);
+            border4.rect(45, 285, 510, 70);
             border4.end();
 
             border5.begin(ShapeRenderer.ShapeType.Filled);
             border5.setColor(Color.WHITE);
-            border5.rect(55, 835, 375, 70);
+            border5.rect(75, 885, 400, 70);
             border5.end();
 
             border6.begin(ShapeRenderer.ShapeType.Filled);
             border6.setColor(Color.WHITE);
-            border6.rect(150, 110, 200, 70);
+            border6.rect(150, 110, 250, 70);
             border6.end();
         }
 

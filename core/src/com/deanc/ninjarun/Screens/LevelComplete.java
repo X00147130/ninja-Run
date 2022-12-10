@@ -1,5 +1,6 @@
 package com.deanc.ninjarun.Screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -105,13 +106,19 @@ public class LevelComplete implements Screen {
               public void clicked(InputEvent event, float x, float y) {
                   run.sound.stop();
 
-                  run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                  long id = run.sound.play();
-                  if(run.getSoundVolume() != 0) {
-                      run.sound.setVolume(id, run.getSoundVolume());
+                  if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                      run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                      long id = run.sound.play();
+                      if (run.getSoundVolume() != 0) {
+                          run.sound.setVolume(id, run.getSoundVolume());
+                      } else {
+                          run.sound.setVolume(id, 0);
+                      }
                   }
-                  else{
-                      run.sound.setVolume(id,0);
+                  if(Gdx.app.getType() == Application.ApplicationType.Android){
+                      if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                          run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
+                      }
                   }
 
 
@@ -126,15 +133,19 @@ public class LevelComplete implements Screen {
             public void clicked(InputEvent event, float x, float y){
                 run.sound.stop();
 
-                run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
-                long id = run.sound.play();
-                if(run.getSoundVolume() != 0) {
-                    run.sound.setVolume(id, run.getSoundVolume());
-                }
-                else{
-                    run.sound.setVolume(id,0);
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                    long id = run.sound.play();
+                    if (run.getSoundVolume() != 0) {
+                        run.sound.setVolume(id, run.getSoundVolume());
+                    } else {
+                        run.sound.setVolume(id, 0);
+                    }
                 }
 
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
+                }
 
                 run.setScreen(new MenuScreen(run));
             }
@@ -145,16 +156,19 @@ public class LevelComplete implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 run.sound.stop();
 
-                run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
+                if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
 
-                long id = run.sound.play();
-                if (run.getSoundVolume() != 0) {
-                    run.sound.setVolume(id, run.getSoundVolume());
-                } else {
-                    run.sound.setVolume(id, 0);
+                    long id = run.sound.play();
+                    if (run.getSoundVolume() != 0) {
+                        run.sound.setVolume(id, run.getSoundVolume());
+                    } else {
+                        run.sound.setVolume(id, 0);
+                    }
                 }
-
-
+                if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
+                }
                 run.setScreen(new LevelSelect(run));
                 run.loadMusic("audio/music/yoitrax - Ronin.mp3");
                 if (run.getVolume() != 0) {

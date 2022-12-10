@@ -1,5 +1,7 @@
 package com.deanc.ninjarun.Sprites.Enemies;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -155,15 +157,20 @@ public class Ninja extends Enemy {
 
     @Override
     public void attacked() {
-            setToDestroy = true;
+        setToDestroy = true;
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
             ninja.loadSound("audio/sounds/stomp.wav");
             long id = ninja.sound.play();
-            if(ninja.getSoundVolume() != 0) {
+            if (ninja.getSoundVolume() != 0) {
                 ninja.sound.setVolume(id, ninja.getSoundVolume());
-            }
-            else{
-                ninja.sound.setVolume(id,0);
+            } else {
+                ninja.sound.setVolume(id, 0);
             }
         }
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            ninja.manager.get("audio/sounds/stomp.wav", Sound.class).play(ninja.getSoundVolume());
+        }
+    }
 }
 
