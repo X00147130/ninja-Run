@@ -52,10 +52,9 @@ public class LevelComplete implements Screen {
         stage = new Stage(screen,run.batch);
         map = level + 1;
 
-         score = run.getCoins();
+        score = run.getCoins();
 
-        /*background = new Texture("levelcomplete.png");
-*/
+
         //TextButton Style Admin
         buttonstyle = new TextButton.TextButtonStyle();
         font = new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt"));
@@ -115,11 +114,11 @@ public class LevelComplete implements Screen {
                           run.sound.setVolume(id, 0);
                       }
                   }
-                  if(Gdx.app.getType() == Application.ApplicationType.Android){
-                      if(Gdx.app.getType() == Application.ApplicationType.Android) {
-                          run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
-                      }
+
+                  if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                      run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
                   }
+
 
 
                   run.setScreen(new PlayScreen(run, map));

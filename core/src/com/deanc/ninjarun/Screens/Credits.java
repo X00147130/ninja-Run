@@ -44,6 +44,11 @@ public class Credits implements Screen {
         private Label musicCred3;
         private Label musicCred4;
 
+        private Label graphicsCred1;
+        private Label graphicsCred2;
+        private Label graphicsCred3;
+        private Label graphicsCred4;
+
         private Label helpCred1;
         private Label helpCred2;
         private Label helpCred3;
@@ -94,14 +99,16 @@ public class Credits implements Screen {
             musicCred3 = new Label("Ronin by yoitrax | https://soundcloud.com/yoitrax", musicStyle);
             musicCred4 = new Label("Fuji by yoitrax | https://soundcloud.com/yoitrax", musicStyle);
 
+            /*Graphic Credits*/
+            graphicsCred1 = new Label("cobaltplasma, deviantart",graphicsStyle);
+            graphicsCred2 = new Label("sunitalke, imgbin",graphicsStyle);
+            graphicsCred3 = new Label("specterblaze, deviantart",graphicsStyle);
+            graphicsCred4 = new Label("efuwa, cleanpng",graphicsStyle);
+
             /*help Credits*/
             helpCred1 = new Label("David Browne", helpStyle);
             helpCred2 = new Label("Check Out His Games By Searching",helpStyle);
             helpCred3 = new Label("davebrowne Games on Anodriod and ios!",helpStyle);
-
-
-//        background = new Texture("logos/logo_white_background.jpg");
-//        backgroundIMG = new Image(background);
 
 
             /*Developer Table*/
@@ -138,7 +145,13 @@ public class Credits implements Screen {
             graphicsTable.row();
             graphicsTable.add(graphics).center();
             graphicsTable.row();
-            graphicsTable.add();
+            graphicsTable.add(graphicsCred1);
+            graphicsTable.row();
+            graphicsTable.add(graphicsCred2);
+            graphicsTable.row();
+            graphicsTable.add(graphicsCred3);
+            graphicsTable.row();
+            graphicsTable.add(graphicsCred4);
 
             /*Help Table*/
             helpTable = new Table();

@@ -156,8 +156,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,1));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,1));
             }
         });
 
@@ -179,8 +179,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,2));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,2));
             }
         });
 
@@ -202,8 +202,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,3));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,3));
             }
         });
 
@@ -225,8 +225,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,4));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,4));
             }
         });
 
@@ -247,8 +247,8 @@ public class LevelSelect implements Screen {
                     GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
-                GAME.setScreen(new PlayScreen(GAME,5));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,5));
             }
         });
 
@@ -270,8 +270,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,6));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,6));
             }
         });
 
@@ -293,8 +293,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,7));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,7));
             }
         });
 
@@ -316,8 +316,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,8));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,8));
             }
         });
 
@@ -338,8 +338,8 @@ public class LevelSelect implements Screen {
                     GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
-                GAME.setScreen(new PlayScreen(GAME,9));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,9));
             }
         });
 
@@ -361,8 +361,8 @@ public class LevelSelect implements Screen {
                 }
 
 
-                GAME.setScreen(new PlayScreen(GAME,10));
                 GAME.music.stop();
+                GAME.setScreen(new PlayScreen(GAME,10));
             }
         });
     }
