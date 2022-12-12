@@ -83,6 +83,8 @@ public class NinjaRun extends Game {
 		manager.load("background.png", Texture.class);
 		manager.load("samurai.png", Texture.class);
 		manager.load("wave-scaled.jpg", Texture.class);
+		manager.load("ninja_wallpaper_by_specterblaze_d5gw3qh.jpg", Texture.class);
+		manager.load("ninja in action.jpg",Texture.class);
 		manager.finishLoading();
 		setScreen(new LogoScreen(this));
 	}

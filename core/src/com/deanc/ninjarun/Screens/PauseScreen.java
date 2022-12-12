@@ -63,7 +63,7 @@ public class PauseScreen implements Screen {
         stage = new Stage(viewport, game.batch);
         batch = new SpriteBatch();
 
-        background = game.manager.get("background.png",Texture.class);
+        background = game.manager.get("ninja_wallpaper_by_specterblaze_d5gw3qh.jpg",Texture.class);
 
 
         //Label set up
@@ -153,7 +153,7 @@ public class PauseScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(background,0,0);
+        batch.draw(background,300,0);
         batch.end();
         stage.draw();
     }

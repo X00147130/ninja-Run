@@ -206,8 +206,8 @@ public class PlayScreen implements Screen {
         }
         else if(Gdx.app.getType() == Application.ApplicationType.Android){
             if (player.currentState != Ryu.State.DEAD) {
-                if (controller.isUpPressed() && game.jumpCounter < 2) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 2f), player.b2body.getWorldCenter(), true);
+                if (controller.isUpPressed() && game.jumpCounter < 1) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
                     game.jumpCounter++;
 
                     game.manager.get("audio/sounds/soundnimja-jump.wav", Sound.class).play(game.getSoundVolume());
