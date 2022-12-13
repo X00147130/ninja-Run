@@ -368,9 +368,10 @@ public class PlayScreen implements Screen {
     public boolean gameOver() {
         if (player.currentState == Ryu.State.DEAD && player.getStateTimer() > 3) {
             return true;
-        } else {
-            return false;
-        }
+        }else {
+                return false;
+            }
+
     }
 
 

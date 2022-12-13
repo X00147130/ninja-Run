@@ -66,8 +66,9 @@ public class NinjaRun extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 
-		//Audio Loading
 		manager = new AssetManager();
+
+		/*Sound Loading*/
 		manager.load("audio/sounds/coin.mp3", Sound.class);
 		manager.load("audio/sounds/getting-hit.wav", Sound.class);
 		manager.load("audio/sounds/healthDrink.wav", Sound.class);
@@ -77,12 +78,18 @@ public class NinjaRun extends Game {
 		manager.load("audio/sounds/sexynakedbunny-ouch.mp3", Sound.class);
 		manager.load("audio/sounds/soundnimja-jump.wav", Sound.class);
 		manager.load("audio/sounds/stomp.wav", Sound.class);
+
+		/*Music Loading*/
 		manager.load("audio/music/yoitrax - Fuji.mp3", Music.class);
 		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
+
+		/*Texture Loading*/
 		manager.load("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
 		manager.load("samurai.png", Texture.class);
 		manager.load("wave-scaled.jpg", Texture.class);
 		manager.load("ninja_wallpaper_by_specterblaze_d5gw3qh.jpg", Texture.class);
+
+
 		manager.finishLoading();
 		setScreen(new LogoScreen(this));
 	}

@@ -103,9 +103,9 @@ public class LevelComplete implements Screen {
           nextLevelButton.addListener(new ClickListener() {
               @Override
               public void clicked(InputEvent event, float x, float y) {
-                  run.sound.stop();
 
                   if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                      run.sound.stop();
                       run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
                       long id = run.sound.play();
                       if (run.getSoundVolume() != 0) {
@@ -116,6 +116,7 @@ public class LevelComplete implements Screen {
                   }
 
                   if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                      run.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
                       run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
                   }
 
@@ -130,9 +131,9 @@ public class LevelComplete implements Screen {
         menuButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                run.sound.stop();
 
                 if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    run.sound.stop();
                     run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
                     long id = run.sound.play();
                     if (run.getSoundVolume() != 0) {
@@ -143,6 +144,7 @@ public class LevelComplete implements Screen {
                 }
 
                 if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    run.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
                     run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
                 }
 
@@ -153,9 +155,9 @@ public class LevelComplete implements Screen {
         levelSelectButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                run.sound.stop();
 
                 if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                    run.sound.stop();
                     run.loadSound("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav");
 
                     long id = run.sound.play();
@@ -166,6 +168,7 @@ public class LevelComplete implements Screen {
                     }
                 }
                 if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                    run.manager.get("audio/sounds/Mission Accomplished Fanfare 1.mp3", Sound.class).stop();
                     run.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(run.getSoundVolume());
                 }
                 run.setScreen(new LevelSelect(run));
