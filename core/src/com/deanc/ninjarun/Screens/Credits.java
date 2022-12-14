@@ -1,18 +1,14 @@
 package com.deanc.ninjarun.Screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deanc.ninjarun.NinjaRun;
@@ -21,8 +17,7 @@ public class Credits implements Screen {
 
         private final NinjaRun GAME;
         private Viewport viewport;
-//    private Texture background;
-//    private Image backgroundIMG;
+
 
         /*tables*/
         private Table devTable;
@@ -115,7 +110,7 @@ public class Credits implements Screen {
             devTable = new Table();
             devTable.setFillParent(true);
 
-            devTable.add(title).center().top().padBottom(20);
+            devTable.add(title).center().padBottom(10);
             devTable.row();
             devTable.add(developer).center();
             devTable.row();
@@ -125,7 +120,7 @@ public class Credits implements Screen {
             musicTable = new Table();
             musicTable.setFillParent(true);
 
-            musicTable.add(title).center().top().padBottom(20);
+            musicTable.add(title).center().padBottom(10);
             musicTable.row();
             musicTable.add(music).center().padBottom(10);
             musicTable.row();
@@ -141,7 +136,7 @@ public class Credits implements Screen {
             graphicsTable = new Table();
             graphicsTable.setFillParent(true);
 
-            graphicsTable.add(title).center().top().padBottom(20);
+            graphicsTable.add(title).center().padBottom(10);
             graphicsTable.row();
             graphicsTable.add(graphics).center();
             graphicsTable.row();

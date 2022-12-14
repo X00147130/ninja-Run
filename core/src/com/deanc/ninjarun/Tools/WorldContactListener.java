@@ -68,6 +68,7 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
 
+
             case NinjaRun.ITEM_BIT | NinjaRun.RYU_BIT:
                 if (fixA.getFilterData().categoryBits == NinjaRun.ITEM_BIT)
                     ((Item) fixA.getUserData()).useItem((Ryu) fixB.getUserData());
