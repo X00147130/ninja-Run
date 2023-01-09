@@ -43,6 +43,8 @@ public class Credits implements Screen {
         private Label graphicsCred2;
         private Label graphicsCred3;
         private Label graphicsCred4;
+        private Label graphicsCred5;
+        private Label graphicsCred6;
 
         private Label helpCred1;
         private Label helpCred2;
@@ -99,6 +101,8 @@ public class Credits implements Screen {
             graphicsCred2 = new Label("sunitalke, imgbin",graphicsStyle);
             graphicsCred3 = new Label("specterblaze, deviantart",graphicsStyle);
             graphicsCred4 = new Label("efuwa, cleanpng",graphicsStyle);
+            graphicsCred5 = new Label("philippineoutsourcing, GraphicRiver",graphicsStyle);
+            graphicsCred6 = new Label("GamespriteZ, GraphicRiver",graphicsStyle);
 
             /*help Credits*/
             helpCred1 = new Label("David Browne", helpStyle);
@@ -147,6 +151,10 @@ public class Credits implements Screen {
             graphicsTable.add(graphicsCred3);
             graphicsTable.row();
             graphicsTable.add(graphicsCred4);
+            graphicsTable.row();
+            graphicsTable.add(graphicsCred5);
+            graphicsTable.row();
+            graphicsTable.add(graphicsCred6);
 
             /*Help Table*/
             helpTable = new Table();
