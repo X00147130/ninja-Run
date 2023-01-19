@@ -17,7 +17,7 @@ public class Coins extends Item {
     public NinjaRun ninjarun;
     public Coins(NinjaRun ninjarun,PlayScreen screen,float  x, float y) {
         super(screen, x, y);
-        setRegion(new Texture("coin.png"));// clipart used
+        setRegion(new Texture("Sprites/coin.png"));// clipart used
         this.ninjarun = ninjarun;
     }
 

@@ -43,8 +43,6 @@ public class LevelSelect implements Screen {
     TextButton.TextButtonStyle textStyle;
     BitmapFont buttonFont;
 
-    //Background
-    private Texture background;
 
     //admin
     private Viewport viewport;
@@ -408,7 +406,6 @@ public class LevelSelect implements Screen {
     public void dispose() {
         screen.dispose();
         GAME.dispose();
-        background.dispose();
     }
 
 

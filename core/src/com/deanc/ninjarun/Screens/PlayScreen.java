@@ -74,7 +74,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(NinjaRun g, int level) {
 
         //admin
-        atlas = new TextureAtlas("ryu_and_enemies.pack");
+        atlas = new TextureAtlas("Sprites/ryu_and_enemies.pack");
 
         this.game = g;
         this.level = level;

@@ -16,7 +16,7 @@ public class health extends Item{
 
     public health(NinjaRun ninjarun, PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        setRegion(new Texture("health_vial1.png"));// clipart used
+        setRegion(new Texture("Sprites/health_vial1.png"));// clipart used
         this.ninjarun = ninjarun;
     }
 

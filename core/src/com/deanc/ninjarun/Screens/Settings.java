@@ -64,7 +64,7 @@ public class Settings implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
         batch = new SpriteBatch();
-        background = GAME.manager.get("wave-scaled.jpg", Texture.class);
+        background = GAME.manager.get("Backgrounds/wave-scaled.jpg", Texture.class);
 
         border = new ShapeRenderer();
         border2 = new ShapeRenderer();

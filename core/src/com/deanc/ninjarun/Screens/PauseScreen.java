@@ -59,7 +59,7 @@ public class PauseScreen implements Screen {
         stage = new Stage(viewport, game.batch);
         batch = new SpriteBatch();
 
-        background = game.manager.get("ninja_wallpaper_by_specterblaze_d5gw3qh.jpg",Texture.class);
+        background = game.manager.get("Backgrounds/ninja_wallpaper_by_specterblaze_d5gw3qh.jpg",Texture.class);
 
 
         //Label set up

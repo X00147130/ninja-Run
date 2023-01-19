@@ -84,10 +84,10 @@ public class NinjaRun extends Game {
 		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
 
 		/*Texture Loading*/
-		manager.load("red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
-		manager.load("samurai.png", Texture.class);
-		manager.load("wave-scaled.jpg", Texture.class);
-		manager.load("ninja_wallpaper_by_specterblaze_d5gw3qh.jpg", Texture.class);
+		manager.load("Backgrounds/red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
+		manager.load("Backgrounds/samurai.png", Texture.class);
+		manager.load("Backgrounds/wave-scaled.jpg", Texture.class);
+		manager.load("Backgrounds/ninja_wallpaper_by_specterblaze_d5gw3qh.jpg", Texture.class);
 
 
 		manager.finishLoading();
