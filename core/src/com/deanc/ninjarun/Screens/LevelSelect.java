@@ -9,7 +9,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -58,9 +57,6 @@ public class LevelSelect implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         screen = new Stage(viewport, GAME.batch);
 
-        /*background = GAME.manager.get("ninja in action.jpg", Texture.class);*/
-
-        //Texture
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
@@ -369,10 +365,6 @@ public class LevelSelect implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        /*GAME.batch.begin();
-        GAME.batch.draw(background,0,0);
-        GAME.batch.end();*/
-
         screen.draw();
     }
 

@@ -35,7 +35,7 @@ public class NinjaRun extends Game {
 	//variables
 	public SpriteBatch batch;
 	public float volume = 0.5f;
-	public float soundVolume = 0.5f;
+	public float soundVolume = 0.4f;
 	public boolean mutedM = false;
 	public boolean mutedS = false;
 	public Music music;
@@ -55,12 +55,7 @@ public class NinjaRun extends Game {
 		this.hud = hud;
 	}
 
-	/* WARING Using AssetManager in a static way can cause issues, especially on Android.
-	Instead you may want to pass around AssetManager to those classes that need it.
-	 We will use it in the static context to save time for now */
-
 	public static AssetManager manager;
-
 
 	@Override
 	public void create() {
@@ -84,7 +79,7 @@ public class NinjaRun extends Game {
 		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
 
 		/*Texture Loading*/
-		manager.load("Backgrounds/red_moon_shinobi_by_cobaltplasma_davlugw.png", Texture.class);
+		manager.load("Backgrounds/-03-1890159321-scale11.00-k_dpmpp_2-sd-v1-5-fp16.png", Texture.class);
 		manager.load("Backgrounds/samurai.png", Texture.class);
 		manager.load("Backgrounds/wave-scaled.jpg", Texture.class);
 		manager.load("Backgrounds/ninja_wallpaper_by_specterblaze_d5gw3qh.jpg", Texture.class);

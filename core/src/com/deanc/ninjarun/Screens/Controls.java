@@ -18,8 +18,6 @@ public class Controls implements Screen {
 
     private final NinjaRun GAME;
     private Viewport viewport;
-//    private Texture background;
-//    private Image backgroundIMG;
 
     /*Labels*/
     private Label title;
@@ -57,9 +55,6 @@ public class Controls implements Screen {
             jump = new Label("Jump: Up Arrow Key", style);
 
 
-//        background = new Texture("logos/logo_white_background.jpg");
-//        backgroundIMG = new Image(background);
-
         Table table = new Table();
         table.setFillParent(true);
 
@@ -75,9 +70,6 @@ public class Controls implements Screen {
         table.add(attack).center();
         table.row();
         table.add(pause).center();
-
-//        table.add(backgroundIMG);
-
 
         stage.addActor(table);
 

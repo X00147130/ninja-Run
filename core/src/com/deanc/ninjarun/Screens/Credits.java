@@ -44,7 +44,6 @@ public class Credits implements Screen {
         private Label graphicsCred3;
         private Label graphicsCred4;
         private Label graphicsCred5;
-        private Label graphicsCred6;
 
         private Label helpCred1;
         private Label helpCred2;
@@ -97,12 +96,11 @@ public class Credits implements Screen {
             musicCred4 = new Label("Fuji by yoitrax | https://soundcloud.com/yoitrax", musicStyle);
 
             /*Graphic Credits*/
-            graphicsCred1 = new Label("cobaltplasma, deviantart",graphicsStyle);
-            graphicsCred2 = new Label("sunitalke, imgbin",graphicsStyle);
-            graphicsCred3 = new Label("specterblaze, deviantart",graphicsStyle);
-            graphicsCred4 = new Label("efuwa, cleanpng",graphicsStyle);
-            graphicsCred5 = new Label("philippineoutsourcing, GraphicRiver",graphicsStyle);
-            graphicsCred6 = new Label("GamespriteZ, GraphicRiver",graphicsStyle);
+            graphicsCred1 = new Label("sunitalke, imgbin",graphicsStyle);
+            graphicsCred2 = new Label("specterblaze, deviantart",graphicsStyle);
+            graphicsCred3 = new Label("efuwa, cleanpng",graphicsStyle);
+            graphicsCred4 = new Label("philippineoutsourcing, GraphicRiver",graphicsStyle);
+            graphicsCred5 = new Label("GamespriteZ, GraphicRiver",graphicsStyle);
 
             /*help Credits*/
             helpCred1 = new Label("David Browne", helpStyle);
@@ -114,7 +112,6 @@ public class Credits implements Screen {
             devTable = new Table();
             devTable.setFillParent(true);
 
-            devTable.add(title).center().padBottom(10);
             devTable.row();
             devTable.add(developer).center();
             devTable.row();
@@ -124,7 +121,6 @@ public class Credits implements Screen {
             musicTable = new Table();
             musicTable.setFillParent(true);
 
-            musicTable.add(title).center().padBottom(10);
             musicTable.row();
             musicTable.add(music).center().padBottom(10);
             musicTable.row();
@@ -140,7 +136,6 @@ public class Credits implements Screen {
             graphicsTable = new Table();
             graphicsTable.setFillParent(true);
 
-            graphicsTable.add(title).center().padBottom(10);
             graphicsTable.row();
             graphicsTable.add(graphics).center();
             graphicsTable.row();
@@ -154,13 +149,11 @@ public class Credits implements Screen {
             graphicsTable.row();
             graphicsTable.add(graphicsCred5);
             graphicsTable.row();
-            graphicsTable.add(graphicsCred6);
 
             /*Help Table*/
             helpTable = new Table();
             helpTable.setFillParent(true);
 
-            helpTable.add(title).center().top().padBottom(15);
             helpTable.row();
             helpTable.add(help).center().padBottom(10);
             helpTable.row();

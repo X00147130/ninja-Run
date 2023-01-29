@@ -35,9 +35,7 @@ public class PauseScreen implements Screen {
     private Label.LabelStyle style;
     private TextButton.TextButtonStyle buttonStyle;
     private TextButton resume;
-    private Label resumeLabel;
     private TextButton quit;
-    private Label quitLabel;
 
 
     //Admin

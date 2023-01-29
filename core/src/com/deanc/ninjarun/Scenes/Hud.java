@@ -39,12 +39,6 @@ public class Hud implements Disposable {
 
     static private boolean projectionMatrixSet;
 
-
-//    //Image Button Variable
-//    private ImageButton pause;
-//    private Texture image;
-//    private Drawable draw;
-
     private NinjaRun gameplay;
     public final Screen play;
     private PlayScreen playScreen;
@@ -57,11 +51,6 @@ public class Hud implements Disposable {
         this.playScreen = playScreen;
 
         coinPouch = playScreen.getCoins();
-
-//        //Image button
-//        image = new Texture("pause.png");
-//        draw = new TextureRegionDrawable(image);
-//        pause = new ImageButton(draw);
         viewport = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
@@ -93,14 +82,6 @@ public class Hud implements Disposable {
         projectionMatrixSet = false;
 
 
-//        pause.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event,float x, float y){
-//                gameplay.setScreen(new PauseScreen(gameplay));
-//            }
-//
-//        });
-
     }
 
     public void update(float dt) {
@@ -109,14 +90,6 @@ public class Hud implements Disposable {
     }
 
     public void resume(){
-//        pause.clearListeners();
-//        stage.addActor(pause);
-//        pause.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y){
-//                gameplay.setScreen(new PauseScreen(gameplay));
-//            }
-//        });
     }
 
     public void draw(SpriteBatch batch, float alpha){
