@@ -28,7 +28,6 @@ public class PauseScreen implements Screen {
     //Display tools
     private Table table;
     private Stage stage;
-    private SpriteBatch batch;
 
     //Labels and Buttons
     private Label titleLabel;
@@ -55,9 +54,8 @@ public class PauseScreen implements Screen {
         hud = gameplay.getHud();
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
-        batch = new SpriteBatch();
 
-        background = game.manager.get("Backgrounds/ninja_wallpaper_by_specterblaze_d5gw3qh.jpg",Texture.class);
+        background = game.manager.get("Backgrounds/-2-1291793858-scale12.00-k_heun-dreamlike-diffusion-.png",Texture.class);
 
 
         //Label set up
@@ -146,9 +144,11 @@ public class PauseScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(background,300,0);
-        batch.end();
+
+        game.batch.begin();
+        game.batch.draw(background,0,-100,400,400);
+        game.batch.end();
+
         stage.draw();
     }
 

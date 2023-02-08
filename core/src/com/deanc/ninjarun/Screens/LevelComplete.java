@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,6 +26,7 @@ public class LevelComplete implements Screen {
     private NinjaRun run;
     private Viewport screen;
     private Stage stage;
+    private Texture background;
     private int score = 0;
 
 
@@ -49,6 +51,7 @@ public class LevelComplete implements Screen {
         screen = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(screen,run.batch);
         map = level + 1;
+        background = run.manager.get("Backgrounds/-1-771063806-scale12.00-k_heun-dreamlike-diffusion-.png",Texture.class);
 
         score = run.getCoins();
 
@@ -188,6 +191,11 @@ public class LevelComplete implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        run.batch.begin();
+        run.batch.draw(background,0,0,400,300);
+        run.batch.end();
+
         stage.draw();
     }
 

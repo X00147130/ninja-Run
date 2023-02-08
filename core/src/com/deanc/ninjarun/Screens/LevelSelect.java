@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -46,6 +47,7 @@ public class LevelSelect implements Screen {
     //admin
     private Viewport viewport;
     private Stage screen;
+    private Texture background;
     private int level = 1;
 
 
@@ -56,7 +58,7 @@ public class LevelSelect implements Screen {
         GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         screen = new Stage(viewport, GAME.batch);
-
+        background = GAME.manager.get("Backgrounds/-3-562454963-scale12.00-k_heun-dreamlike-diffusion-.png",Texture.class);
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
@@ -365,6 +367,11 @@ public class LevelSelect implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        GAME.batch.begin();
+        GAME.batch.draw(background,0,0,400,300);
+        GAME.batch.end();
+
         screen.draw();
     }
 

@@ -79,11 +79,12 @@ public class NinjaRun extends Game {
 		manager.load("audio/music/yoitrax - Jade Dragon.mp3", Music.class);
 
 		/*Texture Loading*/
-		manager.load("Backgrounds/-03-1890159321-scale11.00-k_dpmpp_2-sd-v1-5-fp16.png", Texture.class);
-		manager.load("Backgrounds/samurai.png", Texture.class);
-		manager.load("Backgrounds/wave-scaled.jpg", Texture.class);
-		manager.load("Backgrounds/ninja_wallpaper_by_specterblaze_d5gw3qh.jpg", Texture.class);
-
+		manager.load("Backgrounds/-1-724808065-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Main Menu Background Img
+		manager.load("Backgrounds/-3-1690698520-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Settings Background Image
+		manager.load("Backgrounds/-3-295142130-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Game Over Background Image
+		manager.load("Backgrounds/-3-562454963-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Level Select Background Image
+		manager.load("Backgrounds/-2-1291793858-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Pause Screen Background Image
+		manager.load("Backgrounds/-1-771063806-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Level Complete Background Image
 
 		manager.finishLoading();
 		setScreen(new LogoScreen(this));

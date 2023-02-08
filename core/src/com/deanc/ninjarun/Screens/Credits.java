@@ -26,7 +26,6 @@ public class Credits implements Screen {
         private Table helpTable;
 
         /*Labels*/
-        private Label title;
         private Label developer;
         private Label music;
         private Label graphics;
@@ -41,16 +40,12 @@ public class Credits implements Screen {
 
         private Label graphicsCred1;
         private Label graphicsCred2;
-        private Label graphicsCred3;
-        private Label graphicsCred4;
-        private Label graphicsCred5;
 
         private Label helpCred1;
         private Label helpCred2;
         private Label helpCred3;
 
         /*labelStyle*/
-        private Label.LabelStyle titleStyle;
         private Label.LabelStyle devStyle;
         private Label.LabelStyle musicStyle;
         private Label.LabelStyle graphicsStyle;
@@ -73,14 +68,12 @@ public class Credits implements Screen {
             stage4 = new Stage(viewport, GAME.batch);
 
             /*Label Style*/
-            titleStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.WHITE);
             devStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.GOLD);
             musicStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.RED);
             graphicsStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.BLUE);
             helpStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), Color.GREEN);
 
             /*Labels*/
-            title = new Label("Credits",titleStyle);
             developer = new Label("Created By ", devStyle);
             music = new Label("Music By ", musicStyle);
             graphics = new Label("Graphics By ", graphicsStyle);
@@ -96,11 +89,8 @@ public class Credits implements Screen {
             musicCred4 = new Label("Fuji by yoitrax | https://soundcloud.com/yoitrax", musicStyle);
 
             /*Graphic Credits*/
-            graphicsCred1 = new Label("sunitalke, imgbin",graphicsStyle);
-            graphicsCred2 = new Label("specterblaze, deviantart",graphicsStyle);
-            graphicsCred3 = new Label("efuwa, cleanpng",graphicsStyle);
-            graphicsCred4 = new Label("philippineoutsourcing, GraphicRiver",graphicsStyle);
-            graphicsCred5 = new Label("GamespriteZ, GraphicRiver",graphicsStyle);
+            graphicsCred1 = new Label("philippineoutsourcing, GraphicRiver",graphicsStyle);
+            graphicsCred2 = new Label("GamespriteZ, GraphicRiver",graphicsStyle);
 
             /*help Credits*/
             helpCred1 = new Label("David Browne", helpStyle);
@@ -142,12 +132,6 @@ public class Credits implements Screen {
             graphicsTable.add(graphicsCred1);
             graphicsTable.row();
             graphicsTable.add(graphicsCred2);
-            graphicsTable.row();
-            graphicsTable.add(graphicsCred3);
-            graphicsTable.row();
-            graphicsTable.add(graphicsCred4);
-            graphicsTable.row();
-            graphicsTable.add(graphicsCred5);
             graphicsTable.row();
 
             /*Help Table*/
