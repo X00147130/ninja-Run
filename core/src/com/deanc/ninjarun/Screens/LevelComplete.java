@@ -51,16 +51,16 @@ public class LevelComplete implements Screen {
         screen = new FitViewport(NinjaRun.V_WIDTH,NinjaRun.V_HEIGHT,new OrthographicCamera());
         stage = new Stage(screen,run.batch);
         map = level + 1;
-        background = run.manager.get("Backgrounds/-1-771063806-scale12.00-k_heun-dreamlike-diffusion-.png",Texture.class);
+        background = run.manager.get("Backgrounds/lvlcompletebg.png",Texture.class);
 
         score = run.getCoins();
 
 
         //TextButton Style Admin
         buttonstyle = new TextButton.TextButtonStyle();
-        font = new BitmapFont(Gdx.files.internal("skins/arcade/raw/screen-export.fnt"));
+        font = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt"));
         buttonstyle.font = font;
-        buttonstyle.font.setColor(Color.WHITE);
+        buttonstyle.font.setColor(Color.GOLD);
 
         //Setting up the TextButtons
         menuButton = new TextButton("Main Menu", buttonstyle);

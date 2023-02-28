@@ -80,11 +80,11 @@ public class NinjaRun extends Game {
 
 		/*Texture Loading*/
 		manager.load("Backgrounds/-1-724808065-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Main Menu Background Img
-		manager.load("Backgrounds/-3-1690698520-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Settings Background Image
-		manager.load("Backgrounds/-3-295142130-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Game Over Background Image
-		manager.load("Backgrounds/-3-562454963-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Level Select Background Image
-		manager.load("Backgrounds/-2-1291793858-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Pause Screen Background Image
-		manager.load("Backgrounds/-1-771063806-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class); //Level Complete Background Image
+		manager.load("Backgrounds/settingsbg.png", Texture.class); //Settings Background Image
+		manager.load("Backgrounds/gameoverbg.png", Texture.class); //Game Over Background Image
+		manager.load("Backgrounds/levelselectbg.png", Texture.class); //Level Select Background Image
+		manager.load("Backgrounds/pausebg.png", Texture.class); //Pause Screen Background Image
+		manager.load("Backgrounds/lvlcompletebg.png", Texture.class); //Level Complete Background Image
 
 		manager.finishLoading();
 		setScreen(new LogoScreen(this));

@@ -48,7 +48,7 @@ public class PlayScreen implements Screen {
 
     //Box2D Variables
     private World world;
-    private Box2DDebugRenderer b2dr;
+    /*private Box2DDebugRenderer b2dr;*/
     private B2WorldCreator creator;
 
     //Player variable
@@ -95,7 +95,7 @@ public class PlayScreen implements Screen {
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, -10), true);
-        b2dr = new Box2DDebugRenderer();
+        /*b2dr = new Box2DDebugRenderer();*/
 
         creator = new B2WorldCreator(game,this);
 
@@ -298,9 +298,9 @@ public class PlayScreen implements Screen {
         //game map
         renderer.render();
 
-        //box2d debug lines
+        /*//box2d debug lines
         if(Gdx.app.getType() == Application.ApplicationType.Desktop)
-            b2dr.render(world, gamecam.combined);
+            b2dr.render(world, gamecam.combined);*/
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
@@ -404,7 +404,7 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        b2dr.dispose();
+        /*b2dr.dispose();*/
         hud.dispose();
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             controller.dispose();

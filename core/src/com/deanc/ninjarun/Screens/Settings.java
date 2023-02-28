@@ -1,7 +1,7 @@
 package com.deanc.ninjarun.Screens;
 
 import static com.badlogic.gdx.graphics.Color.GOLD;
-import static com.badlogic.gdx.graphics.Color.WHITE;
+import static com.badlogic.gdx.graphics.Color.RED;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -51,17 +51,17 @@ public class Settings implements Screen {
         this.GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
-        background = GAME.manager.get("Backgrounds/-3-1690698520-scale12.00-k_heun-dreamlike-diffusion-.png", Texture.class);
+        background = GAME.manager.get("Backgrounds/settingsbg.png", Texture.class);
 
 
         textStyle = new TextButton.TextButtonStyle();
         buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt"));
         textStyle.font = buttonFont;
-        textStyle.fontColor = WHITE;
+        textStyle.fontColor = RED;
 
         Label.LabelStyle label = new Label.LabelStyle();
         label.font = buttonFont;
-        label.fontColor = WHITE;
+        label.fontColor = RED;
 
         Label.LabelStyle title = new Label.LabelStyle();
         title.font = buttonFont;
@@ -191,7 +191,7 @@ public class Settings implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         GAME.batch.begin();
-        GAME.batch.draw(background,0,-70,400,350);
+        GAME.batch.draw(background,0,-20,400,250);
         GAME.batch.end();
 
         stage.draw();

@@ -55,7 +55,7 @@ public class PauseScreen implements Screen {
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT,  new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        background = game.manager.get("Backgrounds/-2-1291793858-scale12.00-k_heun-dreamlike-diffusion-.png",Texture.class);
+        background = game.manager.get("Backgrounds/pausebg.png",Texture.class);
 
 
         //Label set up
@@ -146,7 +146,7 @@ public class PauseScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        game.batch.draw(background,0,-100,400,400);
+        game.batch.draw(background,0,0,400,400);
         game.batch.end();
 
         stage.draw();

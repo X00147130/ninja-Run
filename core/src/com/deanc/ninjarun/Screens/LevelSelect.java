@@ -58,7 +58,7 @@ public class LevelSelect implements Screen {
         GAME = game;
         viewport = new FitViewport(NinjaRun.V_WIDTH, NinjaRun.V_HEIGHT, new OrthographicCamera());
         screen = new Stage(viewport, GAME.batch);
-        background = GAME.manager.get("Backgrounds/-3-562454963-scale12.00-k_heun-dreamlike-diffusion-.png",Texture.class);
+        background = GAME.manager.get("Backgrounds/levelselectbg.png",Texture.class);
 
         //Button initialisation
         textStyle = new TextButton.TextButtonStyle();
