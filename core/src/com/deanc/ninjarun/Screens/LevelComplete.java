@@ -100,7 +100,7 @@ public class LevelComplete implements Screen {
             run.setVolume(0);
 
         //Setting up ClickListners for buttons
-      if(map != 10) {
+      if(map != 11) {
           nextLevelButton.addListener(new ClickListener() {
               @Override
               public void clicked(InputEvent event, float x, float y) {
@@ -193,7 +193,7 @@ public class LevelComplete implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         run.batch.begin();
-        run.batch.draw(background,0,0,400,300);
+        run.batch.draw(background,0,-17,400,300);
         run.batch.end();
 
         stage.draw();

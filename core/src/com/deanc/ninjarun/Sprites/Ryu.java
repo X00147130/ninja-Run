@@ -396,7 +396,7 @@ public class Ryu extends Sprite {
     public void hit(){
 
         if(hitCounter < 2){    //ryu is pushed back and says ow
-            b2body.applyLinearImpulse(new Vector2(-1f,1f),b2body.getWorldCenter(),true);
+            b2body.applyLinearImpulse(new Vector2(-2f,2f),b2body.getWorldCenter(),true);
             if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
                 ninjarun.loadSound("audio/sounds/getting-hit.wav");
                 long id = ninjarun.sound.play();
