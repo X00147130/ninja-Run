@@ -138,4 +138,8 @@ public class NinjaRun extends Game {
 		mutedS = mute;
 	}
 
+	@Override
+	public void dispose() {
+		super.dispose();
+	}
 }

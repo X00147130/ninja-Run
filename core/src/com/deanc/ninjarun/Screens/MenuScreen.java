@@ -185,7 +185,7 @@ public class MenuScreen implements Screen  {
                     GAME.manager.get("audio/sounds/mixkit-gear-metallic-lock-sound-2858.wav", Sound.class).play(GAME.getSoundVolume());
                 }
 
-                System.exit(0);
+                pause();
             }
         });
 
@@ -225,7 +225,7 @@ public class MenuScreen implements Screen  {
 
     @Override
     public void pause() {
-
+        System.exit(0);
     }
 
     @Override
