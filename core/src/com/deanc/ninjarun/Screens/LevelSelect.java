@@ -79,7 +79,7 @@ public class LevelSelect implements Screen {
         backButton = new TextButton("Back", textStyle);
 
         //Label
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt")), RED);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt")), RED);
         Label pageLabel = new Label("Level Select", font);
         pageLabel.setFontScale(2);
 

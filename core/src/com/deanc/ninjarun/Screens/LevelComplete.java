@@ -58,7 +58,7 @@ public class LevelComplete implements Screen {
 
         //TextButton Style Admin
         buttonstyle = new TextButton.TextButtonStyle();
-        font = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-export.fnt"));
+        font = new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt"));
         buttonstyle.font = font;
         buttonstyle.font.setColor(Color.GOLD);
 

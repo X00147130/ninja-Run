@@ -68,7 +68,7 @@ public class PauseScreen implements Screen {
         table.setFillParent(true);
 
         buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = new BitmapFont(Gdx.files.internal("skins/comic/comic-ui_data/font-button-export.fnt"));
+        buttonStyle.font = new BitmapFont(Gdx.files.internal("skins/comic/skin/font-button-export.fnt"));
 
 
         resume = new TextButton("resume", buttonStyle);
