@@ -55,7 +55,7 @@ public class Settings implements Screen {
 
 
         textStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt"));
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/raw/font-export.fnt"));
         textStyle.font = buttonFont;
         textStyle.fontColor = RED;
 

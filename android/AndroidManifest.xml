@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.deanc.ninjarun">
 
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
+    <!-- For apps targeting Android 13 or higher & IMA SDK version 3.24.0 or lower -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
         android:allowBackup="true"
@@ -24,5 +25,5 @@
             </intent-filter>
         </activity>
     </application>
-
+    <!-- For apps targeting Android 13 or higher & IMA SDK version 3.24.0 or lower -->
 </manifest>

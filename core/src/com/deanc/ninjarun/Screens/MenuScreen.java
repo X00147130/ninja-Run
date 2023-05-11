@@ -66,7 +66,7 @@ public class MenuScreen implements Screen  {
 
         //Buttons
         buttonStyle = new TextButton.TextButtonStyle();
-        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt"));
+        buttonFont = new BitmapFont(Gdx.files.internal("skins/comic/raw/font-export.fnt"));
         buttonStyle.font = buttonFont;
         buttonStyle.fontColor = WHITE;
         playButton  = new TextButton("Start",buttonStyle);

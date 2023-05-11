@@ -40,6 +40,7 @@ public class Credits implements Screen {
 
         private Label graphicsCred1;
         private Label graphicsCred2;
+        private Label graphicsCred3;
 
         private Label helpCred1;
         private Label helpCred2;
@@ -68,10 +69,10 @@ public class Credits implements Screen {
             stage4 = new Stage(viewport, GAME.batch);
 
             /*Label Style*/
-            devStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt")), Color.GOLD);
-            musicStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt")), Color.RED);
-            graphicsStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt")), Color.BLUE);
-            helpStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/skin/font-export.fnt")), Color.GREEN);
+            devStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/raw/font-export.fnt")), Color.GOLD);
+            musicStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/raw/font-export.fnt")), Color.RED);
+            graphicsStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/raw/font-export.fnt")), Color.BLUE);
+            helpStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("skins/comic/raw/font-export.fnt")), Color.GREEN);
 
             /*Labels*/
             developer = new Label("Created By ", devStyle);
@@ -91,6 +92,7 @@ public class Credits implements Screen {
             /*Graphic Credits*/
             graphicsCred1 = new Label("philippineoutsourcing, GraphicRiver",graphicsStyle);
             graphicsCred2 = new Label("GamespriteZ, GraphicRiver",graphicsStyle);
+            graphicsCred3 = new Label("Raymond Raeleus Buckley, gdx-textures", graphicsStyle);
 
             /*help Credits*/
             helpCred1 = new Label("David Browne", helpStyle);
@@ -132,6 +134,8 @@ public class Credits implements Screen {
             graphicsTable.add(graphicsCred1);
             graphicsTable.row();
             graphicsTable.add(graphicsCred2);
+            graphicsTable.row();
+            graphicsTable.add(graphicsCred3);
             graphicsTable.row();
 
             /*Help Table*/
